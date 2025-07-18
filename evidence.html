@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junior Production Coordinator: Interactive Evidence Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony (Warm Neutrals with Teal Accent) -->
+    <!-- Application Structure Plan: The SPA uses a two-panel design. Left-side navigation allows users to select KSB categories (e.g., Production Context, Health & Safety). The main panel displays the KSBs for that category in a card format. This structure was chosen because it mirrors the logical grouping of the source report, making it intuitive for the target audience (apprentices). The key interaction is clicking on a "Multi-KSB Mapping" tag, which highlights all related KSBs across different sections, visually demonstrating how one piece of evidence can satisfy multiple requirements, directly addressing a core portfolio instruction. -->
+    <!-- Visualization & Content Choices: The source report data is textual and hierarchical. Goal: Organize & Relate. Method: Structured HTML/CSS cards for each KSB, grouped into collapsible sections. This is more effective than a flat table for focusing on one area at a time. Interaction: The primary interaction is cross-highlighting related KSBs via JavaScript. Goal: Relate. Method: Clicking a mapping tag triggers a JS function to add a highlight class to all corresponding KSB cards. This directly visualizes the relationships outlined in the report's "Potential Multi-KSB Mapping" column. Justification: This interactive approach turns a static guide into a dynamic planning tool, helping apprentices strategize their portfolio evidence efficiently. No charts are needed as there is no quantitative data to visualize. Library/Method: Vanilla JS for interactions, Tailwind CSS for layout. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .nav-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .nav-button.active {
+            background-color: #0d9488;
+            color: white;
+            font-weight: 600;
+        }
+        .ksb-card {
+            transition: all 0.3s ease-in-out;
+            border: 1px solid #e5e7eb;
+        }
+        .ksb-card.highlight {
+            transform: scale(1.02);
+            box-shadow: 0 0 0 3px #14b8a6;
+            border-color: #14b8a6;
+        }
+        .ksb-map-tag {
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div id="app" class="flex flex-col md:flex-row min-h-screen">
+        
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="w-full md:w-64 lg:w-72 bg-stone-100 p-4 md:p-6 border-r border-stone-200 shrink-0">
+            <h1 class="text-2xl font-bold text-teal-800 mb-2">JPC Portfolio Planner</h1>
+            <p class="text-sm text-stone-600 mb-6">An interactive guide to the KSBs for the Junior Production Coordinator apprenticeship.</p>
+            <nav id="navigation" class="space-y-2">
+                <button data-section="section-context" class="nav-button w-full text-left px-4 py-2 rounded-lg hover:bg-stone-200">Core – Production Context</button>
+                <button data-section="section-safety" class="nav-button w-full text-left px-4 py-2 rounded-lg hover:bg-stone-200">Core – Regulations & Safety</button>
+                <button data-section="section-resourcing" class="nav-button w-full text-left px-4 py-2 rounded-lg hover:bg-stone-200">Core – Resourcing & Logistics</button>
+                <button data-section="section-communication" class="nav-button w-full text-left px-4 py-2 rounded-lg hover:bg-stone-200">Core – Communication</button>
+                <button data-section="section-cpd" class="nav-button w-full text-left px-4 py-2 rounded-lg hover:bg-stone-200">Core – CPD</button>
+                <button data-section="section-data" class="nav-button w-full text-left px-4 py-2 rounded-lg hover:bg-stone-200">Core – Data Protection</button>
+                <button data-section="section-copyright" class="nav-button w-full text-left px-4 py-2 rounded-lg hover:bg-stone-200">PC – Copyright</button>
+            </nav>
+            <div class="mt-8 p-4 bg-teal-50 border border-teal-200 rounded-lg text-teal-800">
+                <h3 class="font-bold">How to Use</h3>
+                <p class="text-sm mt-2">Click a section to view the KSBs. To see how evidence can be reused, click on a blue mapping tag like <span class="bg-teal-200 text-teal-800 px-1.5 py-0.5 rounded-md font-mono text-xs">K9</span> to highlight all related KSBs across the entire guide.</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4 md:p-8 lg:p-10 overflow-y-auto">
+            
+            <!-- Section: Core – Production Context -->
+            <section id="section-context" class="content-section space-y-6">
+                <header>
+                    <h2 class="text-3xl font-bold text-stone-900">Core – Production Context</h2>
+                    <p class="mt-2 text-stone-600">This section covers the foundational knowledge of how a production is structured and managed, from its initial vision through to completion. Understanding this context is key to prioritising tasks and navigating the production lifecycle effectively.</p>
+                </header>
+                <div id="ksb-k1" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1">
+                            <h3 class="font-bold text-lg text-teal-700">K1</h3>
+                            <p class="text-sm text-stone-600">How structure, vision and purpose affects production.</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4>
+                            <ul class="list-disc list-inside text-stone-600 text-sm space-y-1">
+                                <li>Annotated Organisational Chart</li>
+                                <li>Annotated Project Brief/Vision Document</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right">
+                        <span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span>
+                        <span data-map="k9" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K9</span>
+                    </div>
+                </div>
+                 <div id="ksb-k9" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1">
+                            <h3 class="font-bold text-lg text-teal-700">K9</h3>
+                            <p class="text-sm text-stone-600">The production lifecycle. Key aspects and industry terminology of each stage within end-to-end production workflows.</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4>
+                            <ul class="list-disc list-inside text-stone-600 text-sm space-y-1">
+                                <li>Production Workflow Diagram</li>
+                                <li>Completed Pre-Production Checklist</li>
+                                <li>Glossary of Industry Terminology</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right">
+                        <span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span>
+                        <span data-map="k1" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K1</span>
+                        <span data-map="s9" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S9</span>
+                    </div>
+                </div>
+                <div id="ksb-s9" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1">
+                            <h3 class="font-bold text-lg text-teal-700">S9</h3>
+                            <p class="text-sm text-stone-600">Prioritise the work to ensure that tasks are completed on schedule.</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4>
+                            <ul class="list-disc list-inside text-stone-600 text-sm space-y-1">
+                                <li>Annotated Gantt Chart/Production Schedule</li>
+                                <li>Task Board Screenshot</li>
+                                <li>Redacted Email Correspondence (re-prioritisation)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right">
+                        <span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span>
+                        <span data-map="k9" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K9</span>
+                        <span data-map="s6" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S6</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Core – Regulations and Health and Safety -->
+            <section id="section-safety" class="content-section space-y-6" style="display: none;">
+                <header>
+                    <h2 class="text-3xl font-bold text-stone-900">Core – Regulations and Health and Safety</h2>
+                    <p class="mt-2 text-stone-600">This area focuses on the critical importance of operating safely and legally. It includes identifying risks, understanding industry regulations, and ensuring the production complies with all relevant laws, policies, and codes of practice to protect the cast, crew, and public.</p>
+                </header>
+                 <div id="ksb-k11" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1">
+                            <h3 class="font-bold text-lg text-teal-700">K11</h3>
+                            <p class="text-sm text-stone-600">How to identify and report potential health and safety risks and hazards for a production.</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4>
+                            <ul class="list-disc list-inside text-stone-600 text-sm space-y-1">
+                                <li>Completed Risk Assessment Document</li>
+                                <li>Safety Briefing Notes</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right">
+                        <span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span>
+                        <span data-map="s15" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S15</span>
+                    </div>
+                </div>
+                 <div id="ksb-k12" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1">
+                            <h3 class="font-bold text-lg text-teal-700">K12</h3>
+                            <p class="text-sm text-stone-600">Industry regulations, codes of practice, organisational policies, licences and legal requirements that might affect a production including social media policy.</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4>
+                            <ul class="list-disc list-inside text-stone-600 text-sm space-y-1">
+                                <li>Compliance Checklist</li>
+                                <li>Redacted Licence Application</li>
+                                <li>Annotated Social Media Policy</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right">
+                        <span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span>
+                        <span data-map="s11" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S11</span>
+                        <span data-map="s15" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S15</span>
+                    </div>
+                </div>
+                <div id="ksb-s11" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1">
+                            <h3 class="font-bold text-lg text-teal-700">S11</h3>
+                            <p class="text-sm text-stone-600">Contribute to the monitoring and compliance for the production relating to legal, regulatory, organisational and industry codes of practice.</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4>
+                            <ul class="list-disc list-inside text-stone-600 text-sm space-y-1">
+                                <li>Compliance Log/Tracker</li>
+                                <li>Redacted Email Correspondence (compliance follow-up)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right">
+                        <span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span>
+                        <span data-map="k12" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K12</span>
+                        <span data-map="s15" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S15</span>
+                    </div>
+                </div>
+                <div id="ksb-s15" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1">
+                            <h3 class="font-bold text-lg text-teal-700">S15</h3>
+                            <p class="text-sm text-stone-600">Operate within legislation, regulations, organisational policies, industry standards and procedures such as health and safety, confidentiality, security.</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4>
+                            <ul class="list-disc list-inside text-stone-600 text-sm space-y-1">
+                                <li>Redacted Signed Confidentiality Agreement</li>
+                                <li>Security Protocol Checklist</li>
+                                <li>Witness Statement (H&S/Confidentiality adherence)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right">
+                        <span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span>
+                        <span data-map="k11" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K11</span>
+                        <span data-map="k12" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K12</span>
+                        <span data-map="s11" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S11</span>
+                        <span data-map="k15" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K15</span>
+                        <span data-map="b4" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">B4</span>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section: Core – Resourcing and Logistics Coordination -->
+            <section id="section-resourcing" class="content-section space-y-6" style="display: none;">
+                <header>
+                    <h2 class="text-3xl font-bold text-stone-900">Core – Resourcing and Logistics Coordination</h2>
+                    <p class="mt-2 text-stone-600">This section is about the practicalities of bringing a production to life. It involves understanding resource needs based on the project's scale, researching and securing those resources, monitoring their use, and coordinating all logistical elements like travel.</p>
+                </header>
+                 <div id="ksb-k5" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">K5</h3><p class="text-sm text-stone-600">How different production environments, formats and scale affect the types and quantity of required resources.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Comparative Resource Plan</li><li>Annotated Budget Breakdown (resource impact)</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="k7" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K7</span> <span data-map="s5" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S5</span></div>
+                </div>
+                <div id="ksb-k7" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">K7</h3><p class="text-sm text-stone-600">How to research and access resources such as suppliers, contributors and crew members.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Redacted Supplier Contact List</li><li>Screenshots of Redacted Crew Database Entries</li><li>Research Notes on Contributors/Locations</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="k5" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K5</span> <span data-map="s6" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S6</span></div>
+                </div>
+                <div id="ksb-k10" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">K10</h3><p class="text-sm text-stone-600">Requirements and production documentation that may be needed when travelling.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Mock Visa Application & Research</li><li>ATA Carnet Documentation (Template/Research)</li><li>Redacted Travel Itinerary</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="s6" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S6</span></div>
+                </div>
+                <div id="ksb-s1" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">S1</h3><p class="text-sm text-stone-600">Operate within agreed organisational policies, standards and procedures; adapting to operational changes as they occur.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Annotated Process Flow Diagram (adaptations)</li><li>Redacted Email Communication (responding to change)</li><li>Witness Statement (adapting to change)</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="s9" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S9</span> <span data-map="s11" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S11</span> <span data-map="s15" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S15</span></div>
+                </div>
+                <div id="ksb-s5" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">S5</h3><p class="text-sm text-stone-600">Monitor the use of resources such as production materials, equipment and supplies.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Equipment Check-in/Check-out Log</li><li>Consumables Tracking Sheet</li><li>Redacted Inventory Report</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="k5" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K5</span></div>
+                </div>
+                <div id="ksb-s6" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">S6</h3><p class="text-sm text-stone-600">Coordinate logistics or travel activity for the production, liaising with other departments when required.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Redacted Detailed Travel Itinerary</li><li>Call Sheets with Travel Information</li><li>Redacted Email Correspondence (logistics coordination)</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="s9" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S9</span> <span data-map="k10" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K10</span></div>
+                </div>
+            </section>
+            
+            <!-- Section: Core – Communication -->
+            <section id="section-communication" class="content-section space-y-6" style="display: none;">
+                <header>
+                    <h2 class="text-3xl font-bold text-stone-900">Core – Communication</h2>
+                    <p class="mt-2 text-stone-600">Effective communication is the backbone of any successful production. This area covers understanding different communication styles and collaborating with the team to ensure the final product meets all required standards.</p>
+                </header>
+                <div id="ksb-k13" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">K13</h3><p class="text-sm text-stone-600">Communication styles. How the type, format and frequency of communication can impact on the success of a production.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Communication Plan</li><li>Redacted Examples of Varied Communication Formats</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="s7" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S7</span></div>
+                </div>
+                <div id="ksb-s7" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">S7</h3><p class="text-sm text-stone-600">Collaborate with the production team to check that the final product is delivered to industry standards including technical and legal requirements.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Completed Quality Control Checklist</li><li>Redacted Sign-off Sheet for Deliverables</li><li>Feedback Loop Documentation (notes/summaries)</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="k13" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K13</span> <span data-map="k21" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K21</span></div>
+                </div>
+            </section>
+
+            <!-- Section: Core – CPD -->
+            <section id="section-cpd" class="content-section space-y-6" style="display: none;">
+                <header>
+                    <h2 class="text-3xl font-bold text-stone-900">Core – Continuing Professional Development (CPD)</h2>
+                    <p class="mt-2 text-stone-600">The creative industries are constantly evolving. This section focuses on the importance of taking initiative for your own learning, keeping up-to-date with new technologies and trends, and being able to promote your own skills and services.</p>
+                </header>
+                 <div id="ksb-k14" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">K14</h3><p class="text-sm text-stone-600">How to keep up to date with tools, standards and trends and emerging technologies and their use and impact across the sector.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Research Summary (new tools/tech)</li><li>Annotated Notes from Industry Event/Webinar</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="s14" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S14</span></div>
+                </div>
+                <div id="ksb-s14" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">S14</h3><p class="text-sm text-stone-600">Keep up to date with tools, standards, trends and emerging technologies and their use and impact across the sector.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Screenshots of Online Course Completion</li><li>Short Video Clip (demonstrating new tool)</li><li>Learning Log</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="k14" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K14</span> <span data-map="b3" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">B3</span></div>
+                </div>
+                <div id="ksb-s17" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">S17</h3><p class="text-sm text-stone-600">Promote and market skills and services.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Screenshot of Professional CV/Portfolio Page</li><li>Screenshot of LinkedIn Profile</li><li>Mock, Redacted Outreach Email</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="b3" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">B3</span></div>
+                </div>
+                <div id="ksb-b3" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">B3</h3><p class="text-sm text-stone-600">Take the initiative and responsibility for own learning and development, working with and learning from peers.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Learning & Development Log</li><li>Redacted Mentorship Meeting Notes</li><li>Witness Statement (initiative in learning)</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="k14" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K14</span> <span data-map="s14" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S14</span> <span data-map="s17" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S17</span></div>
+                </div>
+            </section>
+            
+            <!-- Section: Core – Data Protection and Confidentiality -->
+            <section id="section-data" class="content-section space-y-6" style="display: none;">
+                <header>
+                    <h2 class="text-3xl font-bold text-stone-900">Core – Data Protection and Confidentiality</h2>
+                    <p class="mt-2 text-stone-600">This section covers the professional and legal duty to protect sensitive information. It includes understanding the value of production content, the importance of data security, and maintaining confidentiality at all times.</p>
+                </header>
+                <div id="ksb-k15" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">K15</h3><p class="text-sm text-stone-600">The value of production content and confidentiality to the business or organisation. Why it is important to maintain data security, and the legal and regulatory requirements such as copyright and intellectual property rights.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Annotated Data Security Protocol Document</li><li>Redacted Confidentiality Agreement (annotated)</li><li>Research Notes on Data Protection</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="b4" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">B4</span> <span data-map="k19" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K19</span></div>
+                </div>
+                 <div id="ksb-b4" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">B4</h3><p class="text-sm text-stone-600">Maintain commercial confidentiality and professional practice at all times, and in all settings.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Redacted Signed Confidentiality Agreement</li><li>Witness Statement (confidentiality adherence)</li><li>Redacted Internal Communication (handling sensitive info)</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="k15" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K15</span></div>
+                </div>
+            </section>
+            
+             <!-- Section: PC – Copyright -->
+            <section id="section-copyright" class="content-section space-y-6" style="display: none;">
+                <header>
+                    <h2 class="text-3xl font-bold text-stone-900">Production Coordinator – Copyright</h2>
+                    <p class="mt-2 text-stone-600">This specialist area deals with the legal rights associated with creative content. It involves understanding how copyright impacts content use, knowing the processes for clearing rights, and assisting in securing the necessary licenses for all materials used in a production.</p>
+                </header>
+                 <div id="ksb-k19" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">K19</h3><p class="text-sm text-stone-600">The intended use and impact of a piece of copyright material or content.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Annotated Content Usage Rights Document</li><li>Mood Board with Copyright Notes</li><li>Research Notes on Copyright Types</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="k15" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K15</span> <span data-map="k20" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K20</span></div>
+                </div>
+                <div id="ksb-k20" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">K20</h3><p class="text-sm text-stone-600">The processes required to obtain the necessary legal rights to the copyright. Where to obtain advice and information for different types of copyrighted materials.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Copyright Clearance Workflow Diagram</li><li>Redacted Contact List for Copyright Agencies/Advisors</li><li>Research Notes on Clearance Processes</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="k19" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K19</span> <span data-map="k21" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K21</span> <span data-map="s18" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S18</span></div>
+                </div>
+                <div id="ksb-k21" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">K21</h3><p class="text-sm text-stone-600">How to ensure that all media or creative content is cleared for use and owned or licenced by the production. For example, obtaining release forms or interpreting the rights on PPP or contacts.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Mock/Redacted Completed Talent Release Form</li><li>Mock/Redacted Completed Location Release Form</li><li>Redacted Music Licence Agreement (annotated)</li><li>Content Clearance Log/Tracker</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="s7" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S7</span> <span data-map="s19" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">S19</span></div>
+                </div>
+                <div id="ksb-s18" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">S18</h3><p class="text-sm text-stone-600">Assist with establishing sources of copyright for the materials being used on a production.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Research Log for Copyright Holders</li><li>Screenshots of Database Entries for Licensed Assets</li><li>Redacted Email Correspondence (identifying sources)</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="k20" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K20</span> <span data-map="k21" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K21</span></div>
+                </div>
+                <div id="ksb-s19" class="ksb-card bg-white p-6 rounded-lg shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-1"><h3 class="font-bold text-lg text-teal-700">S19</h3><p class="text-sm text-stone-600">Obtain terms and conditions from copyright owners and license holders acting as a point of contact when required.</p></div>
+                        <div class="md:col-span-2"><h4 class="font-semibold text-stone-700 mb-2">Suggested Visual Evidence</h4><ul class="list-disc list-inside text-stone-600 text-sm space-y-1"><li>Redacted Email Correspondence (requesting T&Cs)</li><li>Redacted License Agreement Negotiation Notes</li><li>Log of License Expiry Dates</li></ul></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-right"><span class="text-xs font-semibold text-stone-500 mr-2">Maps to:</span><span data-map="k21" class="ksb-map-tag bg-teal-100 hover:bg-teal-200 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full">K21</span></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navButtons = document.querySelectorAll('.nav-button');
+            const contentSections = document.querySelectorAll('.content-section');
+            const ksbMapTags = document.querySelectorAll('.ksb-map-tag');
+            const ksbCards = document.querySelectorAll('.ksb-card');
+
+            function showSection(sectionId) {
+                contentSections.forEach(section => {
+                    section.style.display = section.id === sectionId ? 'block' : 'none';
+                });
+                navButtons.forEach(button => {
+                    button.classList.toggle('active', button.dataset.section === sectionId);
+                });
+            }
+
+            function clearHighlights() {
+                ksbCards.forEach(card => card.classList.remove('highlight'));
+            }
+            
+            function highlightKsb(event) {
+                clearHighlights();
+                
+                const ksbId = event.currentTarget.dataset.map;
+                const selfCard = event.currentTarget.closest('.ksb-card');
+
+                if (selfCard) {
+                    selfCard.classList.add('highlight');
+                }
+
+                const targetCard = document.getElementById(`ksb-${ksbId}`);
+                if (targetCard) {
+                    const targetSectionId = targetCard.closest('.content-section').id;
+                    showSection(targetSectionId);
+                    
+                    setTimeout(() => {
+                        targetCard.classList.add('highlight');
+                        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100);
+                }
+            }
+
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    clearHighlights();
+                    showSection(button.dataset.section);
+                });
+            });
+
+            ksbMapTags.forEach(tag => {
+                tag.addEventListener('click', highlightKsb);
+            });
+
+            showSection('section-context');
+        });
+    </script>
+</body>
+</html>
