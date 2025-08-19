@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production Coordinator Resource Hub</title>
+    <!-- Use the Inter font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Load Tailwind CSS from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .resource-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto">
+
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">Production Coordinator Hub</h1>
+            <p class="text-lg md:text-xl text-gray-600">Your go-to resources for career growth and skill development.</p>
+        </header>
+
+        <!-- Resource Sections -->
+        <main class="grid gap-8 lg:grid-cols-2">
+
+            <!-- Jobs & Experience Section -->
+            <section class="bg-white p-6 rounded-2xl shadow-lg">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Jobs & Experience</h2>
+                <p class="text-gray-600 mb-6">Find the perfect role or gain valuable on-the-job experience to build your portfolio.</p>
+                <ul class="space-y-4">
+                    <!-- Broadcaster Careers Link -->
+                    <li class="resource-card bg-gray-50 p-4 rounded-xl shadow-sm hover:shadow-md">
+                        <h3 class="font-medium text-gray-800">Broadcaster Careers</h3>
+                        <p class="text-sm text-gray-500">Official job portals and training academies for major UK broadcasters.</p>
+                        <a href="https://careers.bbc.co.uk/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">BBC Careers →</a>
+                        <a href="https://careers.itv.com/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">ITV Careers →</a>
+                        <a href="https://careers.channel4.com/4jobs" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">Channel 4 Jobs →</a>
+                    </li>
+                    <!-- Studio Companies Link -->
+                    <li class="resource-card bg-gray-50 p-4 rounded-xl shadow-sm hover:shadow-md">
+                        <h3 class="font-medium text-gray-800">Studios & Production Companies</h3>
+                        <p class="text-sm text-gray-500">Explore career opportunities at major film and television studios and production companies.</p>
+                        <a href="https://pinewoodgroup.com/on-the-lot/directory/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">Pinewood Studios Directory →</a>
+                        <p class="text-sm font-semibold text-gray-700 mt-2">Major Studio Careers:</p>
+                        <a href="https://jobs.netflix.com/careers/content" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-1 block">Netflix →</a>
+                        <a href="https://www.amazon.jobs/en-gb/teams/amazon-studios" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-1 block">Amazon Studios →</a>
+                        <a href="https://www.sonyjobs.com/find-a-job.html" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-1 block">Sony Pictures →</a>
+                        <a href="https://careers.wbd.com/global/en/c/production-jobs" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-1 block">Warner Bros. Discovery →</a>
+                        <a href="https://www.disneycareers.com/en/employment/london-production-jobs/391/8014352/2635167-6269131-2648110-2643743/4" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-1 block">The Walt Disney Company →</a>
+                        <p class="text-sm font-semibold text-gray-700 mt-2">UK Production Company & Media Group Careers:</p>
+                        <a href="https://careers.bbc.co.uk/content/Studios--Who-we-are/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-1 block">BBC Studios →</a>
+                        <a href="https://careers.itv.com/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-1 block">ITV Studios →</a>
+                        <a href="https://all3media.com/careers/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-1 block">All3Media →</a>
+                        <a href="https://www.fremantle.com/careers/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-1 block">Fremantle →</a>
+                        <a href="https://careers.global.com/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-1 block">Global →</a>
+                        <a href="https://www.bauermedia.co.uk/join/careers/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-1 block">Bauer Media Group →</a>
+                    </li>
+                    <!-- Job Board Link -->
+                    <li class="resource-card bg-gray-50 p-4 rounded-xl shadow-sm hover:shadow-md">
+                        <h3 class="font-medium text-gray-800">Job Boards</h3>
+                        <p class="text-sm text-gray-500">Explore industry-specific job boards for roles in the UK and internationally.</p>
+                        <a href="https://www.mandy.com/uk" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">The Mandy Network →</a>
+                        <a href="https://www.productionbase.co.uk/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">ProductionBase →</a>
+                        <a href="https://www.grapevinejobs.co.uk/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">grapevinejobs →</a>
+                    </li>
+                    <!-- Volunteer/Entry-Level Link -->
+                    <li class="resource-card bg-gray-50 p-4 rounded-xl shadow-sm hover:shadow-md">
+                        <h3 class="font-medium text-gray-800">Volunteer & Entry-Level Roles</h3>
+                        <p class="text-sm text-gray-500">Find opportunities to get your foot in the door and build practical skills.</p>
+                        <a href="https://www.myfirstjobinfilm.com/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">My First Job In Film →</a>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Upskilling & Training Section -->
+            <section class="bg-white p-6 rounded-2xl shadow-lg">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Upskilling & Training</h2>
+                <p class="text-gray-600 mb-6">Learn new tools, earn certifications, and stay on top of the latest industry trends.</p>
+                <ul class="space-y-4">
+                    <!-- Certifications Link -->
+                    <li class="resource-card bg-gray-50 p-4 rounded-xl shadow-sm hover:shadow-md">
+                        <h3 class="font-medium text-gray-800">Certifications & Training</h3>
+                        <p class="text-sm text-gray-500">Find courses and accredited training to certify your skills.</p>
+                        <a href="https://www.cpduk.co.uk/industries/media" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">The CPD Certification Service →</a>
+                        <a href="https://www.screenskills.com/courses/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">ScreenSkills Courses →</a>
+                    </li>
+                    <!-- Software Training Link -->
+                     <li class="resource-card bg-gray-50 p-4 rounded-xl shadow-sm hover:shadow-md">
+                        <h3 class="font-medium text-gray-800">Industry Software & Tools</h3>
+                        <p class="text-sm text-gray-500">Essential software for production coordinators and managers, including training and certifications.</p>
+                        <p class="text-sm font-semibold text-gray-700 mt-2">Budgeting & Scheduling:</p>
+                        <a href="https://www.ep.com/academy-production-management-studio-courses/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-1 block">Movie Magic Budgeting/Scheduling Courses →</a>
+                        <a href="https://productionguild.com/training-courses/upcoming-courses/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-1 block">Production Guild of Great Britain Training →</a>
+                        <p class="text-sm font-semibold text-gray-700 mt-2">Scripting:</p>
+                        <a href="https://www.hit-the-ground-running.co.uk/final-draft" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-1 block">Final Draft Training →</a>
+                        <p class="text-sm font-semibold text-gray-700 mt-2">Video Editing:</p>
+                        <a href="https://certifiedprofessional.adobe.com/premiere-pro" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-1 block">Adobe Premiere Pro Certification →</a>
+                    </li>
+                    <!-- Training Platforms Link -->
+                    <li class="resource-card bg-gray-50 p-4 rounded-xl shadow-sm hover:shadow-md">
+                        <h3 class="font-medium text-gray-800">Industry-Specific Schools</h3>
+                        <p class="text-sm text-gray-500">Explore training from leading film and music schools.</p>
+                        <a href="https://www.nfts.co.uk/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">National Film and Television School (NFTS) →</a>
+                        <a href="https://abbeyroadinstitute.co.uk/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">Abbey Road Institute →</a>
+                    </li>
+                    <!-- Workshops Link -->
+                    <li class="resource-card bg-gray-50 p-4 rounded-xl shadow-sm hover:shadow-md">
+                        <h3 class="font-medium text-gray-800">Workshops & Webinars</h3>
+                        <p class="text-sm text-gray-500">Find hands-on learning and live sessions on new topics.</p>
+                        <a href="https://www.screenskills.com/courses/search/?q=workshop" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">ScreenSkills Workshops →</a>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Professional Branding Section -->
+            <section class="bg-white p-6 rounded-2xl shadow-lg">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Professional Branding</h2>
+                <p class="text-gray-600 mb-6">Craft your professional identity with a standout CV and a strong LinkedIn profile.</p>
+                <ul class="space-y-4">
+                    <!-- CV Examples Link -->
+                    <li class="resource-card bg-gray-50 p-4 rounded-xl shadow-sm hover:shadow-md">
+                        <h3 class="font-medium text-gray-800">CV & Cover Letter Examples</h3>
+                        <p class="text-sm text-gray-500">Templates and examples to help you build a winning application.</p>
+                        <a href="https://enhancv.com/uk/cv-examples/production-coordinator/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">Enhancv - CV Examples →</a>
+                        <a href="https://www.velvetjobs.com/resume/production-coordinator-resume-sample" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">Velvet Jobs - Resume Samples →</a>
+                    </li>
+                    <!-- Networking Events Link -->
+                    <li class="resource-card bg-gray-50 p-4 rounded-xl shadow-sm hover:shadow-md">
+                        <h3 class="font-medium text-gray-800">Networking & Professional Bodies</h3>
+                        <p class="text-sm text-gray-500">Connect with industry professionals and expand your network.</p>
+                        <a href="https://www.wearecreative.uk/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">Creative UK →</a>
+                        <a href="https://www.productionguild.com/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">The Production Guild of Great Britain →</a>
+                        <a href="https://www.eventbrite.co.uk/d/united-kingdom--london/creative-industries/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">Eventbrite Creative Industries →</a>
+                        <a href="https://bristolcreativeindustries.com/events/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">Bristol Creative Industries Events →</a>
+                    </li>
+                    <!-- LinkedIn Support Link -->
+                    <li class="resource-card bg-gray-50 p-4 rounded-xl shadow-sm hover:shadow-md">
+                        <h3 class="font-medium text-gray-800">LinkedIn Support</h3>
+                        <p class="text-sm text-gray-500">Tips for optimizing your profile and networking in creative industries.</p>
+                        <a href="https://www.wearecreative.uk/support/creative-enterprise-support" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">Creative UK - Enterprise Support →</a>
+                        <a href="https://iuk-business-connect.org.uk/creative-industries/" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm mt-2 block">Innovate UK Business Connect →</a>
+                    </li>
+                </ul>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>
