@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thinking Style Quiz</title>
+    <!-- Use Tailwind CSS for a modern, responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .question-group label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease-in-out;
+            margin-bottom: 0.5rem;
+        }
+        .question-group input[type="radio"]:checked + span {
+            font-weight: 600;
+        }
+        .question-group input[type="radio"]:checked + span::before {
+            background-color: #3b82f6; /* Blue check */
+        }
+        .question-group input[type="radio"] {
+            display: none;
+        }
+        .question-group input[type="radio"] + span::before {
+            content: '';
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            border: 2px solid #9ca3af;
+            margin-right: 0.75rem;
+            transition: all 0.2s ease-in-out;
+        }
+        .question-group input[type="radio"]:checked + span::before {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-inter">
+
+    <div class="container text-center">
+        <div id="quiz-container" class="space-y-6">
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-6">Thinking Style Quiz</h1>
+            <p class="text-gray-600 mb-8">Discover if you're a divergent or convergent thinker by answering the questions below.</p>
+            
+            <form id="quiz-form" class="space-y-8 text-left">
+                <!-- Question 1 -->
+                <div class="question-group">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">1. When brainstorming ideas, you tend to:</p>
+                    <div class="space-y-2">
+                        <label>
+                            <input type="radio" name="q1" value="divergent" required>
+                            <span class="text-gray-700">Freely generate a wide array of ideas, including some that might seem unrelated.</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="convergent">
+                            <span class="text-gray-700">Systematically narrow down options to find the most practical and efficient choice.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- New Question 2 - Yes/No -->
+                <div class="question-group">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">2. When faced with a complex puzzle, do you immediately look for a single, known solution?</p>
+                    <div class="space-y-2">
+                        <label>
+                            <input type="radio" name="q2" value="convergent" required>
+                            <span class="text-gray-700">Yes</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="divergent">
+                            <span class="text-gray-700">No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-group">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">3. In a group discussion, you are most likely to:</p>
+                    <div class="space-y-2">
+                        <label>
+                            <input type="radio" name="q3" value="divergent" required>
+                            <span class="text-gray-700">Expand on a topic by introducing new angles and concepts.</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="convergent">
+                            <span class="text-gray-700">Bring the conversation back to the main point to find a clear resolution.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-group">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">4. You are leading a group project with a strict deadline. The project requires a unique solution. Your approach would be to:</p>
+                    <div class="space-y-2">
+                        <label>
+                            <input type="radio" name="q4" value="convergent" required>
+                            <span class="text-gray-700">Your first step is to establish a detailed roadmap with specific milestones and goals.</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="q4" value="divergent">
+                            <span class="text-gray-700">You begin by encouraging the team to explore all potential pathways without judgment.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- New Question 5 - Yes/No -->
+                <div class="question-group">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">5. When you encounter a technical problem, do you usually explore multiple, unconventional solutions before consulting the manual?</p>
+                    <div class="space-y-2">
+                        <label>
+                            <input type="radio" name="q5" value="divergent" required>
+                            <span class="text-gray-700">Yes</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="q5" value="convergent">
+                            <span class="text-gray-700">No</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Question 6 -->
+                <div class="question-group">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">6. You enjoy activities that involve:</p>
+                    <div class="space-y-2">
+                        <label>
+                            <input type="radio" name="q6" value="divergent" required>
+                            <span class="text-gray-700">Activities where the final result is unknown when you start.</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="q6" value="convergent">
+                            <span class="text-gray-700">Activities that require you to follow a specific set of rules to solve a problem.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- New Question 7 - Yes/No -->
+                <div class="question-group">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">7. When planning a trip, do you prefer to have every detail booked and scheduled in advance?</p>
+                    <div class="space-y-2">
+                        <label>
+                            <input type="radio" name="q7" value="convergent" required>
+                            <span class="text-gray-700">Yes</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="q7" value="divergent">
+                            <span class="text-gray-700">No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-group">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">8. You are learning to cook a new dish. After reading the recipe once, you would:</p>
+                    <div class="space-y-2">
+                        <label>
+                            <input type="radio" name="q8" value="convergent" required>
+                            <span class="text-gray-700">You prioritize accuracy, ensuring every step is executed as written to achieve the expected outcome.</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="q8" value="divergent">
+                            <span class="text-gray-700">You find yourself improvising, adding new flavors and techniques to make the dish uniquely yours.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question-group">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">9. Your approach to a deadline is typically:</p>
+                    <div class="space-y-2">
+                        <label>
+                            <input type="radio" name="q9" value="divergent" required>
+                            <span class="text-gray-700">You take time to explore different approaches before committing to a plan.</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="q9" value="convergent">
+                            <span class="text-gray-700">You quickly identify the most efficient route and begin execution right away.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- New Question 10 - Yes/No -->
+                <div class="question-group">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">10. When you have a creative idea, do you usually stop to evaluate its practicality before developing it further?</p>
+                    <div class="space-y-2">
+                        <label>
+                            <input type="radio" name="q10" value="convergent" required>
+                            <span class="text-gray-700">Yes</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="q10" value="divergent">
+                            <span class="text-gray-700">No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question-group">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">11. You find yourself most energized by:</p>
+                    <div class="space-y-2">
+                        <label>
+                            <input type="radio" name="q11" value="convergent" required>
+                            <span class="text-gray-700">Completing a project and knowing it's done correctly.</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="q11" value="divergent">
+                            <span class="text-gray-700">The initial phase of a project when anything is possible.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question-group">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">12. A friend asks you to help them plan a surprise party. You would:</p>
+                    <div class="space-y-2">
+                        <label>
+                            <input type="radio" name="q12" value="divergent" required>
+                            <span class="text-gray-700">You start by dreaming up a big, original concept for the event.</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="q12" value="convergent">
+                            <span class="text-gray-700">You immediately begin by organizing the logistics and creating a checklist of what needs to be done.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question-group">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">13. When working on a team project, you prefer to:</p>
+                    <div class="space-y-2">
+                        <label>
+                            <input type="radio" name="q13" value="divergent" required>
+                            <span class="text-gray-700">Contribute to open brainstorming sessions where all ideas are valued before a clear direction is chosen.</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="q13" value="convergent">
+                            <span class="text-gray-700">Receive a specific task and work on it independently to ensure it's completed efficiently.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- New Question 14 - Yes/No -->
+                <div class="question-group">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">14. Do you often notice connections between seemingly unrelated elements in a story, such as symbols or themes?</p>
+                    <div class="space-y-2">
+                        <label>
+                            <input type="radio" name="q14" value="divergent" required>
+                            <span class="text-gray-700">Yes</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="q14" value="convergent">
+                            <span class="text-gray-700">No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question-group">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">15. After watching a thought-provoking film, you are most interested in:</p>
+                    <div class="space-y-2">
+                        <label>
+                            <input type="radio" name="q15" value="divergent" required>
+                            <span class="text-gray-700">Discussing the multiple possible interpretations, symbolism, and hidden meanings.</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="q15" value="convergent">
+                            <span class="text-gray-700">Analyzing the plot, character consistency, and the director's intended message.</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center mt-8">
+                    <button type="submit" class="px-8 py-3 bg-blue-600 text-white font-bold rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div id="result-container" class="hidden text-center space-y-6">
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-4" id="result-title"></h2>
+            <p class="text-xl text-gray-600" id="result-description"></p>
+            <p class="mt-4 text-sm text-gray-500" id="result-source">The descriptions are for informational purposes and are based on common traits. Your personality is unique!</p>
+            <button id="retake-btn" class="mt-6 px-6 py-2 bg-gray-200 text-gray-800 font-bold rounded-full shadow-md hover:bg-gray-300 transition duration-300">
+                Retake Quiz
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizForm = document.getElementById('quiz-form');
+            const quizContainer = document.getElementById('quiz-container');
+            const resultContainer = document.getElementById('result-container');
+            const resultTitle = document.getElementById('result-title');
+            const resultDescription = document.getElementById('result-description');
+            const retakeBtn = document.getElementById('retake-btn');
+
+            quizForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const formData = new FormData(quizForm);
+                let divergentScore = 0;
+                let convergentScore = 0;
+
+                for (const pair of formData.entries()) {
+                    const value = pair[1];
+                    if (value === 'divergent') {
+                        divergentScore++;
+                    } else if (value === 'convergent') {
+                        convergentScore++;
+                    }
+                }
+
+                let result = '';
+                let description = '';
+
+                if (divergentScore > convergentScore) {
+                    result = 'You are a Divergent Thinker';
+                    description = `You are an imaginative and creative problem-solver. You excel at generating a wide variety of solutions and ideas, often making unexpected connections between different concepts. You're comfortable with ambiguity and thrive in environments where you can explore and experiment.`;
+                } else if (convergentScore > divergentScore) {
+                    result = 'You are a Convergent Thinker';
+                    description = `You are a logical and analytical problem-solver. You excel at taking a set of facts and using a systematic approach to arrive at a single, correct, or best possible answer. You prefer structure, clarity, and are highly effective at evaluating ideas and synthesizing information.`;
+                } else {
+                    result = 'You are a Balance of Both';
+                    description = `Your thinking style shows a strong balance between divergent and convergent traits. This means you are skilled at both generating creative ideas and logically evaluating them to find the most effective solution. This versatility makes you a well-rounded and adaptable problem-solver.`;
+                }
+
+                resultTitle.textContent = result;
+                resultDescription.textContent = description;
+
+                quizContainer.classList.add('hidden');
+                resultContainer.classList.remove('hidden');
+            });
+
+            retakeBtn.addEventListener('click', () => {
+                quizForm.reset();
+                quizContainer.classList.remove('hidden');
+                resultContainer.classList.add('hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>
