@@ -68,33 +68,57 @@
             list-style-type: none;
             padding-left: 0;
         }
-        li {
+        li.ksb-item {
             margin-bottom: 0.75rem;
             padding-left: 1.5rem;
             position: relative;
+            transition: opacity 0.3s ease, max-height 0.3s ease;
+            overflow: hidden;
+            max-height: 100px;
+            opacity: 1;
         }
-        li::before {
+        li.ksb-item::before {
             content: '›';
             position: absolute;
             left: 0;
             color: #4a5568;
             font-weight: bold;
         }
-        .assessment-tag {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
+        .filter-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background-color: #e2e8f0;
+            border: none;
+            border-radius: 999px;
+            padding: 0.5rem 1.25rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
             font-weight: 600;
-            margin-left: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            color: #475569;
+        }
+        .filter-btn:hover {
+            background-color: #cbd5e0;
+        }
+        .filter-btn.active {
             color: #fff;
-            vertical-align: middle;
         }
-        .method1 { /* Blue */
-            background-color: #3B82F6;
-        }
-        .method2 { /* Green */
-            background-color: #10B981;
+        .filter-btn.method1.active { background-color: #3B82F6; }
+        .filter-btn.method2.active { background-color: #10B981; }
+        .filter-btn.all.active { background-color: #64748b; }
+
+        li.ksb-item.hidden {
+            max-height: 0;
+            opacity: 0;
+            margin-bottom: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            border-width: 0;
         }
         .grade-info {
             background-color: #fffbeb;
@@ -117,15 +141,14 @@
             h1, h2, h3 {
                 page-break-after: avoid;
             }
+            .filter-controls {
+                display: none;
+            }
             table {
                 page-break-inside: auto;
             }
             tr {
                 page-break-inside: avoid;
-            }
-            .assessment-tag {
-                -webkit-print-color-adjust: exact;
-                color-adjust: exact;
             }
             .grade-info {
                 -webkit-print-color-adjust: exact;
@@ -140,80 +163,80 @@
         <p>This document outlines the core <strong>K</strong>nowledge, <strong>S</strong>kills, and <strong>B</strong>ehaviours (KSBs) for the Content Creator role. It also details the assessment methods and grading criteria used to demonstrate competence.</p>
 
         <h2>KSBs Overview</h2>
-        <p>
-            KSBs are color-coded to indicate their corresponding assessment method:
-            <span class="assessment-tag method1">Project Report</span>
-            <span class="assessment-tag method2">Professional Discussion</span>
-        </p>
+        <div class="filter-controls">
+            <button id="showMethod1" class="filter-btn method1">Project Report</button>
+            <button id="showMethod2" class="filter-btn method2">Professional Discussion</button>
+            <button id="showAll" class="filter-btn all active">Show All</button>
+        </div>
 
         <h3>Knowledge</h3>
-        <ul>
-            <li><strong>K1:</strong> The principles and process of setting a budget to produce content.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K2:</strong> The methods used to segment and understand core audiences and how to plan content for them.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>K3:</strong> Availability of data and its use to inform decision-making when identifying channels, formats and platforms for content creation.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>K4:</strong> The end-to-end production workflow process for the organisation, the key stages, and own role within this.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K5:</strong> The regulatory and legal requirements when using media assets such as copyright, intellectual property rights, GDPR, web accessibility, and non-disclosure agreements.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K6:</strong> Personal and employer responsibilities regarding data protection and data sharing, the potential impact on a business and the regulations that cover this.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K7:</strong> How to identify the commercial drivers for a client/customer.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>K8:</strong> The importance of brand, brand awareness, brand purpose, branding guidelines and the intended audience within a brief.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>K9:</strong> Where content creation fits within a marketing strategy.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>K10:</strong> How tone of voice can be adapted effectively to reflect the content.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K11:</strong> How audiences and their behaviours differ across channels and platforms and the different communication styles that could be used.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>K12:</strong> How creative content can be used across multiple channels and platforms, and how the platform chosen affects the content production.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>K13:</strong> The different styles of writing that can be used according to the type of content, channel and platform required.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K14:</strong> Correct use of grammar, punctuation, spelling and inclusive language.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K15:</strong> The principles of writing persuasive copy for a person or group or to raise brand awareness.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K16:</strong> The principles applied to create or capture visuals and audio when using standard packages and equipment.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K17:</strong> Where to source, adapt and edit content from.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K18:</strong> How to organise, structure and label content effectively, methodically and securely to enable efficient search and retrieval.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K19:</strong> How web pages are published and how the content can be optimised to ensure high rankings in search engine results.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K20:</strong> The importance of clearly articulating requirements and how this can influence priorities for a campaign.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K21:</strong> How communication styles can be adapted to suit different audiences.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K22:</strong> How to plan content delivery against the schedule.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K23:</strong> The principles for creating an effective campaign with measurable outcomes.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>K24:</strong> The principles of mapping user journeys to ensure content is focused on maximising engagement.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>K25:</strong> Ways/methods of engaging with audiences, how to respond to evolving situations, recognise potential threats/issues and when to escalate these.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K26:</strong> How to evaluate the success of the campaign against the objectives using available data.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>K27:</strong> How to keep up to date with existing and evolving content tools, platforms, trends and talent.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K28:</strong> Approaches to managing and marketing own skills and services.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K29:</strong> The culture of the organisation in which they are working, the commercial pressures, project deadlines and organisational working practices.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>K30:</strong> How the structures, regulation and funding of organisations affects creative media activities.<span class="assessment-tag method2">Professional Discussion</span></li>
+        <ul id="knowledge-list">
+            <li class="ksb-item" data-method="method2"><strong>K1:</strong> The principles and process of setting a budget to produce content.</li>
+            <li class="ksb-item" data-method="method1"><strong>K2:</strong> The methods used to segment and understand core audiences and how to plan content for them.</li>
+            <li class="ksb-item" data-method="method1"><strong>K3:</strong> Availability of data and its use to inform decision-making when identifying channels, formats and platforms for content creation.</li>
+            <li class="ksb-item" data-method="method2"><strong>K4:</strong> The end-to-end production workflow process for the organisation, the key stages, and own role within this.</li>
+            <li class="ksb-item" data-method="method2"><strong>K5:</strong> The regulatory and legal requirements when using media assets such as copyright, intellectual property rights, GDPR, web accessibility, and non-disclosure agreements.</li>
+            <li class="ksb-item" data-method="method2"><strong>K6:</strong> Personal and employer responsibilities regarding data protection and data sharing, the potential impact on a business and the regulations that cover this.</li>
+            <li class="ksb-item" data-method="method1"><strong>K7:</strong> How to identify the commercial drivers for a client/customer.</li>
+            <li class="ksb-item" data-method="method1"><strong>K8:</strong> The importance of brand, brand awareness, brand purpose, branding guidelines and the intended audience within a brief.</li>
+            <li class="ksb-item" data-method="method1"><strong>K9:</strong> Where content creation fits within a marketing strategy.</li>
+            <li class="ksb-item" data-method="method2"><strong>K10:</strong> How tone of voice can be adapted effectively to reflect the content.</li>
+            <li class="ksb-item" data-method="method1"><strong>K11:</strong> How audiences and their behaviours differ across channels and platforms and the different communication styles that could be used.</li>
+            <li class="ksb-item" data-method="method1"><strong>K12:</strong> How creative content can be used across multiple channels and platforms, and how the platform chosen affects the content production.</li>
+            <li class="ksb-item" data-method="method2"><strong>K13:</strong> The different styles of writing that can be used according to the type of content, channel and platform required.</li>
+            <li class="ksb-item" data-method="method2"><strong>K14:</strong> Correct use of grammar, punctuation, spelling and inclusive language.</li>
+            <li class="ksb-item" data-method="method2"><strong>K15:</strong> The principles of writing persuasive copy for a person or group or to raise brand awareness.</li>
+            <li class="ksb-item" data-method="method2"><strong>K16:</strong> The principles applied to create or capture visuals and audio when using standard packages and equipment.</li>
+            <li class="ksb-item" data-method="method2"><strong>K17:</strong> Where to source, adapt and edit content from.</li>
+            <li class="ksb-item" data-method="method2"><strong>K18:</strong> How to organise, structure and label content effectively, methodically and securely to enable efficient search and retrieval.</li>
+            <li class="ksb-item" data-method="method2"><strong>K19:</strong> How web pages are published and how the content can be optimised to ensure high rankings in search engine results.</li>
+            <li class="ksb-item" data-method="method2"><strong>K20:</strong> The importance of clearly articulating requirements and how this can influence priorities for a campaign.</li>
+            <li class="ksb-item" data-method="method2"><strong>K21:</strong> How communication styles can be adapted to suit different audiences.</li>
+            <li class="ksb-item" data-method="method2"><strong>K22:</strong> How to plan content delivery against the schedule.</li>
+            <li class="ksb-item" data-method="method1"><strong>K23:</strong> The principles for creating an effective campaign with measurable outcomes.</li>
+            <li class="ksb-item" data-method="method1"><strong>K24:</strong> The principles of mapping user journeys to ensure content is focused on maximising engagement.</li>
+            <li class="ksb-item" data-method="method2"><strong>K25:</strong> Ways/methods of engaging with audiences, how to respond to evolving situations, recognise potential threats/issues and when to escalate these.</li>
+            <li class="ksb-item" data-method="method1"><strong>K26:</strong> How to evaluate the success of the campaign against the objectives using available data.</li>
+            <li class="ksb-item" data-method="method2"><strong>K27:</strong> How to keep up to date with existing and evolving content tools, platforms, trends and talent.</li>
+            <li class="ksb-item" data-method="method2"><strong>K28:</strong> Approaches to managing and marketing own skills and services.</li>
+            <li class="ksb-item" data-method="method2"><strong>K29:</strong> The culture of the organisation in which they are working, the commercial pressures, project deadlines and organisational working practices.</li>
+            <li class="ksb-item" data-method="method2"><strong>K30:</strong> How the structures, regulation and funding of organisations affects creative media activities.</li>
         </ul>
 
         <h3>Skills</h3>
-        <ul>
-            <li><strong>S1:</strong> Interpret the aims of the brief.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>S2:</strong> Research ideas and concepts to meet the brief.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>S3:</strong> Evaluate brand requirements and brand guidelines.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>S4:</strong> Prepare a mood board or other visual aid for the content to be created.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>S5:</strong> Present ideas, pitches and proposals for creative content to be further developed.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>S6:</strong> Storyboard and outline script their ideas for content to be developed.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>S7:</strong> Interpret data, consider its integrity and use it to inform content.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>S8:</strong> Develop accessible written content for different platforms and devices.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>S9:</strong> Apply best practice and inclusive language when creating content.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>S10:</strong> Write and edit copy or scripts for use on different channels and platforms.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>S11:</strong> Create or capture visuals and audio using standard packages and equipment.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>S12:</strong> Source, obtain and prepare media assets for use; using industry standard packages to adapt and edit content.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>S13:</strong> Use industry standard tools and content management systems to organise, structure and label content effectively, methodically and securely enabling efficient search and retrieval.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>S14:</strong> Identify and recommend the platform/s or channel/s to use for the media campaign.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>S15:</strong> Develop and maintain effective working relationships with clients, colleagues and suppliers, establishing and using professional contacts.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>S16:</strong> Engage and respond with audiences through social media, adapting content to respond to evolving circumstances.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>S17:</strong> Monitor user experience to ensure content is focused on maximising engagement.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>S18:</strong> Analyse the differences between audiences using audience segmentation techniques and data.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>S19:</strong> Use lessons learned to evaluate the success of the content and identify areas for improvement for future campaigns.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>S20:</strong> Use continuing professional development planning to support own current and future training and development needs.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>S21:</strong> Operate effectively within the production workflow to meet production timelines.<span class="assessment-tag method2">Professional Discussion</span></li>
+        <ul id="skills-list">
+            <li class="ksb-item" data-method="method1"><strong>S1:</strong> Interpret the aims of the brief.</li>
+            <li class="ksb-item" data-method="method1"><strong>S2:</strong> Research ideas and concepts to meet the brief.</li>
+            <li class="ksb-item" data-method="method1"><strong>S3:</strong> Evaluate brand requirements and brand guidelines.</li>
+            <li class="ksb-item" data-method="method1"><strong>S4:</strong> Prepare a mood board or other visual aid for the content to be created.</li>
+            <li class="ksb-item" data-method="method1"><strong>S5:</strong> Present ideas, pitches and proposals for creative content to be further developed.</li>
+            <li class="ksb-item" data-method="method1"><strong>S6:</strong> Storyboard and outline script their ideas for content to be developed.</li>
+            <li class="ksb-item" data-method="method2"><strong>S7:</strong> Interpret data, consider its integrity and use it to inform content.</li>
+            <li class="ksb-item" data-method="method2"><strong>S8:</strong> Develop accessible written content for different platforms and devices.</li>
+            <li class="ksb-item" data-method="method2"><strong>S9:</strong> Apply best practice and inclusive language when creating content.</li>
+            <li class="ksb-item" data-method="method2"><strong>S10:</strong> Write and edit copy or scripts for use on different channels and platforms.</li>
+            <li class="ksb-item" data-method="method2"><strong>S11:</strong> Create or capture visuals and audio using standard packages and equipment.</li>
+            <li class="ksb-item" data-method="method2"><strong>S12:</strong> Source, obtain and prepare media assets for use; using industry standard packages to adapt and edit content.</li>
+            <li class="ksb-item" data-method="method2"><strong>S13:</strong> Use industry standard tools and content management systems to organise, structure and label content effectively, methodically and securely enabling efficient search and retrieval.</li>
+            <li class="ksb-item" data-method="method1"><strong>S14:</strong> Identify and recommend the platform/s or channel/s to use for the media campaign.</li>
+            <li class="ksb-item" data-method="method2"><strong>S15:</strong> Develop and maintain effective working relationships with clients, colleagues and suppliers, establishing and using professional contacts.</li>
+            <li class="ksb-item" data-method="method2"><strong>S16:</strong> Engage and respond with audiences through social media, adapting content to respond to evolving circumstances.</li>
+            <li class="ksb-item" data-method="method1"><strong>S17:</strong> Monitor user experience to ensure content is focused on maximising engagement.</li>
+            <li class="ksb-item" data-method="method1"><strong>S18:</strong> Analyse the differences between audiences using audience segmentation techniques and data.</li>
+            <li class="ksb-item" data-method="method1"><strong>S19:</strong> Use lessons learned to evaluate the success of the content and identify areas for improvement for future campaigns.</li>
+            <li class="ksb-item" data-method="method2"><strong>S20:</strong> Use continuing professional development planning to support own current and future training and development needs.</li>
+            <li class="ksb-item" data-method="method2"><strong>S21:</strong> Operate effectively within the production workflow to meet production timelines.</li>
         </ul>
 
         <h3>Behaviours</h3>
-        <ul>
-            <li><strong>B1:</strong> Committed to producing high quality creative content.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>B2:</strong> Team-focussed and works effectively with colleagues and others.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>B3:</strong> Acts in a way that builds and maintains positive relationships with customers.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>B4:</strong> Takes ownership of work and strives to achieve quality content.<span class="assessment-tag method1">Project Report</span></li>
-            <li><strong>B5:</strong> Acts in a professional and ethical manner, embracing equality, diversity and inclusion in the workplace.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>B6:</strong> Committed to keeping up to date with new technologies and industry best practice.<span class="assessment-tag method2">Professional Discussion</span></li>
-            <li><strong>B7:</strong> Reflects on the results of the content created and identifies areas for improvement.<span class="assessment-tag method1">Project Report</span></li>
+        <ul id="behaviours-list">
+            <li class="ksb-item" data-method="method2"><strong>B1:</strong> Committed to producing high quality creative content.</li>
+            <li class="ksb-item" data-method="method2"><strong>B2:</strong> Team-focussed and works effectively with colleagues and others.</li>
+            <li class="ksb-item" data-method="method2"><strong>B3:</strong> Acts in a way that builds and maintains positive relationships with customers.</li>
+            <li class="ksb-item" data-method="method1"><strong>B4:</strong> Takes ownership of work and strives to achieve quality content.</li>
+            <li class="ksb-item" data-method="method2"><strong>B5:</strong> Acts in a professional and ethical manner, embracing equality, diversity and inclusion in the workplace.</li>
+            <li class="ksb-item" data-method="method2"><strong>B6:</strong> Committed to keeping up to date with new technologies and industry best practice.</li>
+            <li class="ksb-item" data-method="method1"><strong>B7:</strong> Reflects on the results of the content created and identifies areas for improvement.</li>
         </ul>
 
         <h2>Assessment Methods and Grading Criteria</h2>
@@ -226,6 +249,7 @@
             <strong>Distinction:</strong> Apprentices must demonstrate all the pass descriptors and all of the distinction descriptors.
         </div>
         <table>
+            <!-- Table content remains the same -->
             <thead>
                 <tr>
                     <th>Theme</th>
@@ -277,11 +301,12 @@
         <h3>Assessment Method 2: Professional Discussion</h3>
         <p><em>(Underpinned by a portfolio of evidence)</em></p>
         <div class="grade-info">
-            <strong>Fail:</strong> Does not meet pass criteria.<br>
+             <strong>Fail:</strong> Does not meet pass criteria.<br>
             <strong>Pass:</strong> Apprentices must demonstrate all the pass descriptors.<br>
             <strong>Distinction:</strong> Apprentices must demonstrate all the pass descriptors and all of the distinction descriptors.
         </div>
         <table>
+            <!-- Table content remains the same -->
             <thead>
                 <tr>
                     <th>Theme</th>
@@ -336,5 +361,50 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const showMethod1Btn = document.getElementById('showMethod1');
+            const showMethod2Btn = document.getElementById('showMethod2');
+            const showAllBtn = document.getElementById('showAll');
+            const allFilterBtns = document.querySelectorAll('.filter-btn');
+            const ksbItems = document.querySelectorAll('.ksb-item');
+
+            function updateActiveButton(activeBtn) {
+                allFilterBtns.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                activeBtn.classList.add('active');
+            }
+
+            function filterKSBs(methodToShow) {
+                ksbItems.forEach(item => {
+                    if (methodToShow === 'all' || item.dataset.method === methodToShow) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            }
+
+            showMethod1Btn.addEventListener('click', function() {
+                filterKSBs('method1');
+                updateActiveButton(this);
+            });
+
+            showMethod2Btn.addEventListener('click', function() {
+                filterKSBs('method2');
+                updateActiveButton(this);
+            });
+
+            showAllBtn.addEventListener('click', function() {
+                filterKSBs('all');
+                updateActiveButton(this);
+            });
+        });
+    </script>
+
 </body>
 </html>
+
+
