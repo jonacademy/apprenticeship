@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Content Creator Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        :root {
+            --primary: #1e272e; --accent: #00d2d3; --bg: #f1f2f6; --card-bg: #ffffff;
+            --text: #2f3542; --journalism: #5f27cd; --legal: #ff4757;
+            --design: #ffa502; --video: #2ed573; --pitch: #ff9f43; --audio: #3498db; --course: #eb4d4b;
+        }
+
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 1600px; margin: 0 auto; }
+        
+        header { 
+            text-align: center; padding: 50px 20px; 
+            background: linear-gradient(135deg, var(--primary) 0%, #485460 100%); 
+            color: white; border-radius: 15px; margin-bottom: 25px; 
+        }
+
+        .otj-bar {
+            background: #fff; padding: 20px; border-radius: 12px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 30px;
+            border-left: 8px solid var(--accent);
+        }
+        .otj-text h2 { margin: 0; font-size: 1.2rem; }
+        .otj-btn {
+            background: var(--primary); color: white; text-decoration: none;
+            padding: 12px 25px; border-radius: 8px; font-weight: 800;
+            transition: 0.3s;
+        }
+        .otj-btn:hover { background: var(--accent); transform: scale(1.05); }
+
+        .search-container { margin-bottom: 40px; text-align: center; }
+        #ksbSearch { width: 100%; max-width: 600px; padding: 18px 30px; font-size: 1.1rem; border-radius: 50px; border: 2px solid #ddd; outline: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .card { background: var(--card-bg); padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 6px solid var(--accent); display: flex; flex-direction: column; height: 600px; }
+        .card.hidden { display: none; }
+        .ksb-tag { display: inline-block; background: #dfe6e9; color: #2d3436; padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 800; margin-bottom: 10px; align-self: flex-start; }
+        
+        .scroll-area { overflow-y: auto; flex-grow: 1; padding-right: 10px; }
+        .link-list { list-style: none; padding: 0; margin: 0; }
+        .link-list li { margin-bottom: 10px; border-bottom: 1px solid #f1f2f6; padding-bottom: 8px; }
+        .link-list a { text-decoration: none; color: #57606f; font-weight: 500; font-size: 0.88rem; display: block; }
+        .link-list a:hover { color: var(--accent); padding-left: 5px; transition: 0.2s; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Content Creator Master Hub</h1>
+        <p>Complete Apprentice Learning Resource Library</p>
+    </header>
+
+    <div class="otj-bar">
+        <div class="otj-text">
+            <h2>Ready to log your OTJ hours?</h2>
+            <p style="margin: 5px 0 0 0; color: #636e72;">Record your learning evidence and reflections directly in Smart Assessor.</p>
+        </div>
+        <a href="https://smartassessor.co.uk/" target="_blank" class="otj-btn">Go to Smart Assessor ➔</a>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="ksbSearch" onkeyup="filterResources()" placeholder="🔍 Search KSBs (K10, S11), Topics (Social, Video), or Keywords...">
+    </div>
+
+    <div class="dashboard-grid">
+        
+        <div class="card" style="border-top-color: var(--journalism);" data-tags="K10 K13 K15 S8 S10 S16 copywriting journalism apple hubspot wordstream coschedule buzzsumo toolkit NYT licensing skills content marketing LinkedIn tandfonline">
+            <span class="ksb-tag">K10, K13, K15, S8, S10, S16</span>
+            <h3>Journalism & Copywriting</h3>
+            <div class="scroll-area">
+                <ul class="link-list">
+                    <li><a href="https://www.journalism.co.uk/a-complete-toolkit-for-journalism-content-creators/" target="_blank">🗞️ Complete Toolkit for Journalism Creators</a></li>
+                    <li><a href="https://nytlicensing.com/latest/marketing/8-reasons-use-journalism-content-marketing/" target="_blank">📰 NYT: 8 Reasons for Journalism in Marketing</a></li>
+                    <li><a href="https://www.linkedin.com/pulse/7-valuable-journalism-skills-you-can-use-content-marketing-mac-slocum/" target="_blank">💼 LinkedIn: 7 Journalism Skills for Content</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=38oWiboAP84" target="_blank">🎥 Journalism vs Content Writing Explained</a></li>
+                    <li><a href="https://youtu.be/oAKfJAxu2PA" target="_blank">🎤 Journalism Skills for Social Content</a></li>
+                    <li><a href="https://www.tandfonline.com/doi/full/10.1080/21670811.2024.2397088#d1e92" target="_blank">🔬 Academic: Journalism & Digital Content 2024</a></li>
+                    <li><a href="https://twitter.com/alexgarcia_atx/status/1456426053140811779" target="_blank">🍎 13 Copywriting Tips From Apple</a></li>
+                    <li><a href="https://blog.hubspot.com/marketing/good-copywriting-practices-list" target="_blank">✍️ HubSpot: 6 Traits of Excellent Copy</a></li>
+                    <li><a href="https://www.wordstream.com/blog/ws/2019/09/03/copywriting-examples" target="_blank">💡 21 Impressive Copywriting Examples</a></li>
+                    <li><a href="https://coschedule.com/blog/copywriting-examples/" target="_blank">📝 20 Copy Examples for Inspiration</a></li>
+                    <li><a href="https://coschedule.com/blog/how-to-write-for-social-media/" target="_blank">📱 How To Write For Social Media</a></li>
+                    <li><a href="https://onlyonemike.com/copywriting-exercises-practice-copywriting-skills/" target="_blank">🏋️ 21 Proven Copywriting Exercises</a></li>
+                    <li><a href="https://buzzsumo.com/resources/hundred-million-best-headlines-study/" target="_blank">🗞️ Headline Analysis Study (100m Posts)</a></li>
+                    <li><a href="https://design-system.service.gov.uk/content/content-alignment/" target="_blank">🏛️ GOV.UK: Content Alignment & Style</a></li>
+                    <li><a href="https://copyblogger.com/blog/" target="_blank">✍️ Copyblogger: Content Marketing Blog</a></li>
+                    <li><a href="https://www.w3.org/WAI/fundamentals/accessibility-intro/" target="_blank">♿ W3C: Intro to Web Accessibility</a></li>
+                    <li><a href="https://youtu.be/9hnR9ldGjeI" target="_blank">🎤 Copywriting Secret: Read It Out Loud</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="border-top-color: var(--design);" data-tags="K16 K17 S11 S12 photography image pixlr canon blink time 100 berresford overlay raw naming file naming formats canva adobe thumbnails logo">
+            <span class="ksb-tag">K16, K17, S11, S12</span>
+            <h3>Photography & Design</h3>
+            <div class="scroll-area">
+                <ul class="link-list">
+                    <li><a href="https://www.youtube.com/watch?v=StWpNY9MHEY" target="_blank">📸 Day in Life: Still Life Photographer</a></li>
+                    <li><a href="https://www.youtube.com/playlist?list=PLrq_zvwF5agcopQe58cW_Iyc89SpyiZ2X" target="_blank">🎨 Pixlr 101 Bitesize Tutorials</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=Jqx6eImDEzc" target="_blank">🎨 Pixlr X (Advanced Tutorial)</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=7q0sFJhA4iE" target="_blank">🎨 Pixlr E (Basic Tutorial)</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=YWmyUq4CVng" target="_blank">🎨 Pixlr: Create Logo & Thumbnails</a></li>
+                    <li><a href="https://www.canon.com.au/get-inspired/blink" target="_blank">🔭 Canon Blink Beginner Tips</a></li>
+                    <li><a href="https://time.com/4563482/100-most-influential-photos/" target="_blank">🕰️ TIME: 100 Most Influential Photos</a></li>
+                    <li><a href="https://time.com/5921202/top-100-photos-2020/" target="_blank">🕰️ TIME: Top 100 Photos 2020</a></li>
+                    <li><a href="http://www.fernberresford.com/" target="_blank">📷 Photographer: Fern Berresford Portfolio</a></li>
+                    <li><a href="https://blog.iamsuleiman.com/techniques-to-display-text-overlay-background-images/" target="_blank">🖼️ Techniques for Text Overlays</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=ww12lImOJ38" target="_blank">📂 Image Formats: JPEG, GIF, PNG</a></li>
+                    <li><a href="https://www.premiumbeat.com/blog/organization-file-naming-conventions/" target="_blank">📁 File Naming Best Practice</a></li>
+                    <li><a href="https://filecamp.com/blog/file-naming-conventions-for-photographers/" target="_blank">📁 File Naming for Photographers</a></li>
+                    <li><a href="https://www.makeuseof.com/tag/shoot-process-raw-photos-android-youd-want/" target="_blank">📱 Shooting RAW on Android Guide</a></li>
+                    <li><a href="https://www.canva.com/learn/" target="_blank">🎨 Canva Design School</a></li>
+                    <li><a href="https://www.adobe.com/learn/" target="_blank">🎨 Adobe Learn & Support</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="border-top-color: var(--pitch);" data-tags="K1 K4 K7 K8 K9 S1 S3 strategy data pitching voss the drum mad men brandwatch google marketing week consumer hubspot coursera semrush digital 2025 pixar fundraising">
+            <span class="ksb-tag">K1, K4, K7, K8, K9, S1, S3</span>
+            <h3>Strategy & Pitching</h3>
+            <div class="scroll-area">
+                <ul class="link-list">
+                    <li><a href="https://www.youtube.com/watch?v=guZa7mQV1l0" target="_blank">🤝 Chris Voss: Negotiation Techniques</a></li>
+                    <li><a href="https://www.thedrum.com/opinion/2020/09/28/virtual-pitching-steps-success-world-working-home" target="_blank">💻 Virtual Pitching: Steps for Success</a></li>
+                    <li><a href="https://ew.com/tv/2017/07/19/mad-men-don-draper-best-pitches/" target="_blank">🎩 Mad Men: Don Draper's Best Pitches</a></li>
+                    <li><a href="https://www.brandwatch.com/webinars/telling-powerful-stories-social-data/view/" target="_blank">📈 Telling Stories with Social Data</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=z5a8KtUE1S4" target="_blank">💧 Scott Harrison: Charity Water Story</a></li>
+                    <li><a href="http://www.itsnicethat.com/news/how-to-pitch-remotely-video-call-presenting-tips-creative-industry-opinion-180520" target="_blank">🖥️ Remote Pitching: Video Call Tips</a></li>
+                    <li><a href="https://review.firstround.com/Tell-Stories-Like-This-to-Take-Your-Fundraising-Pitch-from-Mediocre-to-Memorable" target="_blank">📢 Pitching: Mediocre to Memorable</a></li>
+                    <li><a href="https://www.thinkwithgoogle.com/intl/en-gb/consumer-insights/" target="_blank">🔍 Think With Google: Consumer Insights</a></li>
+                    <li><a href="https://www.marketingweek.com/strategy/" target="_blank">📈 Marketing Week: Strategy Hub</a></li>
+                    <li><a href="https://www.semrush.com/blog/market-segmentation-strategy/" target="_blank">🎯 Semrush: Market Segmentation Guide</a></li>
+                    <li><a href="https://datareportal.com/reports/digital-2025-july-global-statshot" target="_blank">📊 Digital 2025 Global Statshot</a></li>
+                    <li><a href="https://hbr.org/2016/09/how-senior-executives-find-time-to-be-creative" target="_blank">💡 HBR: Finding Time for Creativity</a></li>
+                    <li><a href="https://hbr.org/2008/09/how-pixar-fosters-collective-creativity" target="_blank">💡 HBR: How Pixar Fosters Creativity</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="border-top-color: var(--legal);" data-tags="K5 K6 B5 S7 legal copyright gdpr asa influencers ico privacy ofcom ownership intellectual property monkey selfie jack daniels vice">
+            <span class="ksb-tag">K5, K6, B5, S7</span>
+            <h3>Legal & Ethics</h3>
+            <div class="scroll-area">
+                <ul class="link-list">
+                    <li><a href="https://www.asa.org.uk/resources/Influencers-guide.html" target="_blank">📣 ASA: The Influencers' Disclosure Guide</a></li>
+                    <li><a href="https://www.gov.uk/government/publications/intellectual-property-for-business/ip-for-business-tools" target="_blank">⚖️ GOV.UK: IP for Business Tools</a></li>
+                    <li><a href="https://ico.org.uk/for-organisations/sme-web-hub/" target="_blank">🛡️ ICO: Data Protection Hub</a></li>
+                    <li><a href="https://www.gov.uk/government/collections/intellectual-property-copyright" target="_blank">⚖️ UK Copyright Advice</a></li>
+                    <li><a href="https://www.gov.uk/government/collections/data-protection-act-2018" target="_blank">📜 Data Protection Act 2018</a></li>
+                    <li><a href="https://www.ofcom.org.uk/tv-radio-and-on-demand/public-service-broadcasting/psb" target="_blank">📺 Ofcom: PSB Guidelines</a></li>
+                    <li><a href="https://www.mediareform.org.uk/media-ownership/media-ownership-2025" target="_blank">📡 Media Ownership Report 2025</a></li>
+                    <li><a href="https://time.com/3393645/monkey-selfie-lands-photographer-in-legal-quagmire/" target="_blank">🐒 Legal Case: The Monkey Selfie</a></li>
+                    <li><a href="https://www.theguardian.com/uk-news/2017/sep/05/topless-photos-of-duchess-of-cambridge-were-invasion-of-privacy" target="_blank">🛡️ Privacy: Duchess Case</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="border-top-color: var(--video);" data-tags="K13 K14 S11 S12 S14 video bbc academy production rts talking head tiktok youtube influencers mckinnon odisho adobe effects creative cloud talking head">
+            <span class="ksb-tag">K13, K14, S11, S12, S14</span>
+            <h3>Video Production</h3>
+            <div class="scroll-area">
+                <ul class="link-list">
+                    <li><a href="https://www.bbc.co.uk/academy/production" target="_blank">🎙️ BBC Academy: Production Skills</a></li>
+                    <li><a href="https://experienceleague.adobe.com/" target="_blank">🎨 Adobe Experience League</a></li>
+                    <li><a href="https://rts.org.uk/" target="_blank">📺 Royal Television Society (RTS) Hub</a></li>
+                    <li><a href="https://youtu.be/_EiixT7hwFA" target="_blank">📽️ Tips for Talking Head Videos</a></li>
+                    <li><a href="https://www.youtube.com/@PeterMcKinnon" target="_blank">🎥 Peter McKinnon (Video/Photo)</a></li>
+                    <li><a href="https://www.youtube.com/@JustinOdisho" target="_blank">🎥 Justin Odisho (Editing/VFX)</a></li>
+                    <li><a href="https://www.youtube.com/@ThinkMediaTV" target="_blank">📹 Think Media: Platform Strategy</a></li>
+                    <li><a href="https://www.youtube.com/@VideoInfluencers" target="_blank">📹 Video Influencers</a></li>
+                    <li><a href="https://adobevideotraining.com/after-effects/introductory-courses/" target="_blank">✨ After Effects Introductory Courses</a></li>
+                    <li><a href="https://www.adobe.com/creativecloud/video.html" target="_blank">🎞️ Adobe Creative Cloud Video Guides</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="border-top-color: var(--course);" data-tags="courses coursera hubspot google digital garage academy open university udemy skillshare domestika analytics creator academy certifications">
+            <span class="ksb-tag">Certifications & Training</span>
+            <h3>Courses & Learning Hubs</h3>
+            <div class="scroll-area">
+                <ul class="link-list">
+                    <li><a href="https://grow.google/digitalgarage/courses/" target="_blank">🎓 Google Digital Garage (Free Certs)</a></li>
+                    <li><a href="https://analytics.google.com/analytics/academy/" target="_blank">📊 Google Analytics Academy</a></li>
+                    <li><a href="https://academy.hubspot.com/courses/content-marketing" target="_blank">🎓 HubSpot Content Marketing Cert</a></li>
+                    <li><a href="https://academy.hubspot.com/courses/social-media" target="_blank">🎓 HubSpot Social Media Strategy</a></li>
+                    <li><a href="https://academy.hubspot.com/courses/youtube-marketing" target="_blank">🎓 HubSpot YouTube Marketing</a></li>
+                    <li><a href="https://www.coursera.org/professional-certificates/content-creation-tiktok-youtube-instagram-facebook" target="_blank">🎓 Coursera: Content Creation Cert</a></li>
+                    <li><a href="https://www.coursera.org/articles/content-creator" target="_blank">📜 Coursera: What is a Content Creator?</a></li>
+                    <li><a href="https://www.coursera.org/articles/digital-content-creator-skills" target="_blank">📜 Coursera: Digital Creator Skills</a></li>
+                    <li><a href="https://www.open.ac.uk/courses/short-courses/bgxs021" target="_blank">🎓 Open University: Content Creation</a></li>
+                    <li><a href="https://www.mygreatlearning.com/content-marketing/free-courses" target="_blank">🎓 Great Learning: Free Content Courses</a></li>
+                    <li><a href="https://www.udemy.com/topic/content-creation/" target="_blank">🎓 Udemy: Content Creation Topics</a></li>
+                    <li><a href="https://www.skillshare.com/browse/content-creation" target="_blank">🎓 Skillshare: Creator Classes</a></li>
+                    <li><a href="https://www.domestika.org/en/courses/category/27-content-creation" target="_blank">🎓 Domestika: Content Creation</a></li>
+                    <li><a href="https://www.domestika.org/en/blog/8200-13-free-essential-tutorials-for-mastering-social-media" target="_blank">🎓 Domestika: 13 Free Social Tutorials</a></li>
+                    <li><a href="https://creatoracademy.youtube.com/" target="_blank">🎬 YouTube Creator Academy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="border-top-color: var(--audio);" data-tags="audio podcast law negotiation creators storytelling bbc spotify radio magic lynn parsons media law negotiation geller carr">
+            <span class="ksb-tag">Audio & Podcasts</span>
+            <h3>Audio Learning Hub</h3>
+            <div class="scroll-area">
+                <ul class="link-list">
+                    <li><a href="https://podcasts.apple.com/gb/podcast/the-media-law-podcast/id1511438996" target="_blank">⚖️ The Media Law Podcast</a></li>
+                    <li><a href="https://www.amazon.co.uk/kindle-dbs/entity/author/B01MT83TIZ" target="_blank">🎧 Audio: 21 Dirty Tricks in Negotiation</a></li>
+                    <li><a href="https://youtu.be/-PMP_01YaLc" target="_blank">📻 Catharine Carr: Audio Storytelling</a></li>
+                    <li><a href="https://www.facebook.com/cancerresearchuk/videos/10156239776419474/" target="_blank">🎙️ Lynn Parsons Storytelling Masterclass</a></li>
+                    <li><a href="https://indiemedia.club/insights/best-content-creator-podcasts/" target="_blank">🎙️ Best Content Creator Podcasts</a></li>
+                    <li><a href="https://podcasters.spotify.com/resources/learn" target="_blank">🎙️ Spotify Creator Learning Hub</a></li>
+                    <li><a href="https://youtu.be/vyU7IwiHe_E" target="_blank">🎙️ Valerie Geller: No Boring Stories</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="border-top-color: #8e44ad;" data-tags="books reading list sinek Kleon thirst slay lane culture code gills artist why creatively focus">
+            <span class="ksb-tag">Reading List</span>
+            <h3>Essential Books</h3>
+            <div class="scroll-area">
+                <ul class="link-list">
+                    <li><a href="https://www.amazon.co.uk/Start-Why-Leaders-Inspire-Everyone-ebook/dp/B005JZD3B4" target="_blank">📖 Simon Sinek: Start With Why</a></li>
+                    <li><a href="http://uajourn.pbworks.com/f/How+To+Steal+Like+An+Artist+(And+9+Other+Things+Nobody+Told+Me)+-+Austin+Kleon.pdf" target="_blank">🎨 Austin Kleon: Steal Like An Artist</a></li>
+                    <li><a href="https://www.amazon.co.uk/Slay-Your-Lane-Black-Bible/dp/0008306303/" target="_blank">📖 Slay In Your Lane: The Black Girl Bible</a></li>
+                    <li><a href="https://www.amazon.co.uk/Culture-Code-Secrets-Highly-Successful/dp/1847941273/" target="_blank">📖 The Culture Code (Team Success)</a></li>
+                    <li><a href="https://www.amazon.co.uk/Thirst-Story-Redemption-Compassion-Mission/dp/1524762865" target="_blank">📖 Thirst: Scott Harrison Story</a></li>
+                    <li><a href="https://www.amazon.co.uk/Growing-Gills-Creative-Focus-Drowning-ebook/dp/B07284HSHQ" target="_blank">📖 Growing Gills: Creative Focus</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="border-top-color: #1dd1a1;" data-tags="toolkit blog aggregate hubs industry answers public buffer later social media campaign ted creativity toolkit">
+            <span class="ksb-tag">Toolkits & Industry</span>
+            <h3>Resource Aggregators</h3>
+            <div class="scroll-area">
+                <ul class="link-list">
+                    <li><a href="https://www.answersthepublic.com/" target="_blank">❓ Answers The Public (Search Insights)</a></li>
+                    <li><a href="https://buffer.com/library/" target="_blank">📬 Buffer: Social Media Marketing Library</a></li>
+                    <li><a href="https://later.com/blog/" target="_blank">🗓️ Later: Visual Marketing Blog</a></li>
+                    <li><a href="https://sproutsocial.com/insights/" target="_blank">📈 Sprout Social Insights</a></li>
+                    <li><a href="https://www.contentmarketinginstitute.com/education/" target="_blank">🏛️ Content Marketing Institute Hub</a></li>
+                    <li><a href="https://www.socialmediaexaminer.com/category/how-to/" target="_blank">📱 Social Media Examiner: How-To</a></li>
+                    <li><a href="https://www.socialmediatoday.com/" target="_blank">📱 Social Media Today News</a></li>
+                    <li><a href="https://www.campaignlive.co.uk/" target="_blank">📢 Campaign Live (Industry News)</a></li>
+                    <li><a href="https://www.ted.com/playlists/170/kickstart_your_creativity" target="_blank">🎥 TED: Kickstart Your Creativity</a></li>
+                    <li><a href="https://www.mightynetworks.com/resources/content-creator-platforms" target="_blank">🏗️ Guide to Creator Platforms</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="border-top-color: #576574;" data-tags="youtube creators roberto blake nick nimmin influencers examples pepsi Kendall Jenner Dave Berry KISS beat uk phil hansen">
+            <span class="ksb-tag">Examples & Mentorship</span>
+            <h3>Creator & Content Examples</h3>
+            <div class="scroll-area">
+                <ul class="link-list">
+                    <li><a href="https://www.youtube.com/creators/" target="_blank">🎬 Official YouTube Creator Hub</a></li>
+                    <li><a href="https://www.youtube.com/@robertoblake" target="_blank">🎥 Roberto Blake (Creator Economy)</a></li>
+                    <li><a href="https://www.youtube.com/@nicknimmin" target="_blank">🎥 Nick Nimmin (Platform Growth)</a></li>
+                    <li><a href="https://youtu.be/j9x15lR9VIg" target="_blank">🥤 Content Example: Kendall Jenner Pepsi</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=YehM8M42W9M" target="_blank">📻 Radio Example: Dave Berry Show</a></li>
+                    <li><a href="https://youtu.be/dLYLKyzzHz8" target="_blank">📻 Radio Example: KISS Beat of the UK</a></li>
+                    <li><a href="https://www.ted.com/talks/phil_hansen_embrace_the_shake" target="_blank">🎥 Ted Talk: Phil Hansen</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function filterResources() {
+        const input = document.getElementById('ksbSearch').value.toLowerCase();
+        const cards = document.getElementsByClassName('card');
+        for (let card of cards) {
+            const tags = card.getAttribute('data-tags').toLowerCase();
+            const title = card.querySelector('h3').innerText.toLowerCase();
+            card.classList.toggle('hidden', !tags.includes(input) && !title.includes(input));
+        }
+    }
+</script>
+
+</body>
+</html>
