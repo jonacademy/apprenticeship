@@ -1,187 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bauer Academy: Off-the-Job Training for Content Creator Apprenticeship</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <title>Content Creator Apprentice | KSB Training Guide</title>
     <style>
-        /* Bauer Academy Brand Colors */
-        :root {
-            --bmg-main-purple: #4700a3; /* Bauer Media Purple */
-            --bmg-dark-taffy: #d54380; /* Dark Taffy (for bold text in lists) */
-            --bmg-dark-mint: #009392;   /* Dark Mint (for subheadings) */
-            --bmg-lavender: #a096ff;    /* Lavender (for note border and strong in note) */
-            
-            /* Other colors from your palette, kept as variables in case you want to use them */
-            --bmg-mint-original: #1fd1bd; 
-            --bmg-peach: #ff7d6a;
-            --bmg-lemon: #fff050;
-            --bmg-aqua: #5af0ff;
-            --bmg-taffy-original: #ff78c8; 
-
-            --text-color: #333; /* Default dark grey for body text */
-            --light-grey: #f9f9f9;
-            --border-grey: #e0e0e0;
-        }
-
         body {
-            font-family: 'Lato', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: var(--text-color);
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: var(--light-grey);
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            color: #2d3436;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f0f2f5;
         }
-        .logo-container {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border-grey);
-        }
-        .logo-container img {
-            max-width: 250px; /* Adjust as needed */
-            height: auto;
+        .container {
+            background: white;
+            padding: 45px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
         h1 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--bmg-main-purple); /* Using Bauer Media Purple */
-            text-align: center;
+            color: #6c5ce7;
+            border-bottom: 4px solid #6c5ce7;
+            padding-bottom: 15px;
             margin-bottom: 30px;
-            font-size: 2.2em;
+            font-size: 2.2rem;
         }
         h2 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--bmg-main-purple); /* Using Bauer Media Purple */
-            border-bottom: 2px solid var(--border-grey);
-            padding-bottom: 10px;
+            color: #2d3436;
             margin-top: 40px;
-            margin-bottom: 20px;
-            font-size: 1.6em;
+            font-size: 1.6rem;
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 6px;
         }
-        h3 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--bmg-dark-mint); /* Dark Mint for subheadings */
-            margin-top: 25px;
-            margin-bottom: 10px;
-            font-size: 1.2em;
-        }
-        p {
-            margin-bottom: 15px;
-        }
-        ul {
-            list-style-type: disc;
-            margin-left: 25px;
-            margin-bottom: 20px;
-        }
-        ul li {
-            margin-bottom: 8px;
-        }
-        strong {
-            color: var(--bmg-dark-taffy); /* Dark Taffy for bold text in list items */
-        }
-        .note {
-            background-color: #ecf0f1; /* Light grey, can be adjusted */
-            border-left: 5px solid var(--bmg-lavender); /* Lavender for note border */
-            padding: 15px;
-            margin-top: 30px;
+        .rule-box {
+            background: #dfe6e9;
+            padding: 20px;
+            border-radius: 8px;
             margin-bottom: 30px;
-            border-radius: 4px;
+            border-left: 6px solid #636e72;
         }
-        .note strong {
-            color: var(--bmg-lavender); /* Strong text within note uses Lavender */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 20px 0;
         }
-        /* Print-specific styles for better PDF output */
-        @media print {
-            body {
-                box-shadow: none;
-                margin: 0;
-                max-width: none;
-                padding: 0;
-                background-color: #fff;
-            }
-            h1, h2, h3, strong, p, ul li {
-                color: #000 !important; /* Ensure black for print clarity */
-            }
-            .note {
-                background-color: #f0f0f0; /* Lighter background for print */
-                border-color: #bbb; /* Darker border for print */
-            }
-            .logo-container {
-                border-bottom: 1px solid #bbb; /* Ensure border prints */
-            }
-            .logo-container img {
-                max-width: 200px; /* Smaller for print */
-            }
+        .box {
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #dfe6e9;
         }
+        .counts { border-top: 5px solid #00b894; background-color: #fafffd; }
+        .no-count { border-top: 5px solid #d63031; background-color: #fffafb; }
+        
+        .log-entry {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 25px;
+            border-radius: 8px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            margin-top: 20px;
+        }
+        .log-label { color: #a29bfe; font-weight: bold; }
+        
+        ul { padding-left: 20px; }
+        li { margin-bottom: 12px; }
+        .highlight { font-weight: bold; color: #6c5ce7; }
+        .jargon-bust { font-style: italic; color: #636e72; font-size: 0.9rem; }
+        .software-tag { 
+            display: inline-block; 
+            padding: 2px 8px; 
+            border-radius: 4px; 
+            font-size: 0.8rem; 
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        .paid { background: #e1f5fe; color: #0288d1; border: 1px solid #0288d1; }
+        .free { background: #e8f5e9; color: #2e7d32; border: 1px solid #2e7d32; }
     </style>
 </head>
 <body>
 
-    <div class="logo-container">
-        <img src="BMG_Academy_W_pos_KV_flat_mint_RGB (1).png" alt="Bauer Academy Logo">
+<div class="container">
+    <h1>Content Creator: OTJ/DDT Guide</h1>
+    
+    <div class="rule-box">
+        <strong>The "New Learning" Rule:</strong> Off-the-Job (OTJ) training is time spent during work hours learning the skills needed for your qualification. To count, you must be doing something <strong>new</strong> or <strong>different</strong> that helps you meet the official Knowledge, Skills, and Behaviours (KSBs).
     </div>
 
-    <h1>Understanding UK Content Creator Apprenticeship:<br>Off-the-Job Training</h1>
-
-    <p>In the UK, "off-the-job" training for an apprenticeship, including the Content Creator apprenticeship, is a mandatory component and refers to learning activities undertaken outside of the apprentice's normal day-to-day work duties. The key is that this training must be directly relevant to the apprenticeship standard and lead to the achievement of the knowledge, skills, and behaviours (KSBs) required for the role.</p>
-
-    <p>While it's "off-the-job," it doesn't necessarily mean "off-site." It can take place at the employer's premises, a college, a training provider's venue, or even through online learning, as long as it's not part of their usual daily tasks.</p>
-
-    <p>For a full-time apprentice, this typically means a minimum of <strong>6 hours per week</strong> dedicated to off-the-job training, averaged over the duration of the apprenticeship. For part-time apprentices, this is pro-rata, but still must be at least 20% of their working hours.</p>
-
-    <h2>What Counts as Off-the-Job Training?</h2>
-
-    <h3>Formal Learning & Instruction:</h3>
+    <h2>1. Creative Tools & Software</h2>
+    <p>Learning how to use these tools for the first time counts as OTJ. Choose the one that fits your budget:</p>
     <ul>
-        <li><strong>Lectures, seminars, and workshops:</strong> Delivered by the training provider, covering theoretical aspects of content creation.</li>
-        <li><strong>Online learning/E-learning modules:</strong> Structured courses, interactive modules, or virtual classrooms related to content creation principles, tools, and strategies.</li>
-        <li><strong>Role-playing and simulation exercises:</strong> Practicing content creation scenarios, client interactions, or crisis management in a controlled environment.</li>
-        <li><strong>Training to use specialist equipment or software:</strong> Learning how to operate cameras, editing software (video, audio, image), content management systems (CMS), or design tools.</li>
+        <li><span class="highlight">Video Editing:</span> Learning <strong>Adobe Premiere Pro</strong> <span class="software-tag paid">PAID</span> or <strong>CapCut / DaVinci Resolve</strong> <span class="software-tag free">FREE</span>.</li>
+        <li><span class="highlight">Graphic Design:</span> Learning <strong>Adobe Photoshop</strong> <span class="software-tag paid">PAID</span> or <strong>Canva / Photopea</strong> <span class="software-tag free">FREE</span>.</li>
+        <li><span class="highlight">Audio Production:</span> Mastering <strong>Adobe Audition</strong> <span class="software-tag paid">PAID</span> or <strong>Audacity</strong> <span class="software-tag free">FREE</span>.</li>
     </ul>
 
-    <h3>Practical Application & Development (beyond daily duties):</h3>
+    <h2>2. Planning & Strategy (The "Brain" Work)</h2>
     <ul>
-        <li><strong>Work-based projects:</strong> Dedicated time for projects that go beyond the scope of their regular job, designed to develop new skills outlined in the apprenticeship standard. For a Content Creator, this could involve:
+        <li><span class="highlight">Storyboarding & Scripting:</span> Learning how to draw out a video plan before filming. 
+            <br><span class="jargon-bust">(A storyboard is like a comic-strip version of your video to show the camera angles.)</span></li>
+        <li><span class="highlight">User Journey Mapping:</span> Learning how a customer goes from seeing an ad to buying a product.
+            <br><span class="jargon-bust">(This means planning every step a person takes on your website or social media.)</span></li>
+        <li><span class="highlight">Commercial Awareness:</span> Learning about <strong>Budgets</strong> and how your content makes money for the business.</li>
+    </ul>
+
+    <h2>3. Legal, Ethics & Accessibility</h2>
+    <ul>
+        <li><span class="highlight">Inclusive Content:</span> Learning how to add <strong>Alt-Text</strong> (descriptions for the blind) and <strong>Captions</strong> (for the deaf).</li>
+        <li><span class="highlight">Copyright & GDPR:</span> Understanding who owns the music you use and how to keep people's private info safe.</li>
+        <li><span class="highlight">Ethics:</span> Learning the rules about "Sponsored Content" and being honest with your audience.</li>
+    </ul>
+
+    <div class="grid">
+        <div class="box counts">
+            <h3 style="color: #00b894;">✅ This Counts as OTJ</h3>
             <ul>
-                <li>Developing a complete content strategy for a new campaign.</li>
-                <li>Producing a complex video series.</li>
-                <li>Designing and implementing a new content management system.</li>
+                <li><strong>New Skill:</strong> Using AI (like ChatGPT) to help brainstorm 10 new content ideas.</li>
+                <li><strong>Data Analysis:</strong> Spending an hour looking at why a post "flopped" and planning how to fix it.</li>
+                <li><strong>Mentoring:</strong> A senior designer showing you how to pick the right "Brand Colours."</li>
+                <li><strong>Research:</strong> Looking at what your competitors are doing on YouTube.</li>
             </ul>
-        </li>
-        <li><strong>Shadowing and mentoring:</strong> Observing experienced colleagues or being mentored to learn new techniques or approaches not typically encountered in their routine tasks.</li>
-        <li><strong>Industry visits or conferences:</strong> Attending events to gain a broader understanding of the content creation industry, emerging trends, and networking.</li>
-        <li><strong>Time spent writing assignments and projects:</strong> Dedicated time for coursework, evaluations, reports, or portfolio development related to the apprenticeship.</li>
-        <li><strong>Research:</strong> In-depth research into new content trends, audience analytics, competitor analysis, or specific content formats, beyond what's needed for immediate work tasks.</li>
-        <li><strong>Creating mock content:</strong> Developing content for hypothetical briefs to practice new skills or experiment with different styles.</li>
-    </ul>
-
-    <h3>Personal & Professional Development:</h3>
-    <ul>
-        <li><strong>Coaching sessions:</strong> Dedicated sessions with an apprenticeship coach or mentor to review progress, set goals, and discuss learning.</li>
-        <li><strong>Writing reflective journals:</strong> Documenting learning and applying it to their development.</li>
-        <li><strong>Learning support:</strong> Time spent receiving additional support for their learning.</li>
-        <li><strong>Continuing Professional Development (CPD) activities:</strong> Engaging in activities that enhance their skills and knowledge relevant to the content creator role, even if not directly part of the formal curriculum (e.g., specific webinars on new social media algorithms, advanced SEO techniques).</li>
-    </ul>
-
-    <h2>What DOES NOT Count as Off-the-Job Training?</h2>
-    <ul>
-        <li><strong>Normal daily duties and responsibilities:</strong> Any work that is part of their regular job role, even if it involves content creation.</li>
-        <li><strong>Progress reviews or on-programme assessments:</strong> Meetings to discuss their overall apprenticeship progress or formal assessments of their KSBs.</li>
-        <li><strong>Training that takes place outside the apprentice's paid working hours:</strong> Unless the apprentice is compensated for this time or takes time off in lieu.</li>
-        <li><strong>English and maths (Functional Skills) training (if required):</strong> While essential for some apprentices, this is generally funded separately and does not count towards the minimum off-the-job training hours.</li>
-        <li><strong>Initial assessments or onboarding activities:</strong> The very first steps of joining the apprenticeship.</li>
-        <li><strong>Training not directly relevant to the apprenticeship standard:</strong> Activities that don't contribute to the specific KSBs for a Content Creator.</li>
-        <li><strong>Time spent repeating failed end-point assessments:</strong> This additional training does not count towards the initial off-the-job requirement.</li>
-    </ul>
-
-    <div class="note">
-        <p>The key principle is that off-the-job training must deliver <strong>new learning</strong> that directly contributes to the apprentice achieving the knowledge, skills, and behaviours outlined in the Content Creator apprenticeship standard. It should be planned and agreed upon by the apprentice, employer, and training provider in the training plan.</p>
+        </div>
+        <div class="box no-count">
+            <h3 style="color: #d63031;">❌ This DOES NOT Count</h3>
+            <ul>
+                <li><strong>Basic Posting:</strong> Just hitting 'publish' on a post you've already finished.</li>
+                <li><strong>Email & Admin:</strong> Checking your inbox or organizing your computer folders.</li>
+                <li><strong>Repetitive Work:</strong> Doing the exact same edit you do every single Monday.</li>
+                <li><strong>Lunch Breaks:</strong> Training must happen during your "working" time.</li>
+            </ul>
+        </div>
     </div>
+
+    <h2>How to Write a Great Log Entry</h2>
+    <p>Always mention <strong>what you learned</strong> and <strong>how it helps the business</strong>:</p>
+    
+    <div class="log-entry">
+        <p><span class="log-label">Skill/Knowledge:</span> Accessibility & Inclusive Language (S8, K14)</p>
+        <p><span class="log-label">What I did:</span> I spent 90 minutes learning how to use 'Closed Captions' and 'Alt-Text' on our company's Instagram and LinkedIn posts.</p>
+        <p><span class="log-label">Why it matters:</span> By making our content accessible, we are making sure people with visual or hearing impairments can engage with us. This increases our reach and ensures the business is acting ethically and legally.</p>
+    </div>
+
+    <p style="margin-top: 30px; font-size: 0.9rem; text-align: center; color: #636e72;">
+        <em>Top Tip: If you're using a tool for the first time—whether it's free or paid—it's learning. Log it!</em>
+    </p>
+</div>
 
 </body>
-
 </html>
