@@ -1,313 +1,249 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { Settings, Info, AlertTriangle, CheckCircle, RefreshCcw } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Iron Triangle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        input[type=range] {
+            accent-color: currentColor;
+        }
+        .handle {
+            transition: r 0.1s ease;
+        }
+        .handle:hover {
+            r: 14;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4 sm:p-8 font-sans text-slate-800">
 
-const App = () => {
-  // State for our three corners (0 to 100)
-  // Initial state is a balanced 60/100 for each
-  const [values, setValues] = useState({
-    scope: 60,
-    cost: 60,
-    time: 60
-  });
-
-  const [activeCorner, setActiveCorner] = useState(null);
-  const containerRef = useRef(null);
-
-  // Constants for triangle geometry
-  const center = { x: 200, y: 200 };
-  const radius = 140;
-  
-  // Define corner angles (in radians)
-  const angles = {
-    scope: -Math.PI / 2,        // Top
-    cost: (Math.PI * 2) / 3 - Math.PI / 2,  // Bottom Right
-    time: (Math.PI * 4) / 3 - Math.PI / 2   // Bottom Left
-  };
-
-  // Calculate Quality based on the "Health" of the triangle
-  // In a real iron triangle, you can't have high scope, low cost, and low time.
-  // We'll calculate a stress score. High stress = Low Quality.
-  const qualityScore = useMemo(() => {
-    const { scope, cost, time } = values;
-    // The "Iron Law": Total resources are finite. 
-    // If scope is high, cost or time MUST be high.
-    // Quality drops if: (Scope is high AND (Cost is low OR Time is low))
-    // Or if all three are pushed to the limit (over-extension)
-    
-    const totalInput = scope + cost + time;
-    const balancedSum = 180; // The "Goldilocks" zone sum
-    
-    // Penalty for over-extending (trying to do everything)
-    const overExtension = Math.max(0, totalInput - balancedSum);
-    
-    // Penalty for "Cheap/Fast/Big" impossibility
-    // Stress = Scope - (Cost + Time)/2
-    const imbalance = Math.max(0, scope - (cost + time) / 2);
-    
-    let score = 100 - (overExtension * 0.5) - (imbalance * 0.4);
-    return Math.max(5, Math.min(100, Math.round(score)));
-  }, [values]);
-
-  const getQualityColor = (score) => {
-    if (score > 80) return 'text-emerald-500';
-    if (score > 50) return 'text-amber-500';
-    return 'text-red-500';
-  };
-
-  const getQualityStatus = (score) => {
-    if (score > 80) return { label: 'Optimal', icon: <CheckCircle className="w-5 h-5" /> };
-    if (score > 50) return { label: 'Strained', icon: <Info className="w-5 h-5" /> };
-    return { label: 'Critical', icon: <AlertTriangle className="w-5 h-5" /> };
-  };
-
-  // Handle value changes with "Pull" logic
-  const updateValue = (key, newVal) => {
-    setValues(prev => {
-      const diff = newVal - prev[key];
-      const otherKeys = Object.keys(prev).filter(k => k !== key);
-      
-      // When one increases, the other two decrease proportionally to maintain balance
-      // This simulates the "pulling" effect
-      const adjustment = diff / 2;
-      
-      const nextValues = {
-        ...prev,
-        [key]: newVal,
-        [otherKeys[0]]: Math.max(10, Math.min(100, prev[otherKeys[0]] - adjustment)),
-        [otherKeys[1]]: Math.max(10, Math.min(100, prev[otherKeys[1]] - adjustment)),
-      };
-      
-      return nextValues;
-    });
-  };
-
-  const handleMouseDown = (corner) => (e) => {
-    setActiveCorner(corner);
-  };
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!activeCorner || !containerRef.current) return;
-
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left - center.x;
-      const y = e.clientY - rect.top - center.y;
-      
-      // Calculate distance from center in the direction of the corner's axis
-      const angle = angles[activeCorner];
-      const distance = (x * Math.cos(angle) + y * Math.sin(angle));
-      
-      // Normalize distance to 0-100 range (approximate radius is 140)
-      const normalizedValue = Math.max(10, Math.min(100, (distance / radius) * 100));
-      updateValue(activeCorner, normalizedValue);
-    };
-
-    const handleMouseUp = () => {
-      setActiveCorner(null);
-    };
-
-    if (activeCorner) {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
-    }
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [activeCorner]);
-
-  // Calculate point coordinates for the SVG
-  const getPoint = (key, val) => {
-    const angle = angles[key];
-    const d = (val / 100) * radius;
-    return {
-      x: center.x + d * Math.cos(angle),
-      y: center.y + d * Math.sin(angle)
-    };
-  };
-
-  const pScope = getPoint('scope', values.scope);
-  const pCost = getPoint('cost', values.cost);
-  const pTime = getPoint('time', values.time);
-  
-  const status = getQualityStatus(qualityScore);
-
-  return (
-    <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4 sm:p-8 font-sans text-slate-800">
-      <div className="max-w-4xl w-full bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row border border-slate-200">
+    <div class="max-w-4xl w-full bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:row border border-slate-200 md:flex-row">
         
-        {/* Left Side: Visualization */}
-        <div className="flex-1 p-8 bg-slate-900 flex flex-col items-center justify-center relative min-h-[400px]">
-          <h2 className="absolute top-6 left-8 text-slate-400 font-bold tracking-widest text-xs uppercase">Live Simulation</h2>
-          
-          <svg 
-            ref={containerRef}
-            viewBox="0 0 400 400" 
-            className="w-full max-w-[320px] h-auto drop-shadow-2xl select-none"
-          >
-            {/* Guide Lines */}
-            <line x1={center.x} y1={center.y} x2={center.x + radius * Math.cos(angles.scope)} y2={center.y + radius * Math.sin(angles.scope)} stroke="#334155" strokeDasharray="4" />
-            <line x1={center.x} y1={center.y} x2={center.x + radius * Math.cos(angles.cost)} y2={center.y + radius * Math.sin(angles.cost)} stroke="#334155" strokeDasharray="4" />
-            <line x1={center.x} y1={center.y} x2={center.x + radius * Math.cos(angles.time)} y2={center.y + radius * Math.sin(angles.time)} stroke="#334155" strokeDasharray="4" />
+        <!-- Visualization Area -->
+        <div class="flex-1 p-8 bg-slate-900 flex flex-col items-center justify-center relative min-h-[400px]">
+            <h2 class="absolute top-6 left-8 text-slate-400 font-bold tracking-widest text-xs uppercase">Live Simulation</h2>
+            
+            <svg id="triangle-svg" viewBox="0 0 400 400" class="w-full max-w-[320px] h-auto drop-shadow-2xl select-none">
+                <!-- Guide Lines -->
+                <g id="guides" stroke="#334155" stroke-dasharray="4"></g>
 
-            {/* The Iron Triangle Shape */}
-            <polygon 
-              points={`${pScope.x},${pScope.y} ${pCost.x},${pCost.y} ${pTime.x},${pTime.y}`}
-              fill="rgba(56, 189, 248, 0.2)"
-              stroke="#38bdf8"
-              strokeWidth="3"
-              strokeLinejoin="round"
-              className="transition-all duration-75"
-            />
+                <!-- The Poly -->
+                <polygon id="iron-polygon" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" stroke-width="3" stroke-linejoin="round"></polygon>
 
-            {/* Quality Core */}
-            <circle cx={center.x} cy={center.y} r="35" fill="#1e293b" stroke="#334155" strokeWidth="2" />
-            <text 
-              x={center.x} 
-              y={center.y - 5} 
-              textAnchor="middle" 
-              className={`text-xl font-bold fill-current ${getQualityColor(qualityScore)}`}
-              style={{ fontSize: '14px', fontWeight: 'bold' }}
-            >
-              {qualityScore}%
-            </text>
-            <text 
-              x={center.x} 
-              y={center.y + 12} 
-              textAnchor="middle" 
-              fill="#94a3b8"
-              style={{ fontSize: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}
-            >
-              Quality
-            </text>
+                <!-- Quality Core -->
+                <circle cx="200" cy="200" r="35" fill="#1e293b" stroke="#334155" stroke-width="2"></circle>
+                <text x="200" y="198" text-anchor="middle" id="quality-text" font-weight="bold" style="font-size: 16px; dominant-baseline: middle; fill: #10b981;">0%</text>
+                <text x="200" y="215" text-anchor="middle" fill="#94a3b8" style="font-size: 8px; text-transform: uppercase; letter-spacing: 1px;">Quality</text>
 
-            {/* Interactive Handles */}
-            {[
-              { id: 'scope', p: pScope, label: 'SCOPE', color: '#f43f5e' },
-              { id: 'cost', p: pCost, label: 'COST', color: '#10b981' },
-              { id: 'time', p: pTime, label: 'TIME', color: '#6366f1' }
-            ].map(corner => (
-              <g 
-                key={corner.id} 
-                onMouseDown={handleMouseDown(corner.id)}
-                className="cursor-pointer group"
-              >
-                <circle 
-                  cx={corner.p.x} cy={corner.p.y} r="12" 
-                  fill={corner.color} 
-                  className="transition-all duration-75 group-hover:r-14"
-                />
-                <text 
-                  x={corner.p.x} y={corner.p.y < center.y ? corner.p.y - 20 : corner.p.y + 25} 
-                  textAnchor="middle" 
-                  fill="white" 
-                  className="text-[10px] font-bold"
-                  style={{ fontSize: '10px' }}
-                >
-                  {corner.label}
-                </text>
-              </g>
-            ))}
-          </svg>
+                <!-- Handles -->
+                <g id="handle-scope" class="cursor-pointer">
+                    <circle class="handle" fill="#f43f5e" r="12"></circle>
+                    <text text-anchor="middle" fill="white" style="font-size: 10px; font-weight: bold;">SCOPE</text>
+                </g>
+                <g id="handle-cost" class="cursor-pointer">
+                    <circle class="handle" fill="#10b981" r="12"></circle>
+                    <text text-anchor="middle" fill="white" style="font-size: 10px; font-weight: bold;">COST</text>
+                </g>
+                <g id="handle-time" class="cursor-pointer">
+                    <circle class="handle" fill="#6366f1" r="12"></circle>
+                    <text text-anchor="middle" fill="white" style="font-size: 10px; font-weight: bold;">TIME</text>
+                </g>
+            </svg>
 
-          <div className="mt-8 flex gap-4">
-            <div className={`px-4 py-2 rounded-full flex items-center gap-2 bg-slate-800 border border-slate-700 ${getQualityColor(qualityScore)}`}>
-              {status.icon}
-              <span className="font-bold text-sm uppercase tracking-wider">{status.label}</span>
+            <div class="mt-8 flex gap-4">
+                <div id="status-pill" class="px-4 py-2 rounded-full flex items-center gap-2 bg-slate-800 border border-slate-700">
+                    <span id="status-label" class="font-bold text-sm uppercase tracking-wider">Optimal</span>
+                </div>
+                <button onclick="resetValues()" class="p-2 bg-slate-800 hover:bg-slate-700 text-slate-400 rounded-full transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+                </button>
             </div>
-            <button 
-              onClick={() => setValues({ scope: 60, cost: 60, time: 60 })}
-              className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-400 rounded-full transition-colors"
-            >
-              <RefreshCcw className="w-5 h-5" />
-            </button>
-          </div>
         </div>
 
-        {/* Right Side: Controls & Insights */}
-        <div className="flex-1 p-8 sm:p-10 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Settings className="w-5 h-5 text-sky-500" />
-              <h1 className="text-2xl font-black text-slate-900 tracking-tight">Project Balancing</h1>
+        <!-- Controls Area -->
+        <div class="flex-1 p-8 sm:p-10 flex flex-col justify-between">
+            <div>
+                <h1 class="text-2xl font-black text-slate-900 tracking-tight mb-2">Project Balancing</h1>
+                <p class="text-slate-500 text-sm mb-8 leading-relaxed">Adjust the project constraints. Increasing one forces a trade-off in the others to maintain system equilibrium.</p>
+
+                <div class="space-y-6">
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-end">
+                            <label class="text-sm font-bold text-slate-700 uppercase tracking-tighter">Project Scope</label>
+                            <span id="val-scope" class="text-xs font-mono bg-slate-100 px-2 py-0.5 rounded text-slate-600">60%</span>
+                        </div>
+                        <input type="range" id="slider-scope" min="10" max="100" value="60" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer text-rose-500">
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-end">
+                            <label class="text-sm font-bold text-slate-700 uppercase tracking-tighter">Budget / Cost</label>
+                            <span id="val-cost" class="text-xs font-mono bg-slate-100 px-2 py-0.5 rounded text-slate-600">60%</span>
+                        </div>
+                        <input type="range" id="slider-cost" min="10" max="100" value="60" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer text-emerald-500">
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-end">
+                            <label class="text-sm font-bold text-slate-700 uppercase tracking-tighter">Schedule / Time</label>
+                            <span id="val-time" class="text-xs font-mono bg-slate-100 px-2 py-0.5 rounded text-slate-600">60%</span>
+                        </div>
+                        <input type="range" id="slider-time" min="10" max="100" value="60" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer text-indigo-500">
+                    </div>
+                </div>
             </div>
-            <p className="text-slate-500 text-sm mb-8 leading-relaxed">
-              Drag the triangle corners or use the sliders to simulate project constraints. Increasing one forces a trade-off in others.
-            </p>
 
-            <div className="space-y-6">
-              {/* Scope Slider */}
-              <div className="space-y-2">
-                <div className="flex justify-between items-end">
-                  <label className="text-sm font-bold text-slate-700 uppercase tracking-tighter">Project Scope</label>
-                  <span className="text-xs font-mono bg-slate-100 px-2 py-0.5 rounded text-slate-600">{Math.round(values.scope)}%</span>
-                </div>
-                <input 
-                  type="range" 
-                  min="10" max="100" 
-                  value={values.scope}
-                  onChange={(e) => updateValue('scope', parseInt(e.target.value))}
-                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-rose-500"
-                />
-                <p className="text-[10px] text-slate-400 italic">Complexity, features, and depth of requirements.</p>
-              </div>
-
-              {/* Cost Slider */}
-              <div className="space-y-2">
-                <div className="flex justify-between items-end">
-                  <label className="text-sm font-bold text-slate-700 uppercase tracking-tighter">Budget / Cost</label>
-                  <span className="text-xs font-mono bg-slate-100 px-2 py-0.5 rounded text-slate-600">{Math.round(values.cost)}%</span>
-                </div>
-                <input 
-                  type="range" 
-                  min="10" max="100" 
-                  value={values.cost}
-                  onChange={(e) => updateValue('cost', parseInt(e.target.value))}
-                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-500"
-                />
-                <p className="text-[10px] text-slate-400 italic">Funding, human resources, and infrastructure.</p>
-              </div>
-
-              {/* Time Slider */}
-              <div className="space-y-2">
-                <div className="flex justify-between items-end">
-                  <label className="text-sm font-bold text-slate-700 uppercase tracking-tighter">Schedule / Time</label>
-                  <span className="text-xs font-mono bg-slate-100 px-2 py-0.5 rounded text-slate-600">{Math.round(values.time)}%</span>
-                </div>
-                <input 
-                  type="range" 
-                  min="10" max="100" 
-                  value={values.time}
-                  onChange={(e) => updateValue('time', parseInt(e.target.value))}
-                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-500"
-                />
-                <p className="text-[10px] text-slate-400 italic">Deadlines, milestones, and delivery speed.</p>
-              </div>
+            <div class="mt-8 p-4 bg-sky-50 rounded-xl border border-sky-100">
+                <p id="insight-text" class="text-xs text-sky-800 leading-snug">The project is well-resourced for the current scope, allowing for high quality standards.</p>
             </div>
-          </div>
-
-          <div className="mt-8 p-4 bg-sky-50 rounded-xl border border-sky-100">
-            <h3 className="text-xs font-black text-sky-900 uppercase mb-2 flex items-center gap-1">
-              <Info className="w-3 h-3" /> System Logic
-            </h3>
-            <p className="text-xs text-sky-800 leading-snug">
-              {qualityScore < 40 
-                ? "The project is over-extended. You are attempting high scope without sufficient budget or time, causing quality to collapse."
-                : qualityScore > 80
-                ? "Excellent balance. The project is well-resourced for the current scope, allowing for high quality standards."
-                : "Standard project pressure. Minor compromises are being made to keep all corners stable."}
-            </p>
-          </div>
         </div>
-      </div>
-      
-      <p className="mt-6 text-slate-400 text-xs text-center max-w-md">
-        "Pick any two: Fast, Cheap, or Good." — The original Iron Triangle adage. 
-        In this model, "Good" (Quality) is the outcome of the balance between the other three.
-      </p>
     </div>
-  );
+
+    <script>
+        const center = { x: 200, y: 200 };
+        const radius = 140;
+        const angles = {
+            scope: -Math.PI / 2,
+            cost: (Math.PI * 2) / 3 - Math.PI / 2,
+            time: (Math.PI * 4) / 3 - Math.PI / 2
+        };
+
+        let values = { scope: 60, cost: 60, time: 60 };
+        let activeCorner = null;
+
+        function updateUI() {
+            // Update Sliders and Text
+            ['scope', 'cost', 'time'].forEach(key => {
+                const slider = document.getElementById(`slider-${key}`);
+                const label = document.getElementById(`val-${key}`);
+                if (slider) slider.value = values[key];
+                if (label) label.innerText = Math.round(values[key]) + '%';
+            });
+
+            // Update Quality
+            const totalInput = values.scope + values.cost + values.time;
+            const overExtension = Math.max(0, totalInput - 180);
+            const imbalance = Math.max(0, values.scope - (values.cost + values.time) / 2);
+            const score = Math.max(5, Math.min(100, Math.round(100 - (overExtension * 0.5) - (imbalance * 0.4))));
+
+            const qText = document.getElementById('quality-text');
+            if (qText) {
+                qText.textContent = score + '%';
+                qText.style.fill = score > 80 ? '#10b981' : score > 50 ? '#f59e0b' : '#ef4444';
+            }
+
+            const statusLabel = document.getElementById('status-label');
+            if (statusLabel) {
+                statusLabel.innerText = score > 80 ? 'Optimal' : score > 50 ? 'Strained' : 'Critical';
+                statusLabel.parentElement.style.color = score > 80 ? '#10b981' : score > 50 ? '#f59e0b' : '#ef4444';
+            }
+
+            const insight = document.getElementById('insight-text');
+            if (insight) {
+                if(score < 40) insight.innerText = "The project is over-extended. Scope exceeds time/budget resources.";
+                else if(score > 80) insight.innerText = "Excellent balance. High quality standards are sustainable.";
+                else insight.innerText = "Standard project pressure. Minor compromises detected.";
+            }
+
+            // Update SVG polygon points
+            const pS = getPoint('scope', values.scope);
+            const pC = getPoint('cost', values.cost);
+            const pT = getPoint('time', values.time);
+
+            const polygon = document.getElementById('iron-polygon');
+            if (polygon) {
+                polygon.setAttribute('points', `${pS.x},${pS.y} ${pC.x},${pC.y} ${pT.x},${pT.y}`);
+            }
+            
+            updateHandle('handle-scope', pS, -20);
+            updateHandle('handle-cost', pC, 25);
+            updateHandle('handle-time', pT, 25);
+        }
+
+        function getPoint(key, val) {
+            const a = angles[key];
+            const d = (val / 100) * radius;
+            return { x: center.x + d * Math.cos(a), y: center.y + d * Math.sin(a) };
+        }
+
+        function updateHandle(id, p, textOffset) {
+            const g = document.getElementById(id);
+            if (!g) return;
+            const circ = g.querySelector('circle');
+            const txt = g.querySelector('text');
+            if (circ) {
+                circ.setAttribute('cx', p.x);
+                circ.setAttribute('cy', p.y);
+            }
+            if (txt) {
+                txt.setAttribute('x', p.x);
+                txt.setAttribute('y', p.y + textOffset);
+            }
+        }
+
+        function setVal(key, newVal) {
+            const diff = newVal - values[key];
+            const otherKeys = Object.keys(values).filter(k => k !== key);
+            values[key] = newVal;
+            // Balance logic: move other two corners
+            values[otherKeys[0]] = Math.max(10, Math.min(100, values[otherKeys[0]] - diff/2));
+            values[otherKeys[1]] = Math.max(10, Math.min(100, values[otherKeys[1]] - diff/2));
+            updateUI();
+        }
+
+        function resetValues() {
+            values = { scope: 60, cost: 60, time: 60 };
+            updateUI();
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            // Setup Guide Lines
+            const guides = document.getElementById('guides');
+            Object.values(angles).forEach(a => {
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute("x1", center.x); 
+                line.setAttribute("y1", center.y);
+                line.setAttribute("x2", center.x + radius * Math.cos(a)); 
+                line.setAttribute("y2", center.y + radius * Math.sin(a));
+                guides.appendChild(line);
+            });
+
+            // Sliders
+            ['scope', 'cost', 'time'].forEach(key => {
+                const slider = document.getElementById(`slider-${key}`);
+                const handle = document.getElementById(`handle-${key}`);
+                if (slider) slider.addEventListener('input', (e) => setVal(key, parseInt(e.target.value)));
+                if (handle) handle.addEventListener('mousedown', () => activeCorner = key);
+            });
+
+            updateUI();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!activeCorner) return;
+            const svg = document.getElementById('triangle-svg');
+            const rect = svg.getBoundingClientRect();
+            
+            // Scaled coordinates
+            const scaleX = 400 / rect.width;
+            const scaleY = 400 / rect.height;
+            
+            const x = (e.clientX - rect.left) * scaleX - center.x;
+            const y = (e.clientY - rect.top) * scaleY - center.y;
+            
+            const angle = angles[activeCorner];
+            const distance = (x * Math.cos(angle) + y * Math.sin(angle));
+            setVal(activeCorner, Math.max(10, Math.min(100, (distance / radius) * 100)));
+        });
+
+        window.addEventListener('mouseup', () => activeCorner = null);
+
+    </script>
+</body>
+</html>
 };
 
 export default App;
