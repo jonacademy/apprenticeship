@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bauer Media - Project Management Workshop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .drag-card {
+            cursor: grab;
+            transition: all 0.2s ease;
+        }
+        .drag-card:active {
+            cursor: grabbing;
+        }
+        .drop-zone {
+            min-height: 80px;
+            transition: background-color 0.2s ease;
+        }
+        .drop-zone.drag-over {
+            background-color: #f1f5f9;
+            border-color: #3b82f6;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 1);
+        }
+        .raci-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2003/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 1.5em;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-900 pb-20">
+
+    <nav class="bg-slate-900 text-white p-4 sticky top-0 z-50 shadow-md">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center font-bold">B</div>
+                <span class="font-bold tracking-tight">Bauer Media Group Exercise</span>
+            </div>
+            <div class="text-sm text-slate-400 font-mono" id="timer">35:00</div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 mt-8 space-y-12">
+        
+        <!-- Scenario Header -->
+        <section class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+            <h1 class="text-3xl font-extrabold text-slate-800 mb-4">Mobile Audio App Launch</h1>
+            <div class="grid md:grid-cols-3 gap-6 text-sm">
+                <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-xl">
+                    <span class="text-2xl">⏳</span>
+                    <div><p class="font-bold">Deadline</p><p>3 Months</p></div>
+                </div>
+                <div class="flex items-center space-x-3 p-3 bg-green-50 rounded-xl">
+                    <span class="text-2xl">💰</span>
+                    <div><p class="font-bold">Budget</p><p>Limited / Fixed</p></div>
+                </div>
+                <div class="flex items-center space-x-3 p-3 bg-purple-50 rounded-xl">
+                    <span class="text-2xl">🎯</span>
+                    <div><p class="font-bold">Target</p><p>18-30 year olds (EU)</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. Delivery Approach -->
+        <section>
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span class="bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
+                Delivery Approach
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Chosen Approach</label>
+                    <div class="flex gap-4">
+                        <button onclick="setApproach('Agile')" id="btn-agile" class="flex-1 py-3 px-4 rounded-xl border-2 border-slate-200 font-bold hover:border-blue-500 transition-all">Agile</button>
+                        <button onclick="setApproach('Waterfall')" id="btn-waterfall" class="flex-1 py-3 px-4 rounded-xl border-2 border-slate-200 font-bold hover:border-blue-500 transition-all">Waterfall</button>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Reasoning</label>
+                    <textarea class="w-full h-24 p-3 bg-slate-50 border border-slate-200 rounded-xl resize-none focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Explain your choice..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. MoSCoW Prioritisation -->
+        <section>
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span class="bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span>
+                MoSCoW Prioritisation
+            </h2>
+            <p class="text-slate-500 mb-6 text-sm">Drag and drop features into categories.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <!-- Drop Zones -->
+                <div class="space-y-3">
+                    <div class="bg-emerald-500 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider">Must Have</div>
+                    <div class="drop-zone border-2 border-dashed border-emerald-200 rounded-xl p-3 space-y-2 bg-emerald-50/30" data-category="must"></div>
+                </div>
+                <div class="space-y-3">
+                    <div class="bg-blue-500 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider">Should Have</div>
+                    <div class="drop-zone border-2 border-dashed border-blue-200 rounded-xl p-3 space-y-2 bg-blue-50/30" data-category="should"></div>
+                </div>
+                <div class="space-y-3">
+                    <div class="bg-amber-500 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider">Could Have</div>
+                    <div class="drop-zone border-2 border-dashed border-amber-200 rounded-xl p-3 space-y-2 bg-amber-50/30" data-category="could"></div>
+                </div>
+                <div class="space-y-3">
+                    <div class="bg-slate-400 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider">Won't Have</div>
+                    <div class="drop-zone border-2 border-dashed border-slate-200 rounded-xl p-3 space-y-2 bg-slate-50/30" data-category="wont"></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <h3 class="text-sm font-bold text-slate-700 mb-4">Feature Bank</h3>
+                <div id="feature-bank" class="flex flex-wrap gap-3">
+                    <!-- Features added via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. RACI Matrix -->
+        <section>
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span class="bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">3</span>
+                RACI Matrix
+            </h2>
+            <div class="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-sm">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-slate-200">
+                            <th class="p-4 font-bold text-sm">Task</th>
+                            <th class="p-4 font-bold text-sm">Responsible (R)</th>
+                            <th class="p-4 font-bold text-sm">Accountable (A)</th>
+                            <th class="p-4 font-bold text-sm">Consulted (C)</th>
+                            <th class="p-4 font-bold text-sm">Informed (I)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr>
+                            <td class="p-4 font-medium text-slate-600">App Development</td>
+                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium text-slate-600">Content Licensing</td>
+                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium text-slate-600">Launch Campaign</td>
+                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 4. Iron Triangle -->
+        <section>
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span class="bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">4</span>
+                Iron Triangle Impacts
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col">
+                    <div class="text-red-600 font-bold text-sm mb-2 flex items-center gap-1">
+                        🚨 Time is reduced
+                    </div>
+                    <p class="text-slate-600 text-sm mb-4">To hit the date, we must...</p>
+                    <textarea class="flex-1 w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none" placeholder="e.g. Cut scope..."></textarea>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col">
+                    <div class="text-amber-600 font-bold text-sm mb-2 flex items-center gap-1">
+                        💸 Budget is cut
+                    </div>
+                    <p class="text-slate-600 text-sm mb-4">With less money, we will...</p>
+                    <textarea class="flex-1 w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none" placeholder="e.g. Reduce marketing..."></textarea>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col">
+                    <div class="text-blue-600 font-bold text-sm mb-2 flex items-center gap-1">
+                        📈 Scope increases
+                    </div>
+                    <p class="text-slate-600 text-sm mb-4">With more features, we need...</p>
+                    <textarea class="flex-1 w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none" placeholder="e.g. Extend deadline..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bonus Challenge -->
+        <section class="bg-slate-900 text-white p-8 rounded-3xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-4 opacity-10 text-8xl">⚡</div>
+            <h2 class="text-2xl font-bold mb-4">Bonus Challenge</h2>
+            <p class="text-slate-400 mb-6">Leadership wants to launch in <strong>6 weeks</strong> instead of 3 months. What changes?</p>
+            <textarea class="w-full h-32 p-4 bg-slate-800 border border-slate-700 rounded-xl text-white outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your strategic pivot here..."></textarea>
+        </section>
+
+    </main>
+
+    <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 shadow-lg z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center px-4">
+            <p class="text-xs text-slate-500">Group Exercise Worksheet - V1.0</p>
+            <button onclick="window.print()" class="bg-blue-600 text-white px-6 py-2 rounded-full font-bold hover:bg-blue-700 transition-all flex items-center gap-2">
+                <span>🖨️</span> Save as PDF
+            </button>
+        </div>
+    </footer>
+
+    <script>
+        const features = [
+            'User login', 'Personalised recommendations', 'Offline listening', 
+            'Social sharing', 'Ads integration', 'Multi-language support', 
+            'Podcast library', 'Live radio streaming'
+        ];
+
+        const roles = ['Product Manager', 'Developer', 'Marketing Lead', 'Legal/Compliance', 'Editorial'];
+
+        function init() {
+            // Setup Timer
+            let timeLeft = 35 * 60;
+            const timerEl = document.getElementById('timer');
+            setInterval(() => {
+                const mins = Math.floor(timeLeft / 60);
+                const secs = timeLeft % 60;
+                timerEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+                if (timeLeft > 0) timeLeft--;
+            }, 1000);
+
+            // Populate Feature Bank
+            const bank = document.getElementById('feature-bank');
+            features.forEach((feat, idx) => {
+                const el = document.createElement('div');
+                el.id = `feat-${idx}`;
+                el.draggable = true;
+                el.className = 'drag-card bg-slate-100 border border-slate-300 px-4 py-2 rounded-lg text-sm shadow-sm hover:bg-white hover:border-blue-400 transition-all';
+                el.textContent = feat;
+                el.addEventListener('dragstart', e => {
+                    e.dataTransfer.setData('text/plain', el.id);
+                    setTimeout(() => el.classList.add('opacity-40'), 0);
+                });
+                el.addEventListener('dragend', () => el.classList.remove('opacity-40'));
+                bank.appendChild(el);
+            });
+
+            // Setup Drop Zones
+            const zones = document.querySelectorAll('.drop-zone');
+            zones.forEach(zone => {
+                zone.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    zone.classList.add('drag-over');
+                });
+                zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+                zone.addEventListener('drop', e => {
+                    e.preventDefault();
+                    zone.classList.remove('drag-over');
+                    const id = e.dataTransfer.getData('text/plain');
+                    const el = document.getElementById(id);
+                    zone.appendChild(el);
+                    el.classList.add('w-full');
+                });
+            });
+
+            // Populate RACI Selects
+            const selects = document.querySelectorAll('.raci-select');
+            selects.forEach(select => {
+                const emptyOpt = document.createElement('option');
+                emptyOpt.textContent = 'Select Role...';
+                emptyOpt.value = '';
+                select.appendChild(emptyOpt);
+                roles.forEach(role => {
+                    const opt = document.createElement('option');
+                    opt.value = role;
+                    opt.textContent = role;
+                    select.appendChild(opt);
+                });
+            });
+        }
+
+        function setApproach(approach) {
+            const agile = document.getElementById('btn-agile');
+            const water = document.getElementById('btn-waterfall');
+            if (approach === 'Agile') {
+                agile.className = 'flex-1 py-3 px-4 rounded-xl border-2 border-blue-500 bg-blue-50 text-blue-700 font-bold transition-all';
+                water.className = 'flex-1 py-3 px-4 rounded-xl border-2 border-slate-200 font-bold hover:border-blue-500 transition-all';
+            } else {
+                water.className = 'flex-1 py-3 px-4 rounded-xl border-2 border-blue-500 bg-blue-50 text-blue-700 font-bold transition-all';
+                agile.className = 'flex-1 py-3 px-4 rounded-xl border-2 border-slate-200 font-bold hover:border-blue-500 transition-all';
+            }
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
