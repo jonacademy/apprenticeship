@@ -21,11 +21,6 @@
             background-color: #f1f5f9;
             border-color: #3b82f6;
         }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(226, 232, 240, 1);
-        }
         .raci-select {
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2003/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
@@ -33,136 +28,169 @@
             background-position: right 0.5rem center;
             background-size: 1.5em;
         }
+
+        /* PDF / PRINT OPTIMIZATION */
+        @media print {
+            nav, footer, .no-print, #timer-container {
+                display: none !important;
+            }
+            body {
+                background-color: white !important;
+                padding-bottom: 0 !important;
+            }
+            main {
+                margin-top: 0 !important;
+                space-y: 1.5rem !important;
+            }
+            section {
+                break-inside: avoid;
+                border: 1px solid #e2e8f0 !important;
+                box-shadow: none !important;
+                margin-bottom: 1.5rem !important;
+            }
+            textarea {
+                border: 1px solid #cbd5e1 !important;
+                background: white !important;
+            }
+            .drop-zone {
+                border: 1px solid #cbd5e1 !important;
+            }
+            h1, h2 {
+                color: black !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-slate-50 min-h-screen text-slate-900 pb-20">
 
     <nav class="bg-slate-900 text-white p-4 sticky top-0 z-50 shadow-md">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center font-bold">B</div>
-                <span class="font-bold tracking-tight">Bauer Media Group Exercise</span>
+            <div class="flex items-center space-x-4">
+                <img src="https://api.typedream.com/v0/document/public/56d78703-9c5c-4e8c-8b85-c4ec8b854884_BMG_Academy_W_pos_KV_flat_mint_RGB_1_png.png" alt="Bauer Academy Logo" class="h-10 w-auto brightness-0 invert" onerror="this.src='https://placehold.co/100x40?text=Bauer+Academy'">
+                <span class="font-bold tracking-tight border-l border-slate-700 pl-4">Bauer Academy Workshop</span>
             </div>
-            <div class="text-sm text-slate-400 font-mono" id="timer">35:00</div>
+            <div class="text-sm text-slate-400 font-mono bg-slate-800 px-3 py-1 rounded-full" id="timer-container">
+                Time Remaining: <span id="timer">35:00</span>
+            </div>
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-4 mt-8 space-y-12">
+    <main class="max-w-6xl mx-auto px-4 mt-8 space-y-8">
         
-        <!-- Scenario Header -->
+        <!-- Scenario Brief -->
         <section class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-            <h1 class="text-3xl font-extrabold text-slate-800 mb-4">Mobile Audio App Launch</h1>
-            <div class="grid md:grid-cols-3 gap-6 text-sm">
-                <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-xl">
-                    <span class="text-2xl">⏳</span>
-                    <div><p class="font-bold">Deadline</p><p>3 Months</p></div>
+            <div class="flex flex-col md:flex-row justify-between items-start gap-6">
+                <div class="flex-1">
+                    <h1 class="text-3xl font-extrabold text-slate-800 mb-2">Mobile Audio App Launch</h1>
+                    <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                        <strong>The Brief:</strong> You are a project team at Bauer Media Group launching a new mobile app for personalised audio content (podcasts, radio, playlists) targeting 18–30-year-olds across Europe. You must coordinate across editorial, tech, marketing, and legal stakeholders.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-bold uppercase tracking-wider text-slate-500">
+                        <div class="flex items-center gap-2"><span class="text-blue-500">⏳</span> 3 Month Deadline</div>
+                        <div class="flex items-center gap-2"><span class="text-green-500">💰</span> Limited Budget</div>
+                        <div class="flex items-center gap-2"><span class="text-purple-500">🇪🇺</span> Pan-European</div>
+                        <div class="flex items-center gap-2"><span class="text-orange-500">📱</span> iOS/Android</div>
+                    </div>
                 </div>
-                <div class="flex items-center space-x-3 p-3 bg-green-50 rounded-xl">
-                    <span class="text-2xl">💰</span>
-                    <div><p class="font-bold">Budget</p><p>Limited / Fixed</p></div>
-                </div>
-                <div class="flex items-center space-x-3 p-3 bg-purple-50 rounded-xl">
-                    <span class="text-2xl">🎯</span>
-                    <div><p class="font-bold">Target</p><p>18-30 year olds (EU)</p></div>
+                <div class="w-full md:w-64 p-4 bg-slate-50 rounded-xl border border-slate-100 no-print">
+                    <p class="text-[10px] font-bold text-slate-400 mb-2 uppercase">Team Members</p>
+                    <input type="text" class="w-full bg-transparent border-b border-slate-200 py-1 text-sm outline-none focus:border-blue-500 mb-2" placeholder="Typist:">
+                    <input type="text" class="w-full bg-transparent border-b border-slate-200 py-1 text-sm outline-none focus:border-blue-500" placeholder="Presenter:">
                 </div>
             </div>
         </section>
 
         <!-- 1. Delivery Approach -->
-        <section>
-            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-                <span class="bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
+        <section class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                <span class="bg-slate-800 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs">1</span>
                 Delivery Approach
             </h2>
             <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <label class="block text-sm font-bold text-slate-700 mb-2">Chosen Approach</label>
-                    <div class="flex gap-4">
-                        <button onclick="setApproach('Agile')" id="btn-agile" class="flex-1 py-3 px-4 rounded-xl border-2 border-slate-200 font-bold hover:border-blue-500 transition-all">Agile</button>
-                        <button onclick="setApproach('Waterfall')" id="btn-waterfall" class="flex-1 py-3 px-4 rounded-xl border-2 border-slate-200 font-bold hover:border-blue-500 transition-all">Waterfall</button>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-2 uppercase">Chosen Approach</label>
+                    <div class="flex gap-2">
+                        <button onclick="setApproach('Agile')" id="btn-agile" class="flex-1 py-3 px-4 rounded-xl border-2 border-slate-200 font-bold hover:border-blue-500 transition-all text-sm">Agile</button>
+                        <button onclick="setApproach('Waterfall')" id="btn-waterfall" class="flex-1 py-3 px-4 rounded-xl border-2 border-slate-200 font-bold hover:border-blue-500 transition-all text-sm">Waterfall</button>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <label class="block text-sm font-bold text-slate-700 mb-2">Reasoning</label>
-                    <textarea class="w-full h-24 p-3 bg-slate-50 border border-slate-200 rounded-xl resize-none focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Explain your choice..."></textarea>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-2 uppercase">Reasoning</label>
+                    <textarea class="w-full h-20 p-3 bg-slate-50 border border-slate-200 rounded-xl resize-none text-sm outline-none focus:ring-2 focus:ring-blue-500" placeholder="Why this method for Bauer?"></textarea>
                 </div>
             </div>
         </section>
 
         <!-- 2. MoSCoW Prioritisation -->
-        <section>
-            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-                <span class="bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span>
+        <section class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                <span class="bg-slate-800 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs">2</span>
                 MoSCoW Prioritisation
             </h2>
-            <p class="text-slate-500 mb-6 text-sm">Drag and drop features into categories.</p>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                <!-- Drop Zones -->
-                <div class="space-y-3">
-                    <div class="bg-emerald-500 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider">Must Have</div>
-                    <div class="drop-zone border-2 border-dashed border-emerald-200 rounded-xl p-3 space-y-2 bg-emerald-50/30" data-category="must"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="space-y-2">
+                    <div class="bg-emerald-600 text-white px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider">Must Have</div>
+                    <div class="drop-zone border-2 border-dashed border-slate-200 rounded-xl p-3 space-y-2 bg-slate-50/50" data-category="must"></div>
                 </div>
-                <div class="space-y-3">
-                    <div class="bg-blue-500 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider">Should Have</div>
-                    <div class="drop-zone border-2 border-dashed border-blue-200 rounded-xl p-3 space-y-2 bg-blue-50/30" data-category="should"></div>
+                <div class="space-y-2">
+                    <div class="bg-blue-600 text-white px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider">Should Have</div>
+                    <div class="drop-zone border-2 border-dashed border-slate-200 rounded-xl p-3 space-y-2 bg-slate-50/50" data-category="should"></div>
                 </div>
-                <div class="space-y-3">
-                    <div class="bg-amber-500 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider">Could Have</div>
-                    <div class="drop-zone border-2 border-dashed border-amber-200 rounded-xl p-3 space-y-2 bg-amber-50/30" data-category="could"></div>
+                <div class="space-y-2">
+                    <div class="bg-amber-500 text-white px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider">Could Have</div>
+                    <div class="drop-zone border-2 border-dashed border-slate-200 rounded-xl p-3 space-y-2 bg-slate-50/50" data-category="could"></div>
                 </div>
-                <div class="space-y-3">
-                    <div class="bg-slate-400 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider">Won't Have</div>
-                    <div class="drop-zone border-2 border-dashed border-slate-200 rounded-xl p-3 space-y-2 bg-slate-50/30" data-category="wont"></div>
+                <div class="space-y-2">
+                    <div class="bg-slate-500 text-white px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider">Won't Have</div>
+                    <div class="drop-zone border-2 border-dashed border-slate-200 rounded-xl p-3 space-y-2 bg-slate-50/50" data-category="wont"></div>
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                <h3 class="text-sm font-bold text-slate-700 mb-4">Feature Bank</h3>
-                <div id="feature-bank" class="flex flex-wrap gap-3">
-                    <!-- Features added via JS -->
-                </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 no-print">
+                <h3 class="text-[10px] font-bold text-slate-400 mb-3 uppercase tracking-widest">Drag Features Below:</h3>
+                <div id="feature-bank" class="flex flex-wrap gap-2"></div>
             </div>
         </section>
 
         <!-- 3. RACI Matrix -->
-        <section>
-            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-                <span class="bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">3</span>
+        <section class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                <span class="bg-slate-800 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs">3</span>
                 RACI Matrix
             </h2>
-            <div class="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-sm">
-                <table class="w-full text-left border-collapse">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[600px]">
                     <thead>
                         <tr class="bg-slate-50 border-b border-slate-200">
-                            <th class="p-4 font-bold text-sm">Task</th>
-                            <th class="p-4 font-bold text-sm">Responsible (R)</th>
-                            <th class="p-4 font-bold text-sm">Accountable (A)</th>
-                            <th class="p-4 font-bold text-sm">Consulted (C)</th>
-                            <th class="p-4 font-bold text-sm">Informed (I)</th>
+                            <th class="p-3 font-bold text-xs uppercase text-slate-500">Task</th>
+                            <th class="p-3 font-bold text-xs uppercase text-slate-500">Resp. (R)</th>
+                            <th class="p-3 font-bold text-xs uppercase text-slate-500">Acc. (A)</th>
+                            <th class="p-3 font-bold text-xs uppercase text-slate-500">Cons. (C)</th>
+                            <th class="p-3 font-bold text-xs uppercase text-slate-500">Info. (I)</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
                         <tr>
-                            <td class="p-4 font-medium text-slate-600">App Development</td>
-                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
-                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
-                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
-                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-3 text-sm font-semibold">App Development</td>
+                            <td class="p-1"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-xs outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-1"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-xs outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-1"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-xs outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-1"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-xs outline-none border border-transparent focus:border-blue-500"></select></td>
                         </tr>
                         <tr>
-                            <td class="p-4 font-medium text-slate-600">Content Licensing</td>
-                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
-                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
-                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
-                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-3 text-sm font-semibold">Content Licensing</td>
+                            <td class="p-1"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-xs outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-1"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-xs outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-1"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-xs outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-1"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-xs outline-none border border-transparent focus:border-blue-500"></select></td>
                         </tr>
                         <tr>
-                            <td class="p-4 font-medium text-slate-600">Launch Campaign</td>
-                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
-                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
-                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
-                            <td class="p-2"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-sm outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-3 text-sm font-semibold">Launch Campaign</td>
+                            <td class="p-1"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-xs outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-1"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-xs outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-1"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-xs outline-none border border-transparent focus:border-blue-500"></select></td>
+                            <td class="p-1"><select class="raci-select w-full p-2 bg-slate-50 rounded-lg text-xs outline-none border border-transparent focus:border-blue-500"></select></td>
                         </tr>
                     </tbody>
                 </table>
@@ -170,54 +198,54 @@
         </section>
 
         <!-- 4. Iron Triangle -->
-        <section>
-            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-                <span class="bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">4</span>
+        <section class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                <span class="bg-slate-800 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs">4</span>
                 Iron Triangle Impacts
             </h2>
             <div class="grid md:grid-cols-3 gap-6">
-                <!-- Card 1 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col">
-                    <div class="text-red-600 font-bold text-sm mb-2 flex items-center gap-1">
-                        🚨 Time is reduced
-                    </div>
-                    <p class="text-slate-600 text-sm mb-4">To hit the date, we must...</p>
-                    <textarea class="flex-1 w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none" placeholder="e.g. Cut scope..."></textarea>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <p class="text-[10px] font-bold text-red-600 uppercase mb-2">Scenario: Time is reduced</p>
+                    <textarea class="w-full h-24 p-2 bg-white border border-slate-200 rounded-lg text-sm outline-none" placeholder="Your decision..."></textarea>
                 </div>
-                <!-- Card 2 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col">
-                    <div class="text-amber-600 font-bold text-sm mb-2 flex items-center gap-1">
-                        💸 Budget is cut
-                    </div>
-                    <p class="text-slate-600 text-sm mb-4">With less money, we will...</p>
-                    <textarea class="flex-1 w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none" placeholder="e.g. Reduce marketing..."></textarea>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <p class="text-[10px] font-bold text-amber-600 uppercase mb-2">Scenario: Budget is cut</p>
+                    <textarea class="w-full h-24 p-2 bg-white border border-slate-200 rounded-lg text-sm outline-none" placeholder="Your decision..."></textarea>
                 </div>
-                <!-- Card 3 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col">
-                    <div class="text-blue-600 font-bold text-sm mb-2 flex items-center gap-1">
-                        📈 Scope increases
-                    </div>
-                    <p class="text-slate-600 text-sm mb-4">With more features, we need...</p>
-                    <textarea class="flex-1 w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none" placeholder="e.g. Extend deadline..."></textarea>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <p class="text-[10px] font-bold text-blue-600 uppercase mb-2">Scenario: Scope increases</p>
+                    <textarea class="w-full h-24 p-2 bg-white border border-slate-200 rounded-lg text-sm outline-none" placeholder="Your decision..."></textarea>
                 </div>
             </div>
         </section>
 
-        <!-- Bonus Challenge -->
-        <section class="bg-slate-900 text-white p-8 rounded-3xl relative overflow-hidden">
-            <div class="absolute top-0 right-0 p-4 opacity-10 text-8xl">⚡</div>
-            <h2 class="text-2xl font-bold mb-4">Bonus Challenge</h2>
-            <p class="text-slate-400 mb-6">Leadership wants to launch in <strong>6 weeks</strong> instead of 3 months. What changes?</p>
-            <textarea class="w-full h-32 p-4 bg-slate-800 border border-slate-700 rounded-xl text-white outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your strategic pivot here..."></textarea>
+        <!-- Bonus Challenge Randomizer -->
+        <section id="bonus-section" class="bg-slate-900 text-white p-8 rounded-3xl relative overflow-hidden transition-all duration-500">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold mb-1">Bonus Challenge</h2>
+                    <p class="text-slate-400 text-sm" id="challenge-prompt">Click the button to generate a unique crisis for your team to solve.</p>
+                </div>
+                <button onclick="randomizeChallenge()" class="no-print bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg font-bold text-sm transition-all flex items-center gap-2">
+                    🎲 Randomize Challenge
+                </button>
+            </div>
+            <div id="challenge-display" class="hidden animate-in fade-in slide-in-from-bottom-2 duration-700">
+                <div class="p-4 bg-slate-800 rounded-xl border border-slate-700 mb-6">
+                    <h3 class="text-blue-400 font-bold mb-1 uppercase text-xs" id="challenge-title">The Situation:</h3>
+                    <p class="text-lg italic" id="challenge-text"></p>
+                </div>
+                <textarea class="w-full h-32 p-4 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:ring-2 focus:ring-blue-500" placeholder="Describe your team's strategic response..."></textarea>
+            </div>
         </section>
 
     </main>
 
-    <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 shadow-lg z-50">
+    <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 shadow-lg z-50 no-print">
         <div class="max-w-6xl mx-auto flex justify-between items-center px-4">
-            <p class="text-xs text-slate-500">Group Exercise Worksheet - V1.0</p>
-            <button onclick="window.print()" class="bg-blue-600 text-white px-6 py-2 rounded-full font-bold hover:bg-blue-700 transition-all flex items-center gap-2">
-                <span>🖨️</span> Save as PDF
+            <p class="text-xs text-slate-500">Bauer Media Group Exercise • Collaborative Worksheet</p>
+            <button onclick="window.print()" class="bg-slate-900 text-white px-8 py-2 rounded-full font-bold hover:bg-slate-800 transition-all flex items-center gap-2 shadow-xl">
+                <span>🖨️</span> Save Final Worksheet (PDF)
             </button>
         </div>
     </footer>
@@ -230,6 +258,14 @@
         ];
 
         const roles = ['Product Manager', 'Developer', 'Marketing Lead', 'Legal/Compliance', 'Editorial'];
+
+        const challenges = [
+            { title: "The 6-Week Squeeze", text: "Leadership has moved the launch forward to 6 weeks to beat a competitor. How do you pivot?" },
+            { title: "The Legal Wall", text: "New EU privacy laws mean 'Personalised Recommendations' are blocked until further audits. What's the plan?" },
+            { title: "The Celebrity Drop", text: "A major European artist wants to host a live exclusive on launch day, but it requires new live-streaming tech. Do you accept the scope creep?" },
+            { title: "The Budget Black Hole", text: "The marketing budget has been slashed by 50%. How do you reach your 18-30 target audience now?" },
+            { title: "The Tech Crash", text: "The lead developer has left the company. You have to outsource the rest of the build. How do you manage the risk?" }
+        ];
 
         function init() {
             // Setup Timer
@@ -248,7 +284,7 @@
                 const el = document.createElement('div');
                 el.id = `feat-${idx}`;
                 el.draggable = true;
-                el.className = 'drag-card bg-slate-100 border border-slate-300 px-4 py-2 rounded-lg text-sm shadow-sm hover:bg-white hover:border-blue-400 transition-all';
+                el.className = 'drag-card bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm hover:border-blue-400 transition-all';
                 el.textContent = feat;
                 el.addEventListener('dragstart', e => {
                     e.dataTransfer.setData('text/plain', el.id);
@@ -280,7 +316,7 @@
             const selects = document.querySelectorAll('.raci-select');
             selects.forEach(select => {
                 const emptyOpt = document.createElement('option');
-                emptyOpt.textContent = 'Select Role...';
+                emptyOpt.textContent = '-';
                 emptyOpt.value = '';
                 select.appendChild(emptyOpt);
                 roles.forEach(role => {
@@ -295,13 +331,31 @@
         function setApproach(approach) {
             const agile = document.getElementById('btn-agile');
             const water = document.getElementById('btn-waterfall');
+            const activeClass = 'flex-1 py-3 px-4 rounded-xl border-2 border-blue-600 bg-blue-600 text-white font-bold transition-all text-sm';
+            const inactiveClass = 'flex-1 py-3 px-4 rounded-xl border-2 border-slate-200 font-bold hover:border-blue-500 transition-all text-sm text-slate-600';
+            
             if (approach === 'Agile') {
-                agile.className = 'flex-1 py-3 px-4 rounded-xl border-2 border-blue-500 bg-blue-50 text-blue-700 font-bold transition-all';
-                water.className = 'flex-1 py-3 px-4 rounded-xl border-2 border-slate-200 font-bold hover:border-blue-500 transition-all';
+                agile.className = activeClass;
+                water.className = inactiveClass;
             } else {
-                water.className = 'flex-1 py-3 px-4 rounded-xl border-2 border-blue-500 bg-blue-50 text-blue-700 font-bold transition-all';
-                agile.className = 'flex-1 py-3 px-4 rounded-xl border-2 border-slate-200 font-bold hover:border-blue-500 transition-all';
+                water.className = activeClass;
+                agile.className = inactiveClass;
             }
+        }
+
+        function randomizeChallenge() {
+            const display = document.getElementById('challenge-display');
+            const prompt = document.getElementById('challenge-prompt');
+            const textEl = document.getElementById('challenge-text');
+            const titleEl = document.getElementById('challenge-title');
+            
+            const random = challenges[Math.floor(Math.random() * challenges.length)];
+            
+            titleEl.textContent = `The Situation: ${random.title}`;
+            textEl.textContent = random.text;
+            
+            display.classList.remove('hidden');
+            prompt.classList.add('hidden');
         }
 
         window.onload = init;
