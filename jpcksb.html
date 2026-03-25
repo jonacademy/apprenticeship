@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junior Production Coordinator - Assessment Criteria</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #2980b9;
+            --light: #f4f4f4;
+            --border: #ddd;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary);
+        }
+
+        /* Filter Container - Sticky for easy access */
+        .filter-container {
+            margin-bottom: 20px;
+            background: var(--light);
+            padding: 15px;
+            border-radius: 5px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .filter-group label {
+            font-weight: bold;
+        }
+
+        /* Button Choice Layout */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--secondary);
+            background: white;
+            color: var(--secondary);
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            background: #eef7ff;
+        }
+
+        .filter-btn.active {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* KSB List Styling - Restored to original single-column style */
+        .ksb-list {
+            margin-bottom: 30px;
+        }
+
+        .ksb-item {
+            margin-bottom: 5px;
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .ksb-id {
+            font-weight: bold;
+            color: var(--secondary);
+            width: 50px;
+            display: inline-block;
+        }
+
+        /* Table Responsiveness */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto; /* Adds horizontal scroll on mobile so table doesn't squash */
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px; /* Maintains readability on small screens */
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .theme-header {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            width: 25%;
+        }
+
+        .pass-criteria, .distinction-criteria {
+            width: 37.5%;
+        }
+
+        .ksb-tag {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+            color: var(--secondary);
+        }
+
+        .criteria-block {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .criteria-block:last-child {
+            border-bottom: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Mobile specific style tweaks */
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            h1 { font-size: 1.5rem; }
+            .filter-btn { flex: 1 1 auto; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Junior Production Coordinator - Assessment Criteria</h1>
+
+    <div class="filter-container">
+        <div class="filter-group">
+            <label>Choose Assessment Method:</label>
+            <div class="button-group">
+                <button class="filter-btn active" onclick="filterContent('all', this)">All Methods</button>
+                <button class="filter-btn" onclick="filterContent('pres', this)">Method 1: Presentation</button>
+                <button class="filter-btn" onclick="filterContent('disc', this)">Method 2: Discussion</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="ksbSection">
+        <h2>Knowledge, Skills and Behaviours</h2>
+        
+        <div class="ksb-list">
+            <h3>Knowledge</h3>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">K1</span> How structure, vision and purpose affects production.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">K2</span> The requirements of each department and how they work with each other.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">K3</span> The role, responsibilities and impact this has on the success of the production.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">K4</span> How to record and communicate information on the progress of the production which complies with organisational policies including safe storage of data.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">K5</span> How different production environments, formats and scale affect the types and quantity of required resources.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">K6</span> The importance of financial procedures and policies.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">K7</span> How to research and access resources such as suppliers, contributors and crew members.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">K8</span> How to reconcile and code production expenditure.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">K9</span> The production lifecycle. Key aspects and industry terminology of each stage within end-to-end production workflows.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">K10</span> Requirements and production documentation that may be needed when travelling.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">K11</span> How to identify and report potential health and safety risks and hazards for a production.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">K12</span> Industry regulations, codes of practice, organisational policies, licences and legal requirements that might affect a production including social media policy.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">K13</span> Communication styles. How the type, format and frequency of communication can impact on the success of a production.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">K14</span> How to keep up to date with tools, standards and trends and emerging technologies and their use and impact across the sector.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">K15</span> The value of production content and confidentiality to the business or organisation. Why it is important to maintain data security, and the legal and regulatory requirements such as copyright and intellectual property rights.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">K16</span> The importance of environmental sustainability and departmental processes for working on a production.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">K17</span> Current workplace rules and procedures regarding safeguarding, for example child protection.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">K18</span> Process for liaising with organisations or government agencies as required.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">K19</span> The intended use and impact of a piece of copyright material or content.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">K20</span> The processes required to obtain the necessary legal rights to the copyright.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">K21</span> How to ensure that all media or creative content is cleared for use and owned or licenced by the production.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">K22</span> The importance of post-production paperwork in the delivery of creative material.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">K23</span> How technical operations work in studios, sets and on location.</div>
+
+            <h3>Skills</h3>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">S1</span> Operate within agreed organisational policies, standards and procedures; adapting to operational changes as they occur.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">S2</span> Meet the needs of the creative team, such as technical, logistical or organisational requirements.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">S3</span> Create, maintain and share production documentation and records such as schedules, call sheets, show plans, technical requisitions, client feedback, review notes.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">S4</span> Research and assist with sourcing or booking of resources, crew, contributors, talent or suppliers to meet production requirements.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">S5</span> Monitor the use of resources such as production materials, equipment and supplies.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">S6</span> Coordinate logistics or travel activity for the production, liaising with other departments when required.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">S7</span> Collaborate with the production team to check that the final product is delivered to industry standards including technical and legal requirements.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">S8</span> Monitor the production schedule to ensure that changing priorities or deadlines are communicated to the team.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">S9</span> Prioritise the work to ensure that tasks are completed on schedule.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">S10</span> Resolve, and where required escalate, faults, incidents or problems, within agreed policies and procedures.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">S11</span> Contribute to the monitoring and compliance for the production relating to legal, regulatory, organisational and industry codes of practice.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">S12</span> Build relationships with partners on productions such as cast, crew, and contributors.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">S13</span> Liaise with other departments, acting as a point of contact on the production.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">S14</span> Keep up to date with tools, standards, trends and emerging technologies and their use and impact across the sector.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">S15</span> Operate within legislation, regulations, organisational policies, industry standards and procedures such as health and safety, confidentiality, security.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">S16</span> Follow sustainable practices in line with industry standard recommendations.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">S17</span> Promote and market skills and services.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">S18</span> Assist with establishing sources of copyright for the materials being used on a production.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">S19</span> Obtain terms and conditions from copyright owners and license holders acting as a point of contact when required.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">S20</span> Prepare deliverables documentation in readiness for handover such as billings, schedules, production promotion, presentation and support material.</div>
+
+            <h3>Behaviours</h3>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">B1</span> Work on own initiative, be proactive and inquisitive; if mistakes are made take personal responsibility to address them.</div>
+            <div class="ksb-item" data-method="pres"><span class="ksb-id">B2</span> Act in a professional and ethical manner, in line with accepted production etiquette.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">B3</span> Take the initiative and responsibility for own learning and development, working with and learning from peers.</div>
+            <div class="ksb-item" data-method="disc"><span class="ksb-id">B4</span> Maintain commercial confidentiality and professional practice at all times, and in all settings.</div>
+        </div>
+    </div>
+
+    <div id="method1Table" class="table-wrapper">
+        <h2>Method 1: Presentation and questions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>THEME KSBS</th>
+                    <th>PASS</th>
+                    <th>DISTINCTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="theme-header">Core - The role K3 S2 S3</td>
+                    <td class="pass-criteria">
+                        <div class="criteria-block">
+                            Explains how they create, maintain and share production documentation to meet the needs of the creative team and the impact this has on the success of the production.
+                            <span class="ksb-tag">K3, S2, S3</span>
+                        </div>
+                    </td>
+                    <td class="distinction-criteria">No distinction grading criteria.</td>
+                </tr>
+                <tr>
+                    <td class="theme-header">Core - Financials K6 K8 S4</td>
+                    <td class="pass-criteria">
+                        <div class="criteria-block">
+                            Explains the use of financial policy and procedures when sourcing and booking resources to meet production requirements.
+                            <span class="ksb-tag">K6, K8, S4</span>
+                        </div>
+                    </td>
+                    <td class="distinction-criteria">No distinction grading criteria.</td>
+                </tr>
+                <tr>
+                    <td class="theme-header">Core - Production monitoring S8 S10 B1</td>
+                    <td class="pass-criteria">
+                        <div class="criteria-block">
+                            Explains how they use their own initiative to monitor the production schedule, communicating changes and adjustments to the team and proactively resolving identified problems.
+                            <span class="ksb-tag">S8, S10, B1</span>
+                        </div>
+                    </td>
+                    <td class="distinction-criteria">
+                        <div class="criteria-block">
+                            Evaluates their approach to monitoring the production schedule and how they foresee potential issues or consequences with changing priorities.
+                            <span class="ksb-tag">S8, S10</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="theme-header">Core - Communication and collaboration K2 K4 S12 S13 B2</td>
+                    <td class="pass-criteria">
+                        <div class="criteria-block">
+                            Demonstrates an understanding of the organisations departmental structure and the need to work in a professional and ethical manner when building relationships with partners in their role as a point of contact on a production.
+                            <span class="ksb-tag">K2, S12, S13, B2</span>
+                        </div>
+                        <div class="criteria-block">
+                            Explains how they record and communicate production progress information whilst adhering to organisational policies.
+                            <span class="ksb-tag">K4</span>
+                        </div>
+                    </td>
+                    <td class="distinction-criteria">
+                        <div class="criteria-block">
+                            Analyses the impact of collaborative ways of working on the overall functioning of the organisation.
+                            <span class="ksb-tag">K2, S13</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="theme-header">Core - Sustainability K16 S16</td>
+                    <td class="pass-criteria">
+                        <div class="criteria-block">
+                            Explains how they follow environmental sustainability practices in line with industry standard recommendations when working on a production.
+                            <span class="ksb-tag">K16, S16</span>
+                        </div>
+                    </td>
+                    <td class="distinction-criteria">
+                        <div class="criteria-block">
+                            Evaluates areas to improve sustainable practices on the selected production.
+                            <span class="ksb-tag">K16, S16</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="theme-header">Production coordinator - Production compliance K17 K18 S20</td>
+                    <td class="pass-criteria">
+                        <div class="criteria-block">
+                            Describes managing critical aspects of production, including safeguarding, liaison with external entities, and obtaining documentation and the pivotal role they play in ensuring seamless operations and successful project handovers.
+                            <span class="ksb-tag">K17, K18, S20</span>
+                        </div>
+                    </td>
+                    <td class="distinction-criteria">No distinction grading criteria.</td>
+                </tr>
+                <tr>
+                    <td class="theme-header">Production coordinator - Policies and procedures K22 K23</td>
+                    <td class="pass-criteria">
+                        <div class="criteria-block">
+                            Explains how technical operations work in studios, sets and on location and the importance of sharing accurate post-production paperwork in the delivery of creative material.
+                            <span class="ksb-tag">K22, K23</span>
+                        </div>
+                    </td>
+                    <td class="distinction-criteria">No distinction grading criteria.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="method2Table" class="table-wrapper">
+        <h2>Method 2: Professional discussion</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>THEME KSBS</th>
+                    <th>PASS</th>
+                    <th>DISTINCTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="theme-header">Core - Production context K1 K9 S9</td>
+                    <td class="pass-criteria">
+                        <div class="criteria-block">
+                            Explains how they prioritise the work throughout the production lifecycle to ensure that tasks are completed on schedule and how structure, vision and purpose can affect production.
+                            <span class="ksb-tag">K1, K9, S9</span>
+                        </div>
+                    </td>
+                    <td class="distinction-criteria">
+                        <div class="criteria-block">
+                            Justifies decisions for prioritising tasks and adapting to work.
+                            <span class="ksb-tag">S9</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="theme-header">Core - Regulations and health and safety K11 K12 S11 S15</td>
+                    <td class="pass-criteria">
+                        <div class="criteria-block">
+                            Explains how to identify and report potential health and safety risks and hazards for a production.
+                            <span class="ksb-tag">K11</span>
+                        </div>
+                        <div class="criteria-block">
+                            Explains how they monitor and comply with industry regulations, organisational policies, codes of practice, required licenses and legal requirements when working on a production.
+                            <span class="ksb-tag">K12, S11, S15</span>
+                        </div>
+                    </td>
+                    <td class="distinction-criteria">No distinction grading criteria.</td>
+                </tr>
+                <tr>
+                    <td class="theme-header">Core - Resourcing and logistics coordination K5 K7 K10 S1 S5 S6</td>
+                    <td class="pass-criteria">
+                        <div class="criteria-block">
+                            Explains how they adapt to different production environments, formats, scale and operational changes whilst working within agreed organisational policies, standards and procedures.
+                            <span class="ksb-tag">K5, S1</span>
+                        </div>
+                        <div class="criteria-block">
+                            Describes how to research, access and monitor the use of resources to meet production requirements.
+                            <span class="ksb-tag">K7, S5</span>
+                        </div>
+                        <div class="criteria-block">
+                            Explains the requirements and production documentation that may be needed when travelling and how to coordinate logistics or travel activity for the production.
+                            <span class="ksb-tag">K10, S6</span>
+                        </div>
+                    </td>
+                    <td class="distinction-criteria">
+                        <div class="criteria-block">
+                            Justifies their selection of suppliers, crew members and resources.
+                            <span class="ksb-tag">K7, S5</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="theme-header">Core - Communication K13 S7</td>
+                    <td class="pass-criteria">
+                        <div class="criteria-block">
+                            Explains the communication techniques used to build rapport with a range of colleagues and suppliers to ensure the final product is delivered to industry standards meeting technical and legal requirements.
+                            <span class="ksb-tag">K13, S7</span>
+                        </div>
+                    </td>
+                    <td class="distinction-criteria">No distinction grading criteria.</td>
+                </tr>
+                <tr>
+                    <td class="theme-header">Core - CPD K14 S14 S17 B3</td>
+                    <td class="pass-criteria">
+                        <div class="criteria-block">
+                            Demonstrates initiative and responsibility for own learning by keeping up to date with tools, standards, trends and emerging technologies to promote and market skills and services.
+                            <span class="ksb-tag">K14, S14, S17, B3</span>
+                        </div>
+                    </td>
+                    <td class="distinction-criteria">
+                        <div class="criteria-block">
+                            Analyses the impact of utilising emerging technology and latest tools, standards and trends.
+                            <span class="ksb-tag">S14</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="theme-header">Core - Data protection and confidentiality K15 B4</td>
+                    <td class="pass-criteria">
+                        <div class="criteria-block">
+                            Explains the value of confidentiality to the organisation and the importance of maintaining data security and intellectual property rights.
+                            <span class="ksb-tag">K15, B4</span>
+                        </div>
+                    </td>
+                    <td class="distinction-criteria">No distinction grading criteria.</td>
+                </tr>
+                <tr>
+                    <td class="theme-header">Production coordinator - Copyright K19 K20 K21 S18 S19</td>
+                    <td class="pass-criteria">
+                        <div class="criteria-block">
+                            Describes different types of copyright, how copyrighted material is used, its impact, and how to get legal permission to use it.
+                            <span class="ksb-tag">K19, K20, K21, S18, S19</span>
+                        </div>
+                    </td>
+                    <td class="distinction-criteria">No distinction grading criteria.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function filterContent(method, btn) {
+            // Update button active state
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Filter KSB items
+            const ksbItems = document.querySelectorAll('.ksb-item');
+            ksbItems.forEach(item => {
+                if (method === 'all' || item.getAttribute('data-method') === method) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+
+            // Filter Tables
+            const m1Table = document.getElementById('method1Table');
+            const m2Table = document.getElementById('method2Table');
+
+            if (method === 'all') {
+                m1Table.classList.remove('hidden');
+                m2Table.classList.remove('hidden');
+            } else if (method === 'pres') {
+                m1Table.classList.remove('hidden');
+                m2Table.classList.add('hidden');
+            } else if (method === 'disc') {
+                m1Table.classList.add('hidden');
+                m2Table.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
