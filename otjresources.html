@@ -73,7 +73,7 @@
 
     <div class="dashboard-grid">
         
-        <div class="card" style="border-top-color: var(--journalism);" data-tags="K10 K13 K15 S8 S10 S16 copywriting journalism apple hubspot wordstream coschedule buzzsumo toolkit NYT licensing skills content marketing LinkedIn tandfonline">
+        <div class="card" style="border-top-color: var(--journalism);" data-tags="K10 K13 K15 S8 S10 S16 copywriting journalism apple hubspot wordstream coschedule buzzsumo toolkit NYT licensing skills content marketing LinkedIn tandfonline everybody writes ann handley">
             <span class="ksb-tag">K10, K13, K15, S8, S10, S16</span>
             <h3>Journalism & Copywriting</h3>
             <div class="scroll-area">
@@ -95,6 +95,7 @@
                     <li><a href="https://copyblogger.com/blog/" target="_blank">✍️ Copyblogger: Content Marketing Blog</a></li>
                     <li><a href="https://www.w3.org/WAI/fundamentals/accessibility-intro/" target="_blank">♿ W3C: Intro to Web Accessibility</a></li>
                     <li><a href="https://youtu.be/9hnR9ldGjeI" target="_blank">🎤 Copywriting Secret: Read It Out Loud</a></li>
+                    <li><a href="https://www.amazon.co.uk/Everybody-Writes-Go-To-Create-Ridiculously/dp/1118905555" target="_blank">📖 Ann Handley: Everybody Writes</a></li>
                 </ul>
             </div>
         </div>
@@ -124,7 +125,7 @@
             </div>
         </div>
 
-        <div class="card" style="border-top-color: var(--pitch);" data-tags="K1 K4 K7 K8 K9 S1 S3 strategy data pitching voss the drum mad men brandwatch google marketing week consumer hubspot coursera semrush digital 2025 pixar fundraising">
+        <div class="card" style="border-top-color: var(--pitch);" data-tags="K1 K4 K7 K8 K9 S1 S3 strategy data pitching voss the drum mad men brandwatch google marketing week consumer hubspot coursera semrush digital 2025 pixar fundraising contagious jonah berger talk like ted carmine gallo building a story brand donald daniel miller how to win friends and influence people dale carnegie">
             <span class="ksb-tag">K1, K4, K7, K8, K9, S1, S3</span>
             <h3>Strategy & Pitching</h3>
             <div class="scroll-area">
@@ -142,6 +143,10 @@
                     <li><a href="https://datareportal.com/reports/digital-2025-july-global-statshot" target="_blank">📊 Digital 2025 Global Statshot</a></li>
                     <li><a href="https://hbr.org/2016/09/how-senior-executives-find-time-to-be-creative" target="_blank">💡 HBR: Finding Time for Creativity</a></li>
                     <li><a href="https://hbr.org/2008/09/how-pixar-fosters-collective-creativity" target="_blank">💡 HBR: How Pixar Fosters Creativity</a></li>
+                    <li><a href="https://www.amazon.co.uk/Contagious-Things-Catch-Jonah-Berger/dp/1471111709" target="_blank">📖 Jonah Berger: Contagious</a></li>
+                    <li><a href="https://www.amazon.co.uk/Talk-Like-TED-speaking-secrets/dp/1447261138" target="_blank">📖 Carmine Gallo: Talk Like TED</a></li>
+                    <li><a href="https://www.amazon.co.uk/Building-StoryBrand-Clarify-Message-Customers/dp/0718033329" target="_blank">📖 Donald Miller: Building a Story Brand</a></li>
+                    <li><a href="https://www.amazon.co.uk/How-Win-Friends-Influence-People/dp/0091906814" target="_blank">📖 Dale Carnegie: How to Win Friends & Influence People</a></li>
                 </ul>
             </div>
         </div>
@@ -223,7 +228,7 @@
             </div>
         </div>
 
-        <div class="card" style="border-top-color: #8e44ad;" data-tags="books reading list sinek Kleon thirst slay lane culture code gills artist why creatively focus">
+        <div class="card" style="border-top-color: #8e44ad;" data-tags="books reading list sinek Kleon thirst slay lane culture code gills artist why creatively focus show your work austin kleon the hero with a thousand faces joseph campbell the writers journey christopher vogler quiet the power of introverts susan cain the creative habit twyla tharp">
             <span class="ksb-tag">Reading List</span>
             <h3>Essential Books</h3>
             <div class="scroll-area">
@@ -234,6 +239,11 @@
                     <li><a href="https://www.amazon.co.uk/Culture-Code-Secrets-Highly-Successful/dp/1847941273/" target="_blank">📖 The Culture Code (Team Success)</a></li>
                     <li><a href="https://www.amazon.co.uk/Thirst-Story-Redemption-Compassion-Mission/dp/1524762865" target="_blank">📖 Thirst: Scott Harrison Story</a></li>
                     <li><a href="https://www.amazon.co.uk/Growing-Gills-Creative-Focus-Drowning-ebook/dp/B07284HSHQ" target="_blank">📖 Growing Gills: Creative Focus</a></li>
+                    <li><a href="https://www.amazon.co.uk/Show-Your-Work-Austin-Kleon/dp/076117897X" target="_blank">📖 Austin Kleon: Show Your Work!</a></li>
+                    <li><a href="https://www.amazon.co.uk/Hero-Thousand-Faces-Joseph-Campbell/dp/1577315936" target="_blank">📖 Joseph Campbell: The Hero with a Thousand Faces</a></li>
+                    <li><a href="https://www.amazon.co.uk/Writers-Journey-Mythic-Structure/dp/1615933152" target="_blank">📖 Christopher Vogler: The Writer's Journey</a></li>
+                    <li><a href="https://www.amazon.co.uk/Quiet-power-introverts-world-talking/dp/0141029196" target="_blank">📖 Susan Cain: Quiet (The Power of Introverts)</a></li>
+                    <li><a href="https://www.amazon.co.uk/Creative-Habit-Learn-Use-Life/dp/0743235274" target="_blank">📖 Twyla Tharp: The Creative Habit</a></li>
                 </ul>
             </div>
         </div>
@@ -280,10 +290,16 @@
     function filterResources() {
         const input = document.getElementById('ksbSearch').value.toLowerCase();
         const cards = document.getElementsByClassName('card');
+        
         for (let card of cards) {
+            // Search inside the hidden data-tags
             const tags = card.getAttribute('data-tags').toLowerCase();
-            const title = card.querySelector('h3').innerText.toLowerCase();
-            card.classList.toggle('hidden', !tags.includes(input) && !title.includes(input));
+            
+            // NEW: Search the entire visible text of the card (including all list items, authors, and titles)
+            const cardText = card.innerText.toLowerCase();
+            
+            // If the input matches either the tags OR any text inside the card, show it
+            card.classList.toggle('hidden', !tags.includes(input) && !cardText.includes(input));
         }
     }
 </script>
