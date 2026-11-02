@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>The Call Time | Bauer Academy Production Simulation</title>
+<style>
+:root{--purple:#4700a3;--mint:#1fd1bd;--ink:#24202b;--muted:#625e6b;--line:#e3ddec;--pale:#f8f6fb;--white:#fff;--warm:#fff7e8}*{box-sizing:border-box}body{margin:0;background:#f8f7fa;color:var(--ink);font:15px/1.55 Arial,Helvetica,sans-serif}button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--mint);outline-offset:2px}h1,h2,h3,p{margin:0}h1{font-size:clamp(24px,4vw,34px);color:var(--purple);line-height:1.18}h2{font-size:21px;line-height:1.3}h3{font-size:15px}p{margin:0 0 10px}.muted{color:var(--muted)}.eyebrow{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--purple)}.shell{max-width:1050px;margin:auto;padding:20px 24px 50px}.mast{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 0 20px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px;font-weight:bold;letter-spacing:.02em}.square{display:grid;place-items:center;width:38px;height:38px;background:var(--purple);color:#fff;border-radius:10px;font-size:20px}.mast small{color:var(--muted)}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:20px 0 25px}.step{display:flex;align-items:center;gap:9px;text-align:left;border:1px solid var(--line);background:white;padding:13px 11px;border-radius:12px;font-size:13px;font-weight:700;color:#5c5369}.step strong{display:grid;place-items:center;background:#eee9f5;color:var(--purple);border-radius:50%;width:26px;height:26px;flex-shrink:0}.step.active{border-color:var(--purple);background:#f4effc;color:var(--purple)}.step.done strong{background:#ddf7ec;color:#006c55}.main{display:grid;gap:17px}.intro{background:white;border:1px solid var(--line);border-radius:17px;padding:25px}.intro p{margin-top:10px;max-width:780px;color:var(--muted)}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}.instruction{display:grid;grid-template-columns:1fr 1fr;gap:12px}.instruction>div{background:var(--pale);border-radius:10px;padding:15px}.instruction strong{display:block;font-size:12px;color:var(--purple);text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}.instruction p{margin:0;font-size:13px}.columns{display:grid;grid-template-columns:1fr 1fr;gap:16px}.sectiontop{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.btn{border:1px solid #cfc5dd;border-radius:9px;padding:11px 16px;background:white;color:var(--purple);font-size:13px;font-weight:bold}.btn:hover{background:#f5f0fb}.btn.primary{background:var(--purple);color:white;border-color:var(--purple)}.btn.primary:hover{background:#390083}.btn:disabled{opacity:.5;cursor:not-allowed}.actions{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap}.soft{background:var(--pale);border-radius:10px;padding:15px}.note{border-left:4px solid var(--purple);background:#f5f1fd;border-radius:8px;padding:14px;font-size:13px}.success{border-left-color:#15846b;background:#eaf8f2}.warning{border-left-color:#ca8b2d;background:#fff8ed}.mail{border:1px solid var(--line);background:white;border-radius:10px;padding:16px}.mailhead{font-size:12px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}.mail p{font-size:13px}.contact{display:grid;gap:12px;padding:16px;border:1px solid var(--line);border-radius:11px}.tag{font-size:11px;background:#eee8fa;border-radius:6px;padding:4px 8px;color:var(--purple);font-weight:bold}.check{color:#00735d;font-weight:bold;font-size:13px}.ref{display:flex;justify-content:space-between;gap:10px;align-items:center;background:var(--pale);padding:12px;border-radius:8px;margin-top:9px}.ref span{font-size:12px}.ref strong{font-size:13px}.call{background:white;border:1px solid #a9abb0;border-radius:4px;padding:20px;color:#222;font-size:13px}.call-head{border-bottom:3px solid #333;padding-bottom:12px;margin-bottom:12px}.call-head b{font-size:24px;display:block;line-height:1.1}.call-title{text-align:right;font-size:11px;font-weight:bold;letter-spacing:.08em}.call table{border-collapse:collapse;width:100%;margin-top:8px}.call th,.call td{border:1px solid #adb0b4;padding:8px;text-align:left;font-size:12px}.call th{background:#e8e9eb}.call label{display:block;font-size:12px;font-weight:bold;margin-bottom:4px}.call input,.call textarea{border:1px solid #b8bac0;border-radius:3px;background:white;padding:9px;width:100%;min-height:42px;color:#222;font-size:13px}.call textarea{min-height:66px;resize:vertical}.field{margin:11px 0}.call small{font-size:11px;color:#666;display:block;margin-top:4px}.errors{padding:10px 16px;margin:0;list-style:disc}.errors li{margin:5px 0;font-size:13px}.option{display:flex;gap:12px;align-items:center;padding:16px;border:1px solid var(--line);border-radius:11px;margin:10px 0}.option:has(input:checked){border-color:var(--purple);background:#f6f1fc}.option input{accent-color:var(--purple);height:18px;width:18px}.option div{flex:1}.option p{margin:0;font-size:12px;color:var(--muted)}.option strong{display:block}.money{font-size:22px;color:var(--purple);font-weight:800}.list{margin:0;padding-left:21px}.list li{margin-bottom:9px}.mini{font-size:12px;color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.cards>div{background:#f8f6fa;padding:15px;border-radius:10px}.cards h3{margin-bottom:8px}.cards p{font-size:13px;margin:0}.foot{color:var(--muted);font-size:11px;margin-top:24px}.noprint{}@media(max-width:760px){.shell{padding:12px 12px 45px}.mast{flex-wrap:wrap}.steps{grid-template-columns:repeat(2,1fr)}.columns,.instruction,.cards{grid-template-columns:1fr}.intro,.panel{padding:17px}.call{padding:12px}}@media print{.mast,.steps,.intro,.instruction,.noprint,.foot{display:none!important}.shell{max-width:none;padding:0}.panel{border:0;padding:0}.call{border:0;padding:0}.call input,.call textarea{border:0;border-bottom:1px solid #aaa}body{background:white}.columns{display:block}.call{width:100%}}
+
+/* Always-available production notebook */
+.notebook-launch{position:fixed;right:22px;bottom:20px;z-index:30;background:var(--purple);color:#fff;box-shadow:0 5px 22px #28005042;border:2px solid #fff;border-radius:999px;padding:13px 18px;font-weight:750;font-size:14px;display:flex;align-items:center;gap:9px}.notebook-launch:hover{background:#390083}.notebook-launch:focus-visible{outline:3px solid var(--mint);outline-offset:3px}.notebook-launch .pencil{font-size:17px}.notebook-backdrop{position:fixed;inset:0;background:rgba(23,14,35,.38);z-index:39}.notebook-backdrop[hidden],.notebook-drawer[hidden]{display:none!important}.notebook-drawer{position:fixed;right:0;top:0;bottom:0;width:min(420px,100%);z-index:40;background:#fff;box-shadow:-12px 0 40px #24133135;display:flex;flex-direction:column;overflow:hidden}.notebook-top{padding:21px 21px 15px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.notebook-top h2{color:var(--purple);font-size:24px}.notebook-desc{font-size:13px;line-height:1.5;color:var(--muted);padding:14px 21px 5px}.notebook-body{padding:10px 21px 30px;overflow-y:auto;flex:1}.notebook-block{margin-bottom:17px}.notebook-block label{display:block;color:var(--ink);font-weight:700;margin-bottom:4px;font-size:14px}.notebook-block .hint{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}.notebook-block textarea{width:100%;background:#fff;border:1px solid #c4b8d5;border-radius:9px;min-height:115px;padding:11px 12px;font-size:14px;line-height:1.55;resize:vertical}.notebook-foot{border-top:1px solid var(--line);padding:13px 21px;background:var(--pale);display:flex;align-items:center;justify-content:space-between;gap:12px}.notebook-foot span{font-size:12px;color:#4e4660}.notebook-inline{margin:12px 0 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap}.notebook-inline .btn{padding:7px 11px;font-size:12px}.notebook-hint{color:var(--muted);font-size:12px}.notebook-status{font-size:12px;color:#087a60;font-weight:700}.notebook-open{overflow:hidden}.call-note-link{margin:0 0 14px}.floating-notebook-intro{background:#f4effb;border:1px solid var(--line);border-radius:11px;padding:12px 15px;font-size:13px}.floating-notebook-intro button{margin-top:8px}
+@media(max-width:760px){.notebook-launch{right:12px;bottom:12px;padding:12px 16px}.notebook-top{padding:15px}.notebook-desc{padding:12px 15px 5px}.notebook-body{padding:8px 15px 25px}.notebook-foot{padding:12px 15px}.notebook-drawer{width:100%}}
+@media print{.notebook-launch,.notebook-backdrop,.notebook-drawer,.notebook-inline,.floating-notebook-intro{display:none!important}}
+
+/* Email reply overlay */
+.email-overlay[hidden],.email-dialog[hidden]{display:none!important}
+.email-overlay{position:fixed;inset:0;background:rgba(24,12,40,.66);z-index:49}
+.email-dialog{position:fixed;z-index:50;inset:0;display:flex;align-items:center;justify-content:center;padding:18px;pointer-events:none}
+.email-window{width:min(660px,100%);max-height:min(740px,calc(100dvh - 36px));display:flex;flex-direction:column;overflow:hidden;background:white;box-shadow:0 20px 85px rgba(23,5,45,.35);border-radius:15px;border:1px solid #dfd5ec;pointer-events:auto}
+.email-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#f2eef9;padding:13px 18px;border-bottom:1px solid var(--line)}
+.email-toolbar strong{font-size:13px;color:var(--purple)}
+.email-subject{padding:21px 23px 13px;border-bottom:1px solid var(--line)}
+.email-subject h2{color:var(--ink);font-size:21px;line-height:1.3}
+.email-meta{padding:13px 23px;font-size:12px;color:#514b60;display:grid;gap:5px;border-bottom:1px solid var(--line)}
+.email-meta b{display:inline-block;min-width:55px;color:#24202b}
+.email-content{padding:22px 23px;overflow-y:auto;flex:1;white-space:pre-line;font-size:15px;line-height:1.7}
+.email-content p{margin:0}
+.email-footer{padding:14px 23px;background:#faf9fc;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
+.email-footer .btn{min-height:44px}
+.email-dialog .email-close{min-width:44px;min-height:40px;font-size:14px}
+.email-dialog-open{overflow:hidden}
+.email-dialog-open .notebook-launch{z-index:30}
+.email-dialog-open .notebook-backdrop{z-index:59}
+.email-dialog-open .notebook-drawer{z-index:60}
+@media(max-width:600px){.email-dialog{padding:8px}.email-window{max-height:calc(100dvh - 16px);border-radius:11px}.email-subject{padding:15px}.email-subject h2{font-size:18px}.email-meta,.email-content,.email-footer{padding:13px 15px}.email-content{font-size:14px}.email-footer .btn{flex:1}}
+@media print{.email-overlay,.email-dialog{display:none!important}}
+
+/* Version 5: supplier research and calculation */
+.supplier-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:15px}.quote-card{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff;min-width:0;display:flex;flex-direction:column;gap:8px}.quote-card.selected{border:2px solid var(--purple);background:#f7f2ff;padding:13px}.quote-card .eyebrow{font-size:10px}.quote-card h3{font-size:15px;line-height:1.3}.quote-price{font-size:18px;font-weight:800;color:var(--purple);margin-top:auto}.quote-price span{display:block;font-size:11px;font-weight:400;color:var(--muted)}.quote-buttons{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.quote-buttons .btn{padding:8px 10px;font-size:12px}.choose-quote{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:bold;cursor:pointer}.choose-quote input{accent-color:var(--purple);width:18px;height:18px}.brief-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:15px}.brief-grid>div{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--pale)}.brief-grid strong{font-size:13px;color:var(--purple)}.brief-grid p{font-size:13px;margin:5px 0 0}.cost-breakdown{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:14px}.cost-breakdown>div{display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);font-size:13px}.cost-breakdown>div:last-child{border-bottom:0}.cost-breakdown span{text-align:right;color:var(--muted)}.math-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}.math-grid label,.field>label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.math-grid input,.field select,.field textarea{width:100%;border:1px solid #c7bdd5;padding:10px;background:white;color:var(--ink);border-radius:8px;min-height:44px}.field select{max-width:550px}.field textarea{resize:vertical;min-height:100px}.ack{display:flex;align-items:flex-start;gap:10px;font-size:13px;margin:15px 0}.ack input{margin-top:4px;accent-color:var(--purple);width:19px;height:19px;flex:none}.quote-card .mini{color:#08725e;font-weight:bold}.email-content{white-space:pre-wrap}
+@media(max-width:760px){.supplier-grid{grid-template-columns:1fr}.math-grid,.brief-grid{grid-template-columns:1fr}.quote-card{gap:6px}.cost-breakdown>div{flex-wrap:wrap}.cost-breakdown span{text-align:left}}
+
+/* Compact on-screen calculator: intentionally separate from the learner's budget fields. */
+.calculator-launch{position:fixed;left:22px;bottom:20px;z-index:31;display:flex;align-items:center;gap:8px;border:2px solid white;background:var(--purple);color:white;border-radius:999px;padding:13px 17px;box-shadow:0 5px 22px #28005040;font-weight:750;font-size:14px}
+.calculator-launch:hover{background:#390083}
+.calculator-launch[hidden],.calculator-panel[hidden]{display:none!important}
+.calculator-panel{position:fixed;bottom:79px;left:22px;z-index:70;width:min(304px,calc(100vw - 24px));background:#fff;border:1px solid #d6cce7;border-radius:16px;box-shadow:0 16px 52px rgba(31,8,65,.35);overflow:hidden}
+.calculator-header{padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;background:#f4effb;border-bottom:1px solid var(--line)}
+.calculator-header strong{color:var(--purple);font-size:15px}
+.calculator-header .btn{padding:5px 9px;font-size:12px}
+.calculator-screen{background:#fff;padding:12px 14px;border-bottom:1px solid var(--line);min-height:93px;display:flex;flex-direction:column;justify-content:flex-end;gap:4px}
+.calculator-history{min-height:17px;color:var(--muted);font-size:12px;overflow-wrap:anywhere}
+.calculator-display{font-weight:800;font-size:28px;line-height:1.25;color:var(--ink);text-align:right;min-height:35px;overflow-wrap:anywhere}
+.calculator-keys{padding:12px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.calculator-keys button{border:1px solid #d5cadd;border-radius:9px;background:#faf9fc;min-height:44px;font-size:18px;font-weight:650;color:#282133}
+.calculator-keys button:hover{background:#eee8f7}
+.calculator-keys .calc-op{color:var(--purple);background:#f0e9fa}
+.calculator-keys .calc-equals{background:var(--purple);color:#fff;border-color:var(--purple)}
+.calculator-keys .calc-equals:hover{background:#390083}
+.calculator-keys .calc-clear{color:#71319c;background:#f7edf9}
+.calculator-hint{padding:0 13px 14px;color:var(--muted);font-size:11px;line-height:1.4}
+@media(max-width:760px){.calculator-launch{left:12px;bottom:12px;padding:12px 14px}.calculator-panel{left:12px;bottom:72px}}
+@media print{.calculator-panel,.calculator-launch{display:none!important}}
+
+/* Version 7: fullscreen-first production workspace. All functionality preserved. */
+:root{--purple:#4700a3;--mint:#1fd1bd;--ink:#222333;--muted:#59576c;--line:#dfdce9;--pale:#f6f4fa;--warm:#fff1e9;--production:#15172a;--electric:#a096ff}
+html{scroll-behavior:smooth}
+body{min-width:0;background:linear-gradient(180deg,#16192d 0,#24223b 220px,#f2f1f6 221px,#f2f1f6 100%);font-family:'Bauer Sans','BauerMedia Sans',Arial,Helvetica,sans-serif}
+button{transition:background-color .15s ease,border-color .15s ease,box-shadow .15s ease}
+.shell{max-width:1440px;min-width:0;padding:20px clamp(14px,2.5vw,38px) 74px}
+.mast{color:#fff;border-bottom:1px solid #ffffff32;padding:10px 0 18px;align-items:center}
+.brand{font-size:15px;line-height:1.25;letter-spacing:.035em}
+.mast small{color:#d7d2e9;font-size:11px;font-weight:400}
+.square{background:#a096ff;color:#17132e;border-radius:11px;width:42px;height:42px;font-weight:900;transform:rotate(-3deg);box-shadow:4px 4px 0 #1fd1bd}
+.mast-actions{display:flex;align-items:center;justify-content:flex-end;gap:9px;flex-wrap:wrap}
+.mast .tag{color:#e3dcff;background:#37304e;border:1px solid #615978}
+.mast .btn{border-color:#77708c;background:#262840;color:#fff}
+.mast .btn:hover{background:#363652}
+.fullscreen-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;white-space:nowrap;padding:9px 13px;font-size:13px}
+.fullscreen-button svg{flex:none;width:19px;height:19px}
+.fullscreen-button[aria-pressed='true']{border-color:var(--mint);color:#cefff7}
+.production-banner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:9px;margin:17px 0 0;padding:15px 19px;border-radius:14px;border:1px solid #61577f;background:linear-gradient(110deg,#302445,#1c2138 65%,#1b3b48);color:#fff}
+.production-banner__id{display:flex;flex-wrap:wrap;align-items:baseline;gap:9px 14px}
+.production-banner__kicker{color:#a9fff0;font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+.production-banner__title{font-weight:800;font-size:clamp(16px,2vw,24px);letter-spacing:.06em;line-height:1.3}
+.production-banner__meta{font-size:12px;color:#e5e1ef}
+.production-banner__flag{color:#d1fff3;border:1px solid #5c9a96;background:#24535864;padding:4px 9px;border-radius:999px;font-size:11px;font-weight:700}
+.fullscreen-tip{display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap;margin-top:12px;padding:13px 16px;background:#ecfbf8;border-left:4px solid #0a937d;border-radius:10px;color:#173b39;font-size:13px}
+.fullscreen-tip strong{display:block;font-weight:800;color:#114a43}
+.fullscreen-tip p{margin:2px 0 0}
+.fullscreen-tip__actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.fullscreen-tip .btn{min-height:38px;padding:7px 11px;border-color:#168171;background:#fff;color:#075a4c}
+.fullscreen-tip .btn.primary{background:#176d60;border-color:#176d60;color:#fff}
+.fullscreen-tip[hidden]{display:none!important}
+.fullscreen-message{min-height:1px;color:#edfff9;font-size:12px;line-height:1.4}
+.fullscreen-message:empty{display:none}
+.steps{margin:16px 0 18px;gap:8px}
+.step{min-width:0;min-height:55px;padding:11px 12px;background:#fff;border-color:#ded9eb;box-shadow:0 1px 4px #13162810;line-height:1.25}
+.step strong{width:29px;height:29px;background:#efeafb}
+.step.active{background:#f0eaff;border-color:#6d41b3;box-shadow:inset 0 -3px 0 var(--purple)}
+.step.done{color:#345b52}
+.main,.main>*{min-width:0}
+.main{gap:15px}
+.intro{background:linear-gradient(115deg,#fff 60%,#f3f0fe);border-color:#e6dff3;border-radius:16px;padding:25px 29px 24px;box-shadow:0 4px 18px #1c154512}
+.intro h1{color:#342159;font-weight:850}
+.intro p{color:#514d60;font-size:14px}
+.eyebrow{color:#63459b}
+.intro .eyebrow{color:#7349ad}
+.panel{box-shadow:0 2px 16px #22203e0a;border-color:#e4e0e9;border-radius:14px}
+.panel h2{color:#29243f}
+.instruction>div{border-top:3px solid #a096ff;background:#f5f2fb}
+.instruction>div:first-child{border-top-color:var(--mint);background:#effbf8}
+.instruction strong{color:#3c2b66}
+.btn{min-height:42px}
+.note{background:#f3edfe}
+.note.success{background:#e6faf3}
+.note.warning{background:#fff5e6}
+.quote-card{box-shadow:0 2px 9px #1c15450a}
+.quote-card.selected{background:#f3edff}
+.call{border:1px solid #bdbfc7;box-shadow:0 4px 16px #24243512;max-width:100%;min-width:0;overflow-x:auto}
+.call input,.call textarea{max-width:100%}
+.sheet-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(250px,.82fr);gap:16px;align-items:start}
+.foot{margin-top:22px;color:#625f70}
+/* Wider screens feel like an actual work desk, with persistent navigation. */
+@media (min-width:1150px){
+ .shell{display:grid;grid-template-columns:230px minmax(0,1fr);column-gap:22px;align-content:start}
+ .mast,.production-banner,.fullscreen-tip,.fullscreen-message,.foot{grid-column:1 / -1}
+ .steps{grid-column:1;grid-row:5;display:flex;flex-direction:column;align-self:start;position:sticky;top:18px;margin:18px 0 0;gap:10px}
+ .step{min-height:62px;text-align:left}
+ .main{grid-column:2;grid-row:5;min-width:0;margin-top:18px}
+ .foot{grid-row:6}
+ /* Keep the grid row stable if the optional fullscreen tip is hidden. */
+ .fullscreen-tip[hidden]{display:none!important}
+}
+/* Explicit layout order prevents the sticky sidebar from moving when tip is dismissed. */
+@media (min-width:1150px){
+ .mast{grid-row:1}.production-banner{grid-row:2}.fullscreen-tip{grid-row:3}.fullscreen-message{grid-row:4}
+}
+@media (min-width:1500px){.shell{grid-template-columns:250px minmax(0,1fr);column-gap:28px}.main{gap:20px}.panel{padding:27px}.step{font-size:14px}}
+@media (max-width:1149px){.shell{display:block}}
+@media (max-width:950px){.sheet-layout{grid-template-columns:1fr}.sheet-layout aside{order:-1}}
+@media (max-width:760px){
+ .shell{padding:12px 12px 83px}
+ .mast{gap:10px;padding-bottom:13px}
+ .mast-actions{justify-content:flex-start;width:100%}
+ .mast .tag{display:none}
+ .fullscreen-button{padding:9px 12px}
+ .production-banner{margin-top:12px;padding:13px 14px}
+ .production-banner__title{font-size:17px}
+ .fullscreen-tip{align-items:flex-start}
+ .intro{padding:18px}
+ .intro h1{font-size:26px}
+ .panel{padding:16px}
+ .steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .step{padding:9px;min-height:57px;font-size:12px}
+ .call{padding:12px}
+ .call table{min-width:440px}
+ .supplier-grid{grid-template-columns:1fr}
+ .notebook-launch,.calculator-launch{bottom:max(12px,env(safe-area-inset-bottom))}
+}
+@media (max-width:410px){
+ .mast-actions{gap:6px}
+ .fullscreen-button .fullscreen-label{font-size:12px}
+ .production-banner__meta{font-size:11px}
+ .step strong{width:24px;height:24px}
+ .notebook-launch,.calculator-launch{font-size:12px;padding:10px 12px}
+ .calculator-launch{left:7px}.notebook-launch{right:7px}
+ .calculator-panel{left:7px;bottom:65px}
+}
+/* Same-document fullscreen works for standalone HTML and supported LMS iframe embeddings. */
+html:fullscreen{overflow-y:auto;overscroll-behavior:contain;background:#17192c}
+html:fullscreen body{min-height:100dvh}
+html:fullscreen .shell{max-width:1700px}
+html:fullscreen .fullscreen-tip{display:none!important}
+html:fullscreen .mast{padding-top:14px}
+html:fullscreen .production-banner{background:linear-gradient(110deg,#352246,#1d253f 65%,#124049)}
+@media(max-height:640px){html:fullscreen .production-banner{padding:10px 15px}html:fullscreen .steps{gap:6px}html:fullscreen .step{min-height:46px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}button{transition:none}}
+@media print{
+ body{background:white!important}
+ .production-banner,.fullscreen-tip,.fullscreen-message,.fullscreen-button{display:none!important}
+ .shell{display:block!important;max-width:none!important;padding:0!important}
+ .main{display:block!important;margin:0!important}
+ .foot,.steps{display:none!important}
+ .sheet-layout{display:block!important}
+ .sheet-layout aside{display:none!important}
+ .call{box-shadow:none;overflow:visible}
+}
+
+/* Version 8: brand-led editorial treatment using supplied Academy artwork.
+   Production is fictional; the Academy identity is not. */
+:root{--purple:#4700A3;--mint:#1FD1BD;--electric:#A096FF;--pale:#F6F3FD;--ink:#27212D;--muted:#5B5463;--line:#E5DFF0}
+body{background:linear-gradient(180deg,#fff 0,#fff 178px,#f5f4f8 179px,#f5f4f8 100%);font-family:'Bauer Sans','BauerMedia Sans',Arial,Helvetica,sans-serif}
+.mast{color:var(--purple);border-bottom:1px solid #E6E0ED;padding:7px 0 15px;min-height:96px}
+.brand{display:flex;align-items:center;gap:20px;font-size:14px;letter-spacing:normal;min-width:0}
+.academy-logo{display:block;object-fit:contain;width:clamp(185px,24vw,265px);height:auto;aspect-ratio:653/300;flex-shrink:0}
+.brand-subtitle{display:block;line-height:1.4;color:#4700A3;font-weight:800;padding-left:19px;border-left:2px solid #E1DCFF}
+.brand-subtitle small{color:#60566F;font-weight:400;font-size:11px}
+.mast .tag{background:#F2EBFC;color:#4700A3;border-color:#E1DCFF}
+.mast .btn{background:#fff;color:#4700A3;border-color:#CBBEE3}
+.mast .btn:hover{background:#F5F0FF;color:#390080}
+.fullscreen-button[aria-pressed='true']{color:#006A60;border-color:#009392;background:#ECFAF7}
+.production-banner{position:relative;overflow:hidden;isolation:isolate;background:linear-gradient(111deg,#3A0684 0%,#4700A3 64%,#342067 100%);border:1px solid #4700A3;box-shadow:0 6px 22px #4700A319;padding:18px 22px}
+.production-banner:after{content:'';position:absolute;pointer-events:none;z-index:-1;right:-24px;top:-86px;width:270px;height:295px;background:url('assets/academy-key-visual-mint.png') center/contain no-repeat;opacity:.25;transform:rotate(12deg)}
+.production-banner__id{position:relative;z-index:1;padding-right:16px}
+.production-banner__kicker{color:#BEFAEB}
+.production-banner__meta{color:#E9DEFF}
+.production-banner__flag{position:relative;z-index:1;border-color:#BEFAEB77;background:#2C096E;color:#D6FFF8}
+.fullscreen-tip{background:#EAFBF6;border-left-color:#009392}
+.fullscreen-tip .btn.primary{background:#4700A3;color:white;border-color:#4700A3}
+.fullscreen-message{color:#4700A3}
+.step.active{background:#F1ECFF;border-color:#4700A3}
+.step.active strong{background:#4700A3;color:white}
+.intro{background:linear-gradient(108deg,#fff 72%,#F5F1FF);border-color:#E6DFF3}
+.intro h1{color:#4700A3}
+.intro .eyebrow{color:#4700A3}
+.panel h2{color:#4700A3}
+.instruction>div:first-child{background:#EFFCF8}
+.instruction>div{background:#F5F2FC}
+.notebook-launch{background:#4700A3}
+.notebook-launch:hover{background:#350078}
+.email-toolbar{background:#F1ECFC}
+.email-toolbar strong{color:#4700A3}
+@media(min-width:1150px){.mast{min-height:105px}}
+@media(max-width:760px){
+ .mast{gap:12px;min-height:0}
+ .brand{gap:11px;width:100%;align-items:center}
+ .academy-logo{width:clamp(157px,42vw,210px)}
+ .brand-subtitle{padding-left:10px;font-size:11px}
+ .brand-subtitle small{font-size:10px}
+ .production-banner:after{right:-107px;opacity:.14}
+ .production-banner{padding:15px}
+}
+@media(max-width:390px){.brand{gap:7px}.academy-logo{width:150px}.brand-subtitle{padding-left:8px;font-size:10px}.brand-subtitle small{font-size:9px}}
+/* Preserve call sheet print treatment; the supplied decorative asset is not added to paperwork. */
+@media print{.mast,.production-banner{display:none!important}}
+html:fullscreen{background:#f5f4f8}
+html:fullscreen .production-banner{background:linear-gradient(111deg,#3A0684 0%,#4700A3 64%,#342067 100%)}
+
+</style></head><body><div class="shell"><header class="mast"><div class="brand"><img class="academy-logo" src="assets/bauer-academy-logo.png" alt="Bauer Academy" width="653" height="300"><span class="brand-subtitle">Junior Production Coordinator<br><small>Interactive production simulation</small></span></div><div class="mast-actions"><span class="tag">Interactive learning simulation</span><button class="btn fullscreen-button noprint" id="fullscreen-toggle" type="button" aria-label="Enter full screen" aria-pressed="false" title="View the activity full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="expand-path" d="M8 3H3v5 M16 3h5v5 M3 16v5h5 M21 16v5h-5"/><path class="collapse-path" d="M3 9h6V3 M21 9h-6V3 M3 15h6v6 M21 15h-6v6" style="display:none"/></svg><span class="fullscreen-label">Full screen</span></button><button class="btn noprint" type="button" style="padding:8px 12px;font-size:12px" data-reset>Start again</button></div></header><div class="production-banner" aria-label="Your production"><div class="production-banner__id"><span class="production-banner__kicker">Northline Productions</span><span class="production-banner__title">THE CROSSING</span><span class="production-banner__meta">Episode 3 · Shoot day 04 · 18 November 2026</span></div><span class="production-banner__flag">Production desk</span></div><aside id="fullscreen-tip" class="fullscreen-tip noprint" aria-label="Viewing recommendation"><div><strong>Make some room to work</strong><p>For the best experience, open this simulation in full screen. You can return to the usual view at any time.</p></div><div class="fullscreen-tip__actions"><button type="button" class="btn primary" data-enter-fullscreen>View full screen</button><button type="button" class="btn" data-dismiss-fullscreen-tip>Not now</button></div></aside><div id="fullscreen-message" class="fullscreen-message noprint" role="status" aria-live="polite"></div><nav class="steps" id="steps" aria-label="Activity stages"></nav><main id="view" class="main" aria-live="polite"></main><footer class="foot">Training simulation. All names, production details and locations are fictional. Your progress is saved in this browser on this device. Not yet a SCORM package.</footer></div><button type="button" class="notebook-launch noprint" id="notebook-launch" aria-controls="notebook-drawer" aria-expanded="false" data-notebook-open><span class="pencil" aria-hidden="true">✎</span><span>My notes</span></button>
+<div class="notebook-backdrop noprint" id="notebook-backdrop" hidden data-notebook-close></div>
+<aside class="notebook-drawer noprint" id="notebook-drawer" role="dialog" aria-modal="true" aria-labelledby="notebook-title" hidden>
+  <div class="notebook-top"><div><div class="eyebrow">Keep track as you go</div><h2 id="notebook-title">Production notebook</h2></div><button class="btn" type="button" data-notebook-close aria-label="Close notebook">Close ×</button></div>
+  <p class="notebook-desc">Write down useful information from the emails and decisions you make. Your notes stay here as you move between stages and are saved automatically on this device.</p>
+  <div class="notebook-body">
+    <div class="notebook-block"><label for="notebook-times">Times and call times</label><span class="hint">Crew call, cast pickups, scene times, lunch and wrap</span><textarea id="notebook-times" data-note="times" placeholder="e.g. Unit call 07:00, Mara pickup 06:15..."></textarea></div>
+    <div class="notebook-block"><label for="notebook-places">Locations and arrangements</label><span class="hint">Shoot address, unit base, access, vehicles and costs</span><textarea id="notebook-places" data-note="places" placeholder="e.g. Location access from 07:00..."></textarea></div>
+    <div class="notebook-block"><label for="notebook-questions">Questions and things to check</label><span class="hint">Anything still unclear or needing approval</span><textarea id="notebook-questions" data-note="questions" placeholder="e.g. Check transport option with Sarah..."></textarea></div>
+  </div>
+  <div class="notebook-foot"><span id="notebook-status" aria-live="polite">Notes saved automatically</span><button class="btn primary" type="button" data-notebook-close>Back to activity</button></div>
+</aside>
+
+<div id="email-overlay" class="email-overlay noprint" data-email-close hidden></div>
+<section id="email-dialog" class="email-dialog noprint" role="dialog" aria-modal="true" aria-labelledby="email-title" aria-describedby="email-message" hidden>
+  <div class="email-window">
+    <div class="email-toolbar"><strong>PRODUCTION MAIL · MESSAGE</strong><button type="button" class="btn email-close" data-email-close aria-label="Close email reply">Close ×</button></div>
+    <div class="email-subject"><div class="eyebrow" style="margin-bottom:5px">Inbox</div><h2 id="email-title">Confirmed details for tomorrow</h2></div>
+    <div class="email-meta"><div><b>From:</b> <span id="email-from"></span></div><div><b>To:</b> Production Coordinator</div><div><b>Subject:</b> <span id="email-subject-line">Production correspondence</span></div></div>
+    <div class="email-content" id="email-message" tabindex="0"></div>
+    <div class="email-footer"><button type="button" class="btn" id="email-calculator" data-calculator-open hidden>▦ Calculator</button><button type="button" class="btn" data-notebook-open>✎ Open my notebook</button><button type="button" class="btn primary" data-email-close>Back to activity</button></div>
+  </div>
+</section>
+
+<button class="calculator-launch noprint" id="calculator-launch" type="button" data-calculator-open aria-controls="calculator-panel" aria-expanded="false" hidden>▦ <span>Calculator</span></button>
+<aside class="calculator-panel noprint" id="calculator-panel" role="dialog" aria-modal="false" aria-label="Quick calculator" hidden>
+  <div class="calculator-header"><strong>Quick calculator</strong><button class="btn" type="button" data-calculator-close aria-label="Close calculator">Close ×</button></div>
+  <div class="calculator-screen" tabindex="0" id="calculator-screen" aria-label="Calculator display. Use number keys and arithmetic operators.">
+    <div class="calculator-history" id="calculator-history"></div>
+    <output class="calculator-display" id="calculator-display" aria-live="polite">0</output>
+  </div>
+  <div class="calculator-keys" aria-label="Calculator keypad">
+    <button type="button" class="calc-clear" data-calc-key="C" aria-label="Clear">C</button>
+    <button type="button" data-calc-key="back" aria-label="Delete last digit">⌫</button>
+    <button type="button" class="calc-op" data-calc-key="/" aria-label="Divide">÷</button>
+    <button type="button" class="calc-op" data-calc-key="*" aria-label="Multiply">×</button>
+    <button type="button" data-calc-key="7">7</button><button type="button" data-calc-key="8">8</button><button type="button" data-calc-key="9">9</button><button type="button" class="calc-op" data-calc-key="-" aria-label="Subtract">−</button>
+    <button type="button" data-calc-key="4">4</button><button type="button" data-calc-key="5">5</button><button type="button" data-calc-key="6">6</button><button type="button" class="calc-op" data-calc-key="+" aria-label="Add">+</button>
+    <button type="button" data-calc-key="1">1</button><button type="button" data-calc-key="2">2</button><button type="button" data-calc-key="3">3</button><button type="button" class="calc-equals" data-calc-key="=" aria-label="Equals">=</button>
+    <button type="button" data-calc-key="0" style="grid-column:span 2">0</button><button type="button" data-calc-key=".">.</button><button type="button" data-calc-key="00">00</button>
+  </div>
+  <p class="calculator-hint">Use this to work out the supplier costs. Enter your results into the budget fields yourself.</p>
+</aside>
+<script>
+const KEY='call_time_guided_v7';
+const FACTS={ad:{name:'Imogen Price',role:'2nd Assistant Director',label:'Shooting order and cast calls',reply:'The approved unit call is 07:00. The scenes are 12A (interior stairwell, 08:00), 14B (exterior yard, 10:45) and 16C (interior loading bay, 13:30). Lunch is 12:30–13:30 and estimated wrap is 18:00. Mara Vale is called for 07:00, Daniel Finch for 09:15. Eight supporting artists are called for 07:15.',proof:'Unit call 07:00 · Cast: Mara 07:00, Daniel 09:15 · Supporting artists 07:15'},loc:{name:'Nadia Rahman',role:'Location Manager',label:'Location access and parking',reply:'The fictional location is Alder Mill Works, River Yard, Manchester. The fictional unit base is North Quay Unit Base, Dock Lane, Manchester. The unit base opens at 06:30; access to the main set begins at 07:00. A £120 parking permit is required and must be included in the transport allocation.',proof:'Alder Mill Works · North Quay Unit Base · Parking permit £120'},trans:{name:'Elliot Brooks',role:'Transport Coordinator',label:'Transport times and options',reply:'Confirmed pickup times: Mara 06:15, Daniel 08:15, supporting artists 06:35. The base-to-set shuttle must begin at 06:45. We need places for eight supporting artists. The suppliers have sent several quotes; open each quote in the transport stage and compare the full costs, capacity and frequency. Please do not book anything until Sarah has authorised the plan.',proof:'Mara 06:15 · Daniel 08:15 · Artists 06:35 · Shuttle 06:45'}};
+const BASE={notes:{times:'',places:'',questions:''},stage:0,contacted:[],transport:'',transportChoices:{cast:'',artists:'',shuttle:''},transportMath:{total:'',difference:'',reserve:''},calculator:{expression:'',history:'',done:false},transportReason:'',transportJustification:'',transportAcknowledged:false,transportFeedback:'',quoteOpened:[],approvalEmail:'',approved:false,approvedKey:'',fields:{location:'',unitBase:'',unitCall:'',sceneOrder:'',castCalls:'',pickups:'',transport:'',medical:'MP-04'},firstChecked:false,errors:[],draftDone:false,challenge:false,revisionKnown:false,finished:false};
+let s;try{s={...structuredClone(BASE),...JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('call_time_guided_v6')||localStorage.getItem('call_time_guided_v5')||'{}')}}catch(e){s=structuredClone(BASE)};
+s.notes={times:'',places:'',questions:'',...(s.notes||{})};
+s.transportChoices={cast:'',artists:'',shuttle:'',...(s.transportChoices||{})};
+s.transportMath={total:'',difference:'',reserve:'',...(s.transportMath||{})};
+s.calculator={expression:'',history:'',done:false,...(s.calculator||{})};
+s.quoteOpened=Array.isArray(s.quoteOpened)?s.quoteOpened:[];
+function store(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+function esc(x){return String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function has(k){return s.contacted.includes(k)}
+const TRANSPORT_BUDGET=1200, PRODUCTION_RESERVE=300, PARKING=120;
+// Fictional vendor quotations, inclusive of all stated surcharges; VAT assumed included for this learning exercise.
+const QUOTES={
+ cast:[
+  {id:'cast-standard',name:'Northstar Cars',type:'Standard cast car',base:165,extras:35,extraLabel:'Early collection surcharge',info:'One licensed saloon car. The supplier can meet both confirmed cast pickups with a scheduled return. No spare vehicle is held.'},
+  {id:'cast-dual',name:'Metro Unit Transport',type:'Two dedicated cast cars',base:305,extras:40,extraLabel:'Early call supplement',info:'Two separate cars and drivers. Offers greater resilience if one collection runs late; both confirmed pickups are covered.'},
+  {id:'cast-premium',name:'Silverline Executive',type:'Executive cast car',base:255,extras:35,extraLabel:'Early collection surcharge',info:'Comfort-focused upgrade. One car covers both pickups; no additional schedule protection is included.'}
+ ],
+ artists:[
+  {id:'artists-minibus',name:'North Film Minibuses',type:'16-seat minibus',base:395,extras:25,extraLabel:'Driver waiting time',info:'16 passenger seats with driver. Carries all eight supporting artists together; pickup at 06:35 confirmed.',capacity:16},
+  {id:'artists-mpvs',name:'City Group Travel',type:'Two 6-seat MPVs',base:490,extras:50,extraLabel:'Out-of-area mileage',info:'12 passenger seats in total. More flexible if the group must split; both vehicles can collect at 06:35.',capacity:12},
+  {id:'artists-van',name:'ValueCrew Hire',type:'7-seat people carrier',base:290,extras:20,extraLabel:'Collection supplement',info:'Seven passenger seats only. Cannot transport all eight supporting artists in one journey.',capacity:7}
+ ],
+ shuttle:[
+  {id:'shuttle-shared',name:'Quay Shuttle Co.',type:'Shared shuttle',base:270,extras:45,extraLabel:'Unit-base access fee',info:'16 seats; service starts at 06:45 and runs every 25 minutes. More waiting between transfers.'},
+  {id:'shuttle-dedicated',name:'North Film Minibuses',type:'Dedicated production shuttle',base:360,extras:30,extraLabel:'Set access fee',info:'16 seats; service starts at 06:45 and runs every 10 minutes. Better flexibility around crew arrivals.'},
+  {id:'shuttle-premium',name:'Silverline Executive',type:'Premium shuttle',base:480,extras:40,extraLabel:'Set access fee',info:'16 seats; service starts at 06:45 and runs every 10 minutes. More comfortable, but no operational advantage over the dedicated shuttle.'}
+ ]
+};
+const transportKeys=['cast','artists','shuttle'];
+function chosen(group){return QUOTES[group].find(q=>q.id===s.transportChoices[group])||null}
+function baseCost(){return transportKeys.reduce((sum,g)=>sum+(chosen(g)?.base||0)+(chosen(g)?.extras||0),0)+PARKING}
+function cost(){return baseCost()}
+function planSignature(){return transportKeys.map(g=>s.transportChoices[g]).join('|')}
+function planComplete(){return transportKeys.every(g=>!!chosen(g))}
+function planViable(){return planComplete()&&chosen('artists').capacity>=8}
+function overage(){return Math.max(0,cost()-TRANSPORT_BUDGET)}
+function reserveAfter(){return PRODUCTION_RESERVE-overage()}
+function pounds(v){return '£'+Number(v).toLocaleString('en-GB')}
+function approvalValid(){return s.approved&&s.approvedKey===planSignature()}
+function quoteById(id){return Object.values(QUOTES).flat().find(q=>q.id===id)}
+function quoteTotal(q){return q.base+q.extras}
+function resetTransportApproval(){s.approved=false;s.approvedKey='';s.approvalEmail='';s.transportFeedback='';s.firstChecked=false;s.errors=[]}
+
+function canMoveTo(step){return step===0||step===1||step===2&&s.contacted.length===3||step===3&&s.approved}
+function go(step){if(!canMoveTo(step))return;s.stage=step;store();render();window.scrollTo({top:0,behavior:'instant'})}
+function intro(n,title,description,what,why){return `<div class="intro"><div class="eyebrow">Stage ${n} of 4</div><h1>${title}</h1><p>${description}</p></div><section class="instruction"><div><strong>What to do</strong><p>${what}</p></div><div><strong>Why it matters</strong><p>${why}</p></div></section>`}
+function controls(back,next,nextText,disabled=false){return `<div class="actions noprint"><button class="btn" data-go="${back}">Back</button><button class="btn primary" ${disabled?'disabled':''} data-go="${next}">${nextText}</button></div>`}
+function render(){document.querySelector('#steps').innerHTML=['Understand','Find the facts','Arrange transport','Make the call sheet'].map((t,i)=>`<button class="step ${s.stage===i?'active':''} ${i<s.stage?'done':''}" data-go="${i}" ${canMoveTo(i)?'':'disabled'}><strong>${i+1}</strong><span>${t}</span></button>`).join('');document.querySelector('#view').innerHTML=[understand,information,transport,sheet][s.stage]();document.getElementById('calculator-launch').hidden=s.stage!==2;if(s.stage!==2)closeCalculator(false);}
+function understand(){return intro(1,'First, what is a call sheet?','You are helping prepare tomorrow’s shoot for The Crossing, a fictional high-end TV drama. You do not need any prior experience with call sheets.','Look at the example below. See what each section tells the crew, then continue to collect the missing information.','A call sheet tells cast and crew where they need to be, when they are needed and what is happening on the shoot day.')+`<section class="panel"><div class="sectiontop"><h2>What goes on a call sheet?</h2><span class="tag">Example only</span></div><div class="call"><div class="call-head"><div class="call-title">SAMPLE CALL SHEET</div><b>THE CROSSING</b><span>Episode 3 · Shoot day 04 · Wednesday 18 November 2026</span></div><div class="cards"><div><h3>1. Location and unit base</h3><p>Where the shoot takes place and where the production team meets or operates.</p></div><div><h3>2. Times and scenes</h3><p>When crew and cast are called, which scenes are planned and when they should happen.</p></div><div><h3>3. Travel and safety</h3><p>How people arrive, where they park and where to find approved safety information.</p></div></div><div class="floating-notebook-intro noprint"><strong>Tip:</strong> You have a production notebook available throughout the activity. Use it to record useful timings and details. <button class="btn" type="button" data-notebook-open>Open my notes</button></div><div class="note" style="margin-top:15px"><strong>Your role:</strong> gather and check information so the call sheet is accurate. The AD department agrees the shooting order; the Production Manager approves expenditure.</div></div></section>${controls(0,1,'Start collecting information')}`}
+function information(){const count=s.contacted.length;return intro(2,'Find the missing information','Sarah, the Production Manager, needs a draft call sheet. She has told you who to ask for the facts.','Contact all three colleagues below by selecting “Request details”. Read their replies. We will keep a short record of each answer for you.','Different departments hold different information. A coordinator checks details with the right people rather than guessing.')+`<section class="panel"><div class="sectiontop"><h2>Your production contacts</h2><span class="tag">${count} of 3 contacted</span></div><div class="note"><strong>Sarah’s message:</strong> “Please check the shooting times with Imogen, the location arrangements with Nadia and transport with Elliot. Use their confirmed details to prepare tomorrow’s call sheet.”</div><div class="columns" style="margin-top:16px"><div class="contact"><h3>1. ${FACTS.ad.name}</h3><div class="mini">${FACTS.ad.role}</div><p class="mini">${FACTS.ad.label}</p><button class="btn ${has('ad')?'':'primary'}" data-ask="ad">${has('ad')?'Read reply again':'Request details'}</button>${has('ad')?'<span class="check">Reply received</span>':''}</div><div class="contact"><h3>2. ${FACTS.loc.name}</h3><div class="mini">${FACTS.loc.role}</div><p class="mini">${FACTS.loc.label}</p><button class="btn ${has('loc')?'':'primary'}" data-ask="loc">${has('loc')?'Read reply again':'Request details'}</button>${has('loc')?'<span class="check">Reply received</span>':''}</div><div class="contact"><h3>3. ${FACTS.trans.name}</h3><div class="mini">${FACTS.trans.role}</div><p class="mini">${FACTS.trans.label}</p><button class="btn ${has('trans')?'':'primary'}" data-ask="trans">${has('trans')?'Read reply again':'Request details'}</button>${has('trans')?'<span class="check">Reply received</span>':''}</div></div></section><section class="panel"><h2>Production inbox</h2><p class="muted" style="margin-top:7px">Replies open as emails on top of the activity. Close an email to return to your contacts, or open your notebook while reading.</p>${count?`<div style="display:grid;gap:9px;margin-top:13px">${s.contacted.map(k=>`<button type="button" class="ref" style="border:1px solid var(--line);width:100%;cursor:pointer;text-align:left" data-open-email="${k}"><span><strong>${esc(FACTS[k].name)}</strong><br>Re: Details for tomorrow's shoot</span><span class="tag">Read email</span></button>`).join('')}</div>`:'<p class="mini">No replies yet. Request details from a colleague above.</p>'}</section>${count?`<section class="panel"><h2>Information received</h2>${s.contacted.map(k=>`<div class="ref"><span><strong>${FACTS[k].name}</strong><br>${FACTS[k].proof}</span><span class="check">Confirmed</span></div>`).join('')}</section>`:''}${count===3?'<div class="note success"><strong>All three have replied.</strong> You now have enough information to consider the transport arrangements.</div>':'<div class="note warning">Contact all three people before moving on. You can revisit their replies later.</div>'}${controls(0,2,'Continue to transport',count!==3)}`}
+function quoteCards(group,title,description){return `<section class="panel"><div class="sectiontop"><div><h2>${title}</h2><p class="mini" style="margin-top:5px">${description}</p></div><span class="tag">Choose one</span></div><div class="supplier-grid">${QUOTES[group].map(q=>`<article class="quote-card ${s.transportChoices[group]===q.id?'selected':''}"><div class="eyebrow">${esc(q.name)}</div><h3>${esc(q.type)}</h3><div class="quote-price">From ${pounds(q.base)} <span>plus charges</span></div><div class="quote-buttons"><button class="btn" data-quote="${q.id}" type="button">View full quote${s.quoteOpened.includes(q.id)?' again':''}</button><label class="choose-quote"><input type="radio" name="quote-${group}" value="${q.id}" ${s.transportChoices[group]===q.id?'checked':''}><span>Select</span></label></div>${s.quoteOpened.includes(q.id)?'<span class="mini">Quote viewed</span>':''}</article>`).join('')}</div></section>`}
+function transport(){
+ const complete=planComplete(),viable=planViable(),total=cost(),extra=overage(),approved=approvalValid();
+ let status='Select one quotation from each category, then work out the combined cost.';
+ if(complete&&!viable)status='The selected people carrier only seats seven. You need transport for eight supporting artists. Review that quotation.';
+ else if(complete&&extra>PRODUCTION_RESERVE)status=`Your plan exceeds the allocation by ${pounds(extra)}. The available ${pounds(PRODUCTION_RESERVE)} production reserve cannot cover this difference. Revise your choices.`;
+ else if(complete&&extra>0)status=`Your plan exceeds the transport allocation by ${pounds(extra)}. You can still propose it, but Sarah must authorise an exception and the difference comes from the production reserve.`;
+ else if(complete)status=`Your plan is ${pounds(TRANSPORT_BUDGET-total)} within the transport allocation. Approval is still required before booking.`;
+ return intro(3,'Research and recommend transport','You have the transport requirements. Now review supplier quotes and prepare a recommendation for Sarah, the Production Manager.','Open the quotations to see the complete charges. Choose a cast car, supporting artist transport and a shuttle. Calculate the full cost, then ask Sarah for approval.','A good coordinator checks capacity, timings and hidden charges, not just the advertised price. Spending above the allocation needs an explanation and additional authorisation.')+
+ `<section class="panel"><div class="sectiontop"><h2>Your transport brief</h2><span class="tag">Budget: ${pounds(TRANSPORT_BUDGET)}</span></div><div class="brief-grid"><div><strong>Cast collections</strong><p>Mara 06:15 · Daniel 08:15</p></div><div><strong>Supporting artists</strong><p>Eight people · pickup 06:35</p></div><div><strong>Unit base shuttle</strong><p>Service starts at 06:45</p></div><div><strong>Parking permit</strong><p>${pounds(PARKING)} fixed cost · must be included</p></div></div><div class="note" style="margin-top:13px"><strong>Northline Productions spending rule (fictional)</strong><p style="margin:4px 0 0">Transport allocation: ${pounds(TRANSPORT_BUDGET)}. There is also a separate ${pounds(PRODUCTION_RESERVE)} production contingency for unforeseen costs. A plan above ${pounds(TRANSPORT_BUDGET)} is not automatically prohibited, but Sarah must approve an exception, with a clear production reason, before any booking. Any approved excess reduces the contingency available to the rest of the production. All supplier quotations include VAT for this exercise.</p></div><div class="notebook-inline"><button class="btn" data-notebook-open type="button">Open my notebook</button><button class="btn" data-calculator-open type="button">Open calculator</button><span class="notebook-hint">Keep track of the figures and questions while comparing quotes.</span></div></section>`+
+ quoteCards('cast','1. Cast transport','One option must cover both cast collections.')+
+ quoteCards('artists','2. Supporting artist transport','Check that the vehicle or vehicles can carry all eight people.')+
+ quoteCards('shuttle','3. Unit base shuttle','All options start at 06:45, but service frequency and cost differ.')+
+ `<section class="panel" id="transport-calculation"><div class="sectiontop"><h2>Work out the cost</h2><button class="btn noprint" data-calculator-open type="button">▦ Open calculator</button></div><p class="muted">Use the full figures in the quotations, including any extra charges. Don't forget the ${pounds(PARKING)} parking permit. The totals are not filled in for you.</p><div class="cost-breakdown"><div><strong>Cast transport</strong><span>${chosen('cast')?esc(chosen('cast').name):'Not selected'}</span></div><div><strong>Supporting artists</strong><span>${chosen('artists')?esc(chosen('artists').name):'Not selected'}</span></div><div><strong>Base-to-set shuttle</strong><span>${chosen('shuttle')?esc(chosen('shuttle').name):'Not selected'}</span></div><div><strong>Parking permit</strong><span>${pounds(PARKING)}</span></div></div><div class="math-grid"><div><label for="transport-total">Total cost of your transport plan (£)</label><input type="number" inputmode="numeric" min="0" step="1" id="transport-total" data-math="total" value="${esc(s.transportMath.total)}" placeholder="Calculate full total"></div><div><label for="transport-difference">Amount over budget (£)</label><input type="number" inputmode="numeric" min="0" step="1" id="transport-difference" data-math="difference" value="${esc(s.transportMath.difference)}" placeholder="Enter 0 if within budget"></div><div><label for="transport-reserve">Contingency remaining if approved (£)</label><input type="number" inputmode="numeric" min="0" step="1" id="transport-reserve" data-math="reserve" value="${esc(s.transportMath.reserve)}" placeholder="Start from £300"></div></div><p class="mini" style="margin-top:9px">For the last two figures, only spending above the £1,200 allocation reduces the £300 reserve. Spending below the allocation does not increase it.</p><button class="btn" data-verify-math type="button" style="margin-top:13px">Check my calculations</button><div id="transport-math-result" class="note ${complete&&!viable?'warning':''}" style="margin-top:12px" role="status">${esc(s.transportFeedback||status)}</div></section>`+
+ `<section class="panel" id="transport-approval"><h2>Make your recommendation</h2><p class="muted" style="margin-top:7px">Tell Sarah why you chose this combination. A higher cost is acceptable to propose if it addresses a real production need, but additional approval may be harder to obtain.</p><div class="field"><label for="transport-reason">Main reason for choosing this plan</label><select id="transport-reason" data-transport-reason><option value="">Choose a reason</option><option value="reliability" ${s.transportReason==='reliability'?'selected':''}>Reduce the risk of missed calls or delays</option><option value="flexibility" ${s.transportReason==='flexibility'?'selected':''}>Create flexibility for simultaneous movements</option><option value="cost" ${s.transportReason==='cost'?'selected':''}>Keep the spend within the allocation</option><option value="comfort" ${s.transportReason==='comfort'?'selected':''}>Prefer the more comfortable supplier</option></select></div><div class="field"><label for="transport-justification">Explain your decision to Sarah</label><textarea id="transport-justification" rows="3" data-transport-justification placeholder="Which quote details matter, and why does the additional cost (if any) help this shoot?">${esc(s.transportJustification)}</textarea><small>One or two clear sentences are enough. The amount above allocation will need a specific operational reason.</small></div><label class="ack"><input type="checkbox" id="transport-ack" data-transport-ack ${s.transportAcknowledged?'checked':''}><span>I understand that any approved amount over £1,200 will come out of the £300 production contingency.</span></label><div class="actions"><button class="btn primary" data-request-approval type="button" ${approved?'disabled':''}>${approved?'Approval received':'Email recommendation to Sarah'}</button><button class="btn" data-notebook-open type="button">Review my notes</button>${s.approvalEmail?'<button class="btn" type="button" data-open-approval>Read Sarah’s reply</button>':''}</div>${approved?`<div class="note success" style="margin-top:13px"><strong>${extra?'Exception approved by Sarah.':'Transport plan approved by Sarah.'}</strong><p style="margin:5px 0 0">Total ${pounds(total)}. ${extra?`${pounds(extra)} moved from production contingency; ${pounds(reserveAfter())} remains.`:`Within allocation; production contingency remains ${pounds(PRODUCTION_RESERVE)}.`} You can now add the authorised arrangements to the call sheet.</p></div>`:''}${s.approvalEmail&&!approved?'<p class="mini" style="margin-top:12px">Sarah’s reply is available in the email pop-up. Revise your proposal and try again.</p>':''}</section>`+
+ controls(1,3,'Continue to the call sheet',!approved);
+}
+function validateMath(){
+ if(!planComplete())return 'Choose one quote for each of the three transport needs.';
+ if(!planViable())return 'The selected artist vehicle has only seven seats. Eight people need transport. Choose a suitable supplier.';
+ if(s.transportMath.total===''||s.transportMath.difference===''||s.transportMath.reserve==='')return 'Complete all three calculations before requesting approval.';
+ if(Number(s.transportMath.total)!==cost())return 'Your full total does not match the quotations. Check the base prices, surcharges and parking permit.';
+ if(Number(s.transportMath.difference)!==overage())return 'Recheck the amount above the £1,200 allocation. It is zero if your plan is within budget.';
+ if(overage()>PRODUCTION_RESERVE)return `This proposal would need ${pounds(overage())} beyond allocation, which is more than the available ${pounds(PRODUCTION_RESERVE)} contingency. Choose a lower-cost plan.`;
+ if(Number(s.transportMath.reserve)!==reserveAfter())return 'Recheck the contingency. Subtract only the overspend from £300; if there is no overspend, £300 remains.';
+ return '';
+}
+function requestApproval(){
+ const error=validateMath();if(error){s.transportFeedback=error;store();render();document.getElementById('transport-math-result')?.scrollIntoView({block:'nearest'});return}
+ if(!s.transportReason||s.transportJustification.trim().length<25){s.transportFeedback='Before emailing Sarah, select a reason and write a short explanation of at least 25 characters.';store();render();document.getElementById('transport-math-result')?.scrollIntoView({block:'nearest'});return}
+ if(!s.transportAcknowledged){s.transportFeedback='Confirm that you understand how an approved overspend affects the production contingency.';store();render();document.getElementById('transport-math-result')?.scrollIntoView({block:'nearest'});return}
+ const extra=overage();let message;
+ const hasOperationalReason=['reliability','flexibility'].includes(s.transportReason);
+ const operationalBenefit=(s.transportChoices.cast==='cast-dual'||s.transportChoices.artists==='artists-mpvs'||s.transportChoices.shuttle==='shuttle-dedicated');
+ if(extra&&(!hasOperationalReason||!operationalBenefit)){
+  message=`Thanks for sending your proposal. I can't authorise an exception just for comfort or preference, or without a clear operational benefit from the supplier choices. Your ${pounds(cost())} plan is ${pounds(extra)} above our transport allocation. Please rework it or explain what additional reliability or flexibility the extra spend actually buys us. No bookings are approved yet.`;
+  s.approved=false;s.approvedKey='';
+ }else{
+  s.approved=true;s.approvedKey=planSignature();
+  message=extra?`Thanks for the breakdown. I've considered your recommendation and approved a one-off exception for the ${pounds(cost())} transport plan, subject to the suppliers meeting the confirmed timings and capacities. The ${pounds(extra)} overspend is charged to the production contingency, leaving ${pounds(reserveAfter())} for other unexpected costs. Record this written approval and confirm the bookings. Please flag any subsequent increases before committing them.`:`Thanks for checking the quotes and putting the figures together. I approve the ${pounds(cost())} transport plan. It is within the ${pounds(TRANSPORT_BUDGET)} allocation, so our ${pounds(PRODUCTION_RESERVE)} production contingency remains untouched. Confirm availability and record the approved arrangements on the draft call sheet.`;
+ }
+ s.approvalEmail=message;s.transportFeedback='Sarah has replied to your proposal. Read the email for the outcome.';store();render();openApprovalEmail();
+}
+const FIELD_META=[['location','Shoot location','Where filming takes place.','loc'],['unitBase','Unit base','Where the production unit is based.','loc'],['unitCall','Crew call','The time crew are expected to report.','ad'],['sceneOrder','Shooting order','The scenes and times agreed by the AD department.','ad'],['castCalls','Cast and supporting artists','When performers must report.','ad'],['pickups','Transport pickups','When cast and supporting artists are collected.','trans'],['transport','Transport plan','What vehicles are arranged and whether approved.','trans'],['medical','Medical plan reference','Reference to approved safety information.','given']];
+function expected(){return {location:'Alder Mill Works, River Yard, Manchester',unitBase:'North Quay Unit Base, Dock Lane, Manchester',unitCall:'07:00',sceneOrder:s.challenge?'12A 08:00–12:30; lunch 12:30–13:30; 14B 13:30–15:15; 16C 15:30–17:45; wrap 18:00':'12A 08:00–10:30; 14B 10:45–12:30; lunch 12:30–13:30; 16C 13:30–17:45; wrap 18:00',castCalls:'Mara Vale 07:00; Daniel Finch 09:15; 8 supporting artists 07:15',pickups:'Mara 06:15; Daniel 08:15; supporting artists 06:35; shuttle 06:45',transport:transportKeys.map(g=>chosen(g)?.type+' ('+chosen(g)?.name+') '+pounds(quoteTotal(chosen(g)))).join('; ')+'; parking '+pounds(PARKING)+'; total '+pounds(cost())+'; '+(overage()?'exception approved by Sarah Mitchell, '+pounds(overage())+' from contingency':'approved by Sarah Mitchell'),medical:'MP-04'}}
+function norm(x){return String(x||'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+function check(){const correct=expected(),out=[];for(const [k,label] of FIELD_META){const input=String(s.fields[k]||'').trim();if(!input){out.push('Complete '+label.toLowerCase()+'.');continue}if(k==='sceneOrder'){if(!['12A','14B','16C'].every(v=>input.toUpperCase().includes(v))||!(s.challenge?input.includes('13:30')&&input.includes('15:15'):input.includes('10:45')))out.push('Check the shooting order against the '+(s.challenge?'revised':'approved')+' AD timings.')}else if(k==='castCalls'){if(!['07:00','09:15','07:15'].every(t=>input.includes(t)))out.push('Check the cast and supporting artist call times.')}else if(k==='pickups'){if(!['06:15','08:15','06:35','06:45'].every(t=>input.includes(t)))out.push('Check all four transport movement times.')}else if(k==='transport'){if(!input.includes(pounds(cost()))||!input.toLowerCase().includes('approved'))out.push('Include the approved transport total and approval.')}else if(norm(input)!==norm(correct[k]))out.push('Check '+label.toLowerCase()+' against the confirmed information.')}return out}
+function field(k,label,hint,source){const v=esc(s.fields[k]||'');return `<div class="field"><label for="f-${k}">${label}</label>${['sceneOrder','castCalls','pickups','transport'].includes(k)?`<textarea id="f-${k}" data-field="${k}">${v}</textarea>`:`<input id="f-${k}" data-field="${k}" value="${v}">`}<small>${hint} <strong>Source:</strong> ${source==='given'?'Provided safety plan':FACTS[source].name}.</small><button class="btn noprint" style="margin-top:7px;padding:5px 9px;font-size:11px" data-fill="${k}">Use confirmed details</button></div>`}
+function sheet(){const errors=s.errors||[];return intro(4,'Prepare the call sheet','You’ve gathered the confirmed information and obtained approval for transport. Now bring it together in one document.','Complete the sections below. You can use “Use confirmed details” to transfer information, then review each entry before sending your draft.','The call sheet brings information from multiple departments into one reliable document for the shoot day.')+`<section class="panel"><div class="sectiontop"><h2>Draft call sheet</h2><span class="tag">Training version</span></div><div class="sheet-layout"><div class="call" id="print-area"><div class="call-head"><div class="call-title">CALL SHEET · ${s.challenge?'REVISED DRAFT':'DRAFT'}</div><b>THE CROSSING</b><span>Northline Productions · Episode 3 · Shoot day 04<br>Wednesday 18 November 2026</span></div>${FIELD_META.map(([k,label,hint,source])=>field(k,label,hint,source)).join('')}</div><aside class="soft"><div class="call-note-link noprint"><button class="btn primary" type="button" data-notebook-open>✎ Open my notebook</button><p class="mini" style="margin-top:6px">Check the notes you made while gathering information.</p></div><h3 style="margin-bottom:12px">Confirmed details</h3>${s.contacted.map(k=>`<div style="margin-bottom:14px"><strong style="font-size:12px">${FACTS[k].name}</strong><p class="mini">${FACTS[k].proof}</p></div>`).join('')}<div class="note"><strong>Approved transport</strong><p style="margin:5px 0 0">${pounds(cost())} total, authorised by Sarah Mitchell.${overage()?` Exception: ${pounds(overage())} from contingency; ${pounds(reserveAfter())} remains.`:` Contingency unchanged at ${pounds(PRODUCTION_RESERVE)}.`}</p></div><div class="note" style="margin-top:10px"><strong>Safety reference</strong><p style="margin:5px 0 0">MP-04. The detailed medical plan is held separately.</p></div>${s.challenge?'<div class="note warning" style="margin-top:10px"><strong>Revised AD order</strong><p>12A 08:00–12:30; lunch 12:30–13:30; 14B 13:30–15:15; 16C 15:30–17:45; wrap 18:00.</p></div>':''}</aside></div></section><section class="panel noprint"><h2>Check and send your draft</h2><p class="muted">Check your document before you send it to the production team for review. You can correct anything that needs attention.</p><div class="actions"><button class="btn primary" data-check>Check my call sheet</button><button class="btn" data-print>Print / save PDF</button></div>${s.firstChecked?errors.length?`<div class="note warning" style="margin-top:13px"><strong>${errors.length} area(s) to check</strong><ul class="errors">${errors.map(e=>'<li>'+esc(e)+'</li>').join('')}</ul></div>`:`<div class="note success" style="margin-top:13px"><strong>Your draft is ready for review.</strong><p style="margin:5px 0 0">You have assembled the confirmed information. The AD and Production Manager would review and authorise a real call sheet before distribution.</p></div>`:''}${s.draftDone?`<div class="note success" style="margin-top:12px"><strong>Core activity complete.</strong> You can print your call sheet or try the optional production challenge below.</div>`:''}${s.firstChecked&&!errors.length&&!s.draftDone?'<button class="btn primary" style="margin-top:14px" data-finish>Send draft for simulated review</button>':''}</section>${s.draftDone?`<section class="panel noprint"><div class="eyebrow">Optional extension</div><h2>Production challenge: a last-minute change</h2><p>The Location Manager has reported that the exterior yard cannot be used until 13:30. In a real production, you would flag the issue and ask the AD team to agree the revised plan before changing the shooting order.</p>${s.challenge?'<div class="note success">Imogen has confirmed the revised shooting order. Return to the call sheet above and use the updated timings. This is extra practice; your original task is already complete.</div>':'<button class="btn" data-challenge>Ask Imogen for an approved revision</button>'}</section>`:''}${controls(2,3,'Stay on call sheet')}`}
+function fill(k){s.fields[k]=expected()[k];store();const el=document.querySelector('[data-field="'+k+'"]');if(el){el.value=s.fields[k];el.focus()}}
+let emailReturnFocus=null;
+function openEmail(k){
+ const item=FACTS[k];if(!item||!has(k))return;
+ openMessage(item.name+' · '+item.role,'Hi,\n\n'+item.reply+'\n\nBest,\n'+item.name);
+}
+function openQuote(id){const q=quoteById(id);if(!q)return;if(!s.quoteOpened.includes(id))s.quoteOpened.push(id);store();const capacity=q.capacity?`\nPassenger capacity: ${q.capacity}.`:'';openMessage(q.name+' · Supplier quotation',`QUOTE FOR ${q.type.toUpperCase()}\n\nBase hire: ${pounds(q.base)}\n${q.extraLabel}: ${pounds(q.extras)}\nTotal quoted: ${pounds(quoteTotal(q))}${capacity}\n\nOperational details: ${q.info}\n\nAll figures include VAT. No booking has been made.`);}
+function openApprovalEmail(){if(s.approvalEmail)openMessage('Sarah Mitchell · Production Manager','Hi,\n\n'+s.approvalEmail+'\n\nSarah');}
+function openMessage(sender,message){
+ const modal=document.getElementById('email-dialog');
+ emailReturnFocus=document.activeElement;
+ document.getElementById('email-title').textContent=sender.startsWith('Sarah')?'Decision on transport recommendation':sender.includes('Supplier quotation')?'Supplier quotation':'Confirmed details for tomorrow';
+ document.getElementById('email-subject-line').textContent=sender.startsWith('Sarah')?'Re: Transport recommendation':sender.includes('Supplier quotation')?'Transport supplier quotation':'Re: Details for tomorrow’s shoot';
+ document.getElementById('email-from').textContent=sender;
+ document.getElementById('email-calculator').hidden=!sender.includes('Supplier quotation');
+ document.getElementById('email-message').textContent=message;
+ document.getElementById('email-overlay').hidden=false;
+ modal.hidden=false;
+ document.body.classList.add('email-dialog-open');
+ modal.querySelector('.email-close').focus();
+}
+function closeEmail(){
+ document.getElementById('email-dialog').hidden=true;
+ document.getElementById('email-overlay').hidden=true;
+ document.body.classList.remove('email-dialog-open');
+ if(emailReturnFocus&&emailReturnFocus.isConnected)emailReturnFocus.focus();
+ else document.querySelector('[data-open-email]')?.focus();
+}
+function trapFocus(event,dialog){
+ if(event.key!=='Tab')return;
+ const elements=[...dialog.querySelectorAll('button:not(:disabled),textarea:not(:disabled),[tabindex="0"]')].filter(el=>el.getClientRects().length);
+ if(!elements.length)return;
+ const first=elements[0],last=elements[elements.length-1];
+ if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}
+ else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
+}
+
+// Calculator expressions are evaluated locally with a small arithmetic parser; no eval or external services.
+let calculatorReturnFocus=null;
+function prettyExpression(value){return String(value||'').replace(/\*/g,'×').replace(/\//g,'÷').replace(/-/g,'−')}
+function updateCalculator(){
+ const c=s.calculator;
+ document.getElementById('calculator-display').textContent=prettyExpression(c.expression)||'0';
+ document.getElementById('calculator-history').textContent=prettyExpression(c.history||'');
+}
+function openCalculator(){
+ const panel=document.getElementById('calculator-panel');
+ if(!panel.hidden){closeCalculator();return}
+ calculatorReturnFocus=document.activeElement;
+ panel.hidden=false;
+ document.getElementById('calculator-launch').setAttribute('aria-expanded','true');
+ updateCalculator();
+ panel.querySelector('#calculator-screen').focus();
+}
+function closeCalculator(restoreFocus=true){
+ const panel=document.getElementById('calculator-panel');
+ if(panel.hidden)return;
+ panel.hidden=true;
+ document.getElementById('calculator-launch').setAttribute('aria-expanded','false');
+ if(restoreFocus&&calculatorReturnFocus?.isConnected)calculatorReturnFocus.focus();
+}
+function parseCalculator(input){
+ let pos=0;
+ const str=input;
+ function number(){
+  let sign=1;
+  while(str[pos]==='+'||str[pos]==='-'){if(str[pos]==='-')sign=-sign;pos++}
+  const start=pos;
+  while(pos<str.length&&/[0-9.]/.test(str[pos]))pos++;
+  const raw=str.slice(start,pos);
+  if(!/^(?:\d+(?:\.\d*)?|\.\d+)$/.test(raw))throw new Error('Incomplete calculation');
+  return sign*Number(raw);
+ }
+ function term(){
+  let n=number();
+  while(str[pos]==='*'||str[pos]==='/'){
+   const op=str[pos++],rhs=number();
+   if(op==='/'&&rhs===0)throw new Error('Cannot divide by zero');
+   n=op==='*'?n*rhs:n/rhs;
+  }
+  return n;
+ }
+ function expr(){
+  let n=term();
+  while(str[pos]==='+'||str[pos]==='-'){
+   const op=str[pos++],rhs=term();n=op==='+'?n+rhs:n-rhs;
+  }
+  return n;
+ }
+ const result=expr();
+ if(pos!==str.length||!Number.isFinite(result))throw new Error('Check the calculation');
+ return Math.round((result+Number.EPSILON)*1e8)/1e8;
+}
+function calculatorPress(key){
+ const c=s.calculator;
+ if(key==='C'){c.expression='';c.history='';c.done=false}
+ else if(key==='back'){c.expression=c.done?'':c.expression.slice(0,-1);c.done=false;c.history=''}
+ else if(key==='='){
+  if(!c.expression)return;
+  try{
+   const value=parseCalculator(c.expression);
+   c.history=c.expression+' =';c.expression=String(value);c.done=true;
+  }catch(error){c.history=error.message;c.done=false}
+ }
+ else if('+-*/'.includes(key)&&key.length===1){
+  if(!c.expression){if(key==='-')c.expression='-';else return}
+  else if(/[+*/-]$/.test(c.expression))c.expression=c.expression.slice(0,-1)+key;
+  else c.expression+=key;
+  c.done=false;c.history='';
+ }else if(/^(?:\d|00|\.)$/.test(key)){
+  if(c.done){c.expression='';c.history='';c.done=false}
+  const last=(c.expression.split(/[+*/-]/).pop()||'');
+  if(key==='.'&&last.includes('.'))return;
+  c.expression+=(key==='.'&&!last?'0.':key);
+ }
+ if(c.expression.length>85)c.expression=c.expression.slice(0,85);
+ store();updateCalculator();
+}
+
+let notebookReturnFocus=null;
+function openNotebook(){
+ closeCalculator(false);
+ const drawer=document.getElementById('notebook-drawer');
+ const backdrop=document.getElementById('notebook-backdrop');
+ notebookReturnFocus=document.activeElement;
+ for(const area of drawer.querySelectorAll('[data-note]'))area.value=s.notes[area.dataset.note]||'';
+ drawer.hidden=false;backdrop.hidden=false;document.body.classList.add('notebook-open');
+ document.getElementById('notebook-launch').setAttribute('aria-expanded','true');
+ drawer.querySelector('[data-notebook-close]').focus();
+}
+function closeNotebook(){
+ document.getElementById('notebook-drawer').hidden=true;
+ document.getElementById('notebook-backdrop').hidden=true;
+ document.body.classList.remove('notebook-open');
+ document.getElementById('notebook-launch').setAttribute('aria-expanded','false');
+ if(notebookReturnFocus&&notebookReturnFocus.isConnected)notebookReturnFocus.focus();
+ else document.getElementById('notebook-launch').focus();
+}
+document.addEventListener('keydown',e=>{
+ const drawer=document.getElementById('notebook-drawer');
+ const email=document.getElementById('email-dialog');
+ const calculator=document.getElementById('calculator-panel');
+ if(!calculator.hidden){
+  if(e.key==='Tab'){trapFocus(e,calculator);return}
+  if(e.key==='Escape'){e.preventDefault();closeCalculator();return}
+  if(calculator.contains(document.activeElement)){
+   const key=e.key==='Enter'?'=':e.key==='Backspace'?'back':e.key==='Delete'?'C':e.key;
+   if(/^[0-9.+\-*/=]$/.test(key)||key==='back'||key==='C'){e.preventDefault();calculatorPress(key);return}
+  }
+ }
+ if(!drawer.hidden){
+  if(e.key==='Escape'){e.preventDefault();closeNotebook();return}
+  trapFocus(e,drawer);return;
+ }
+ if(!email.hidden){
+  if(e.key==='Escape'){e.preventDefault();closeEmail();return}
+  trapFocus(e,email);
+ }
+});
+document.addEventListener('click',e=>{if(e.target.closest('[data-calculator-open]')){openCalculator();return}if(e.target.closest('[data-calculator-close]')){closeCalculator();return}if(e.target.closest('[data-calc-key]')){calculatorPress(e.target.closest('[data-calc-key]').dataset.calcKey);return}if(e.target.closest('[data-notebook-open]')){openNotebook();return}if(e.target.closest('[data-notebook-close]')){closeNotebook();return}if(e.target.closest('[data-email-close]')){closeEmail();return}const b=e.target.closest('button');if(!b)return;if(b.hasAttribute('data-reset')){if(confirm('Start again? This will clear your saved work on this device.')){s=structuredClone(BASE);store();go(0)}return}if(b.dataset.go!==undefined){go(Number(b.dataset.go));return}if(b.dataset.ask){const k=b.dataset.ask;if(!has(k))s.contacted.push(k);s.activeReply=k;store();render();const source=document.querySelector('[data-ask="'+k+'"]');if(source)source.focus();openEmail(k);return}if(b.dataset.openEmail){openEmail(b.dataset.openEmail);return}if(b.dataset.fill){fill(b.dataset.fill);return}if(b.hasAttribute('data-verify-math')){s.transportFeedback=validateMath()||'Your figures match the selected quotes. You can now send Sarah a recommendation.';store();render();document.getElementById('transport-math-result')?.scrollIntoView({block:'nearest'});return}if(b.hasAttribute('data-request-approval')){requestApproval();return}if(b.hasAttribute('data-open-approval')){openApprovalEmail();return}if(b.dataset.quote){openQuote(b.dataset.quote);return}if(b.hasAttribute('data-check')){s.firstChecked=true;s.errors=check();store();render();document.querySelector('.errors')?.scrollIntoView({block:'nearest'});return}if(b.hasAttribute('data-finish')){s.draftDone=true;store();render();return}if(b.hasAttribute('data-challenge')){s.challenge=true;s.revisionKnown=true;s.fields.sceneOrder='';s.firstChecked=false;s.errors=[];store();render();return}if(b.hasAttribute('data-print')){window.print();return}});
+document.addEventListener('change',e=>{if(e.target.name?.startsWith('quote-')){const group=e.target.name.slice(6);s.transportChoices[group]=e.target.value;s.transportMath={total:'',difference:'',reserve:''};resetTransportApproval();store();render();return}if(e.target.hasAttribute('data-transport-reason')){s.transportReason=e.target.value;resetTransportApproval();store();return}if(e.target.hasAttribute('data-transport-ack')){s.transportAcknowledged=e.target.checked;store();return}});document.addEventListener('input',e=>{if(e.target.dataset.math){s.transportMath[e.target.dataset.math]=e.target.value;s.transportFeedback='';resetTransportApproval();store();return}if(e.target.hasAttribute('data-transport-justification')){s.transportJustification=e.target.value;store();return}const note=e.target.dataset.note;if(note){s.notes[note]=e.target.value;store();document.getElementById('notebook-status').textContent='Notes saved automatically';return}const k=e.target.dataset.field;if(k){s.fields[k]=e.target.value;store()}});
+render();
+
+// Embedded full screen: request on the current document, preserving all learner state.
+// The hosting LMS must permit the iframe Fullscreen API; otherwise show a useful fallback.
+(function(){
+ const button=document.getElementById('fullscreen-toggle');
+ const tip=document.getElementById('fullscreen-tip');
+ const status=document.getElementById('fullscreen-message');
+ const iconExpand=button.querySelector('.expand-path');
+ const iconCollapse=button.querySelector('.collapse-path');
+ const key='call_time_fullscreen_tip_dismissed';
+ try{tip.hidden=localStorage.getItem(key)==='yes'}catch(e){}
+ function updateFullscreenUI(){
+  const active=!!document.fullscreenElement;
+  button.setAttribute('aria-pressed',String(active));
+  button.setAttribute('aria-label',active?'Exit full screen':'Enter full screen');
+  button.title=active?'Exit full screen':'View the activity full screen';
+  button.querySelector('.fullscreen-label').textContent=active?'Exit full screen':'Full screen';
+  iconExpand.style.display=active?'none':'';
+  iconCollapse.style.display=active?'':'none';
+  if(active)status.textContent='';
+ }
+ async function toggleFullscreen(forceEnter=false){
+  status.textContent='';
+  try{
+   if(document.fullscreenElement){if(!forceEnter)await document.exitFullscreen();return}
+   if(!document.documentElement.requestFullscreen)throw new Error('This browser does not support full screen.');
+   await document.documentElement.requestFullscreen({navigationUI:'hide'});
+  }catch(error){
+   status.textContent='Full screen is unavailable in this embedded view. You can still use the activity here, or ask your tutor for a direct browser link.';
+   console.info('Full screen not available in host:',error);
+  }
+  updateFullscreenUI();
+ }
+ button.addEventListener('click',()=>toggleFullscreen());
+ document.querySelector('[data-enter-fullscreen]').addEventListener('click',()=>toggleFullscreen(true));
+ document.querySelector('[data-dismiss-fullscreen-tip]').addEventListener('click',()=>{
+  tip.hidden=true;
+  try{localStorage.setItem(key,'yes')}catch(e){}
+ });
+ document.addEventListener('fullscreenchange',updateFullscreenUI);
+ document.addEventListener('fullscreenerror',()=>{
+  status.textContent='Your learning platform has prevented full screen. The activity is still available in this view.';
+ });
+ updateFullscreenUI();
+})();
+</script></body></html>
