@@ -1,14 +1,30 @@
-# JPC Off-the-Job Learning Hub
 
-This folder is the learner-only static version for GitHub Pages. It contains no login, editing controls or server-side code.
+# JPC safeguarding learning pages
 
-## Publish it
+Four responsive HTML learning pages for a UK Junior Production Coordinator audience.
 
-1. Create a new GitHub repository. For GitHub Pages on a free personal account, make it public.
-2. Upload `index.html`, `bauer-academy-logo.svg` and this README to the repository root.
-3. Open the repository's **Settings**, then **Pages**.
-4. Under **Build and deployment**, choose **Deploy from a branch**.
-5. Select the `main` branch and `/ (root)`, then choose **Save**.
-6. GitHub will show the published `github.io` address when deployment finishes.
+## Files
 
-The saved-for-later feature uses each learner's browser storage. No learner data is sent anywhere.
+1. `01_safeguarding_foundations.html`
+2. `02_safe_production_planning.html`
+3. `03_prevent_and_radicalisation.html`
+4. `04_digital_safeguarding_and_respect.html`
+
+Each page includes:
+- JPC-relevant safeguarding content
+- an official or industry video link
+- an interactive scenario assessment
+- official further-reading links
+- a downloadable Bauer-branded PDF worksheet
+
+## GitHub Pages
+
+Upload the complete folder to a repository, keeping the `assets` and `worksheets` folders in place. In repository settings, enable GitHub Pages from the branch and root folder you are using. The pages can then be linked individually.
+
+## Branding
+
+The CSS uses Bauer Purple as the lead colour and the approved supporting palette. It requests `Bauer Sans` first and falls back to Arial/Helvetica if the proprietary font is not installed on the learner's device.
+
+## Important content note
+
+The pages are awareness learning, not a substitute for employer or training-provider policy. Safeguarding law and procedures vary across the UK. The wording therefore directs learners to the relevant local policy and named safeguarding route.
